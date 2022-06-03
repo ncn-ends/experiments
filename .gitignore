@@ -1,5 +1,5 @@
 
-App/BenchmarkDotNet.Artifacts/**
+**/BenchmarkDotNet.Artifacts/**
 # Created by https://www.toptal.com/developers/gitignore/api/linux,jetbrains+all,dotnetcore
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,jetbrains+all,dotnetcore
 
