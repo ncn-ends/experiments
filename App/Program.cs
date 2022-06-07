@@ -7,6 +7,8 @@ class Program
     {
         // Benchmarks.Main.RunAllBenchmarks();
 
-        Benchmarks.LeetCode.ReverseStringBenchmarks.RunBenchmarks();
+        // Benchmarks.LeetCode.ReverseStringBenchmarks.RunBenchmarks();
+        
+        Benchmarks.Experiments.Span.StringExampleBenchmarks.RunBenchmarks();
     }
 }
