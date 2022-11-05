@@ -25,8 +25,6 @@ public class StringExample
         int day = int.Parse(dayAsSpan);
         int year = int.Parse(yearAsSpan);
         
-
         return (day, month, year);
     }
-    
 }

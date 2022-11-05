@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 
+#
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{F76EFBB3-7D32-436B-B0FF-D88977AD5770}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{2F6BD534-6EDA-4A26-AD53-62C29BADA3C8}"
@@ -8,6 +8,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{7DEC7C1C-8547-4A45-B950-281AD96F78FD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Subjects", "Subjects\Subjects.csproj", "{DBBCBB8E-3B3C-4D94-A53E-4B0AE2809DD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{C6B9A677-AEF3-4F7B-BED1-A326C3045C92}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,5 +33,9 @@ Global
 		{DBBCBB8E-3B3C-4D94-A53E-4B0AE2809DD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBBCBB8E-3B3C-4D94-A53E-4B0AE2809DD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBBCBB8E-3B3C-4D94-A53E-4B0AE2809DD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6B9A677-AEF3-4F7B-BED1-A326C3045C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6B9A677-AEF3-4F7B-BED1-A326C3045C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6B9A677-AEF3-4F7B-BED1-A326C3045C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6B9A677-AEF3-4F7B-BED1-A326C3045C92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
