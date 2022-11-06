@@ -2,47 +2,57 @@ using System.Diagnostics;
 
 namespace Subjects.Structures;
 
-
-
-
-public class BasicTree<T>
+public class BasicTree<T> where T : notnull
 {
     public TreeNode<T> Root;
+    private HashSet<T> addedValues = new();
 
     public BasicTree(TreeNode<T> root)
     {
         Root = root;
     }
 
-    public void AddChildByValue(T searchValue, TreeNode<T> treeNode, TreeNode<T>? searchingNode = null)
+    public bool AddChildByValue(T searchValue, TreeNode<T> treeNode, TreeNode<T>? searchingNode = null)
     {
+        if (addedValues.Contains(treeNode.Value)) return false;
+        
         searchingNode ??= Root;
-        if (searchValue == null) return;
 
-        if (searchValue.Equals(searchingNode.Value)) searchingNode.AddChild(treeNode);
+        if (searchValue.Equals(searchingNode.Value))
+        {
+            searchingNode.AddChild(treeNode);
+            return addedValues.Add(treeNode.Value);
+        }
 
         foreach (var child in searchingNode.Children)
         {
             AddChildByValue(searchValue, treeNode, child);
         }
 
+        return false;
     }
     
     
-    public void AddChildByValue(Func<T, bool> predicate, TreeNode<T> treeNodeAdding, TreeNode<T>? searchingNode = null)
+    public bool AddChildByValue(Func<T, bool> predicate, TreeNode<T> treeNodeAdding, TreeNode<T>? searchingNode = null)
     {
+        if (addedValues.Contains(treeNodeAdding.Value)) return false;
+        
         searchingNode ??= Root;
         
-        var matched = searchingNode.Value != null && predicate(searchingNode.Value);
-        if (matched) searchingNode.AddChild(treeNodeAdding);
-        else
+        
+        var matched = predicate(searchingNode.Value);
+        if (matched)
         {
-            foreach (var child in searchingNode.Children)
-            {
-                AddChildByValue(predicate, treeNodeAdding, child);
-            }
+            searchingNode.AddChild(treeNodeAdding);
+            return addedValues.Add(treeNodeAdding.Value);
         }
 
+        foreach (var child in searchingNode.Children)
+        {
+            AddChildByValue(predicate, treeNodeAdding, child);
+        }
+
+        return false;
     }
 
     public TreeNode<T>? FindNodeByValue(T searchValue, TreeNode<T>? searchingNode = null)
@@ -59,11 +69,11 @@ public class BasicTree<T>
     }
 }
 
-public class TreeNode<T>
+public class TreeNode<T> where T : notnull
 {
     public readonly TreeNode<T>? Parent = null;
     public List<TreeNode<T>> Children = new();
-    public T? Value = default;
+    public T Value;
 
     public TreeNode(T value, TreeNode<T>? parent = null)
     {
@@ -79,5 +89,5 @@ public class TreeNode<T>
     public void AddChildren(List<TreeNode<T>> childrenToAdd)
     {
         Children = new List<TreeNode<T>>(Children.Concat(childrenToAdd));
-    } 
+    }
 }

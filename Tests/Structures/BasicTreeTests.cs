@@ -60,6 +60,9 @@ public class BasicTreeTests
         
         tree.AddChildByValue(30, new TreeNode<int>(96));
         tree.AddChildByValue(30, new TreeNode<int>(9));
+
+        var added = tree.AddChildByValue(30, new TreeNode<int>(9));
+        added.Should().BeFalse();
     }
 
     public class Person
@@ -87,6 +90,5 @@ public class BasicTreeTests
         }));
         
         tree.Root.Children.Count.Should().Be(1);
-        
     }
 }
