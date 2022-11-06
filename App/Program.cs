@@ -1,4 +1,5 @@
 ﻿using Subjects.Algorithms;
+using Subjects.Structures;
 
 namespace App;
 
@@ -12,7 +13,20 @@ class Program
 
         // Benchmarks.Experiments.Span.StringExampleBenchmarks.RunBenchmarks();
 
-        var res = Subjects.AoC._2020._1.Solution.DoPart2();
-        Console.WriteLine(res);
+        
+        var root = new TreeNode<int>(100);
+        var layer1 = new List<TreeNode<int>>
+        {
+            new(50),
+            new(1),
+            new(150)
+        };
+        root.AddChildren(layer1);
+        foreach (var child in root.Children)
+        {
+            Console.WriteLine(child.Value);
+        }
+        var tree = new BasicTree<int>(root);
+        
     }
 }
