@@ -5,29 +5,28 @@ namespace Utils;
 
 public static class AOCInput
 {
-    public static List<int> Import(string? path = null)
+    public static string Import(string? path = null)
     {
         path ??= GetPairedInputFile();
         
-        var textLines = File.ReadAllLines(path);
+        var text = File.ReadAllText(path);
+        // var toReturn = new List<int>();
+        //
+        // foreach (var line in textLines)
+        // {
+        //     int number;
+        //
+        //     if (int.TryParse(line, out number))
+        //     {
+        //         toReturn.Add(number);
+        //     }
+        //     else
+        //     {
+        //         Console.WriteLine($"Attempted conversion of '{line}' failed.");
+        //     }
+        // }
 
-        var toReturn = new List<int>();
-        
-        foreach (var line in textLines)
-        {
-            int number;
-
-            if (int.TryParse(line, out number))
-            {
-                toReturn.Add(number);
-            }
-            else
-            {
-                Console.WriteLine($"Attempted conversion of '{line}' failed.");
-            }
-        }
-
-        return toReturn;
+        return text;
     }
 
     public static string GetPairedInputFile()
