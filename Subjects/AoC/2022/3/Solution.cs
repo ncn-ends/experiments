@@ -7,8 +7,6 @@ namespace Subjects.AoC._2022._3;
 public static class Day3Solution
 {
     private static string _input = AOCInput.Import().Trim();
-    
-    private const int _numToSumTo = 2022;
 
     static int GetValueFromChar(char c)
     {
@@ -31,9 +29,9 @@ public static class Day3Solution
     
     public static int DoPart1()
     {
-        // var pts = GetValueFromChar('Z');
         var sum = 0;
-
+        
+        // optimization: sort the lines so that you loop through the shortest one
         
         foreach (var l in _input.Split("\n"))
         {
@@ -59,6 +57,8 @@ public static class Day3Solution
             var line1 = lines[i + 0];
             var line2 = lines[i + 1];
             var line3 = lines[i + 2];
+            
+            // optimization: sort the lines so that you loop through the shortest one
 
             for (int k = 0; k < line1.Length; k++)
             {

@@ -5,23 +5,21 @@ namespace Subjects.AoC._2022._1;
 
 public static class Solution
 {
-    private static string _input = AOCInput.Import();
-    
-    private const int _numToSumTo = 2022;
+    private static string _input = AOCInput.Import().Trim();
     
     // 67622
     public static int DoPart1()
     {
         var currentMax = 0;
         
-        foreach (var s1 in _input.Split("\n\n"))
+        foreach (var g in _input.Split("\n\n"))
         {
             int sum = 0;
-            foreach (var s2 in s1.Split("\n"))
+            foreach (var l in g.Split("\n"))
             {
-                if (s2 == "") continue;
+                if (l == "") continue;
                 int parsed;
-                var didParse = Int32.TryParse(s2, out parsed);
+                var didParse = Int32.TryParse(l, out parsed);
                 if (!didParse) throw new Exception("Something went wrong when trying to parse.");
 
                 sum += parsed;
@@ -59,7 +57,9 @@ public static class Solution
 
         return maxElves.Sum();
     }
-
+    
+    // convert group to sum -> sort array of sum of groups -> pluck top 1 or top 3
+    
     public static void Output()
     {
         Console.Write("Part 1: ");

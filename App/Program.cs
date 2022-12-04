@@ -1,7 +1,10 @@
-﻿using Subjects.Algorithms;
+﻿using System.Diagnostics;
+using System.Text;
+using Subjects.Algorithms;
 using Subjects.AoC._2022._1;
 using Subjects.AoC._2022._2;
 using Subjects.AoC._2022._3;
+using Subjects.AoC._2022._4;
 using Subjects.Structures;
 
 namespace App;
@@ -32,6 +35,6 @@ class Program
         // var tree = new BasicTree<int>(root);
         
         
-        Day3Solution.Output();
+        Day4Solution.Output();
     }
 }

@@ -6,10 +6,8 @@ namespace Subjects.AoC._2022._2;
 public static class Day2Solution
 {
     private static string _input = AOCInput.Import().Trim();
-    
-    private const int _numToSumTo = 2022;
-    
-        
+
+
     // A for Rock, B for Paper, and C for Scissors
     // X for Rock, Y for Paper, and Z for Scissors
     //      (1 for Rock, 2 for Paper, and 3 for Scissors)
