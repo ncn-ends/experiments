@@ -27,23 +27,23 @@ public static class Day4Solution
         return count;
     }
 
-public static int DoPart2()
-{
-    var count = 0;
-    var lines = _input.Split("\n");
-    foreach (var l in lines)
+    public static int DoPart2()
     {
-        var pairs = Array.ConvertAll(l.Split(","), x => Array.ConvertAll(x.Split("-"), int.Parse));
-        if (pairs is not [var a, var b]) throw new Exception("Line had unexpected format.");
+        var count = 0;
+        var lines = _input.Split("\n");
+        foreach (var l in lines)
+        {
+            var pairs = Array.ConvertAll(l.Split(","), x => Array.ConvertAll(x.Split("-"), int.Parse));
+            if (pairs is not [var a, var b]) throw new Exception("Line had unexpected format.");
 
-        var aOverlapsWithB = a[1] >= b[0] && a[0] <= b[1];
-        var bOverlapsWithA = b[1] >= a[0] && b[0] <= a[1];
+            var aOverlapsWithB = a[1] >= b[0] && a[0] <= b[1];
+            var bOverlapsWithA = b[1] >= a[0] && b[0] <= a[1];
 
-        if (aOverlapsWithB || bOverlapsWithA) count++;
+            if (aOverlapsWithB || bOverlapsWithA) count++;
+        }
+        
+        return count;
     }
-    
-    return count;
-}
 
     public static void Output()
     {
