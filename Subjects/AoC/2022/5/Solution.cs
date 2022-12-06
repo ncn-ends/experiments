@@ -8,17 +8,17 @@ public static class Day5Solution
 {
     private static string _input = AOCInput.Import().Trim();
 
-    private static Dictionary<int, Stack<char>> _crates = new Dictionary<int, Stack<char>>()
+    private static Dictionary<int, Stack<char>> _crates = new()
     {
-        {1, new Stack<char>(new char[] {'B', 'W', 'N'})},
-        {2, new Stack<char>(new char[] {'L', 'Z', 'S', 'P', 'T', 'D', 'M', 'B'})},
-        {3, new Stack<char>(new char[] {'Q', 'H', 'Z', 'W', 'R'})},
-        {4, new Stack<char>(new char[] {'W', 'D', 'V', 'J', 'Z', 'R'})},
-        {5, new Stack<char>(new char[] {'S', 'H', 'M', 'B'})},
-        {6, new Stack<char>(new char[] {'L', 'G', 'N', 'J', 'H', 'V', 'P', 'B'})},
-        {7, new Stack<char>(new char[] {'J', 'Q', 'Z', 'F', 'H', 'D', 'L', 'S'})},
-        {8, new Stack<char>(new char[] {'W', 'S', 'F', 'J', 'G', 'Q', 'B'})},
-        {9, new Stack<char>(new char[] {'Z', 'W', 'M', 'S', 'C', 'D', 'J'})}
+        {1, new Stack<char>(new[] {'B', 'W', 'N'})},
+        {2, new Stack<char>(new[] {'L', 'Z', 'S', 'P', 'T', 'D', 'M', 'B'})},
+        {3, new Stack<char>(new[] {'Q', 'H', 'Z', 'W', 'R'})},
+        {4, new Stack<char>(new[] {'W', 'D', 'V', 'J', 'Z', 'R'})},
+        {5, new Stack<char>(new[] {'S', 'H', 'M', 'B'})},
+        {6, new Stack<char>(new[] {'L', 'G', 'N', 'J', 'H', 'V', 'P', 'B'})},
+        {7, new Stack<char>(new[] {'J', 'Q', 'Z', 'F', 'H', 'D', 'L', 'S'})},
+        {8, new Stack<char>(new[] {'W', 'S', 'F', 'J', 'G', 'Q', 'B'})},
+        {9, new Stack<char>(new[] {'Z', 'W', 'M', 'S', 'C', 'D', 'J'})}
     };
 
     private static (int, int, int) GetActionDetails(string line)

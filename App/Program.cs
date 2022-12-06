@@ -35,7 +35,6 @@ class Program
         // }
         // var tree = new BasicTree<int>(root);
         
-        
-        Day5Solution.Output();
+        Day6Solution.Output();
     }
 }
