@@ -7,18 +7,17 @@ namespace Subjects.AoC._2022._5;
 public static class Day6Solution
 {
     private static string _input = AOCInput.Import().Trim();
-
-
-    // public static int SolveBySeqLimit(int seqLimit)
-    // {
-    //     for (int i = seqLimit - 1; i < _input.Length; i++)
-    //     {
-    //         var seq = _input.Substring(i - seqLimit - 1, seqLimit);
-    //         if (seq.Distinct().Count() == seqLimit) return i + 1;
-    //     }
-    //     throw new Exception("bad");
-    // }
-    //
+    
+    public static int SolveBySeqLimit(int seqLimit)
+    {
+        for (int i = seqLimit - 1; i < _input.Length; i++)
+        {
+            var seq = _input.Substring(i - seqLimit + 1, seqLimit);
+            if (seq.Distinct().Count() == seqLimit) return i + 1;
+        }
+        throw new Exception("bad");
+    }
+    
     public static int DoPart1()
     {
         for (int i = 3; i < _input.Length; i++)
@@ -43,10 +42,10 @@ public static class Day6Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        // Console.WriteLine(SolveBySeqLimit(4));
+        Console.WriteLine(SolveBySeqLimit(4));
         
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
-        // Console.WriteLine(SolveBySeqLimit(14));
+        Console.WriteLine(SolveBySeqLimit(14));
     }
 }
