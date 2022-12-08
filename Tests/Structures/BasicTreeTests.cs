@@ -42,7 +42,7 @@ public class BasicTreeTests
         root.Children[1].Value.Should().Be(1);
         root.Children[2].Value.Should().Be(150);
         
-        var tree = new BasicTree<int>(root);
+        var tree = new Tree<int>(root);
         tree.AddChildByValue(50, new TreeNode<int>(12));
         tree.FindNodeByValue(50)?.Children[0].Value.Should().Be(12);
         
@@ -75,7 +75,7 @@ public class BasicTreeTests
     [Fact]
     public void BasicTreeOfPersons()
     {
-        var tree = new BasicTree<Person>(new TreeNode<Person>(new Person
+        var tree = new Tree<Person>(new TreeNode<Person>(new Person
         {
             Id = 1,
             Name = "Marcin Jamro",

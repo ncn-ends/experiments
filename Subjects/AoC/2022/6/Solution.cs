@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Globalization;
 using Utils;
 
-namespace Subjects.AoC._2022._5;
+namespace Subjects.AoC._2022._6;
 
 public static class Day6Solution
 {

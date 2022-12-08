@@ -6,6 +6,7 @@ using Subjects.AoC._2022._2;
 using Subjects.AoC._2022._3;
 using Subjects.AoC._2022._4;
 using Subjects.AoC._2022._5;
+using Subjects.AoC._2022._7;
 using Subjects.Structures;
 
 namespace App;
@@ -35,6 +36,6 @@ class Program
         // }
         // var tree = new BasicTree<int>(root);
         
-        Day6Solution.Output();
+        Day7Solution.Output();
     }
 }

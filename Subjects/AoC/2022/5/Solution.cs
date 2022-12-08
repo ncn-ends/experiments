@@ -44,17 +44,10 @@ public static class Day5Solution
             }
 
             moving.Reverse();
-            // Debugger.Break();
             foreach (var box in moving)
             {
                 _crates[to].Push(box);
             }
-            // Debugger.Break();
-            // for (int i = 0; i < count; i++)
-            // {
-            //     var popped = _crates[from].Pop();
-            //     _crates[to].Push(popped);
-            // }
         }
 
         var final = "";
