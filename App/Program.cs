@@ -8,6 +8,7 @@ using Subjects.AoC._2022._4;
 using Subjects.AoC._2022._5;
 using Subjects.AoC._2022._7;
 using Subjects.AoC._2022._8;
+using Subjects.AoC._2022._9;
 using Subjects.Structures;
 
 namespace App;
@@ -38,8 +39,12 @@ class Program
             //     Console.WriteLine(child.Value);
             // }
             // var tree = new BasicTree<int>(root);
+            var asd = new HashSet<(int, int)>();
+            asd.Add((0, 0));
+            asd.Add((1, 0));
+            asd.Add((0, 0));
 
-            Day8Solution.Output();
+            Day9Solution.Output();
         }
         catch (Exception e)
         {
