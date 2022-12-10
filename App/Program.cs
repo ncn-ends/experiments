@@ -2,6 +2,7 @@
 using System.Text;
 using Subjects.Algorithms;
 using Subjects.AoC._2022._1;
+using Subjects.AoC._2022._10;
 using Subjects.AoC._2022._2;
 using Subjects.AoC._2022._3;
 using Subjects.AoC._2022._4;
@@ -39,12 +40,7 @@ class Program
             //     Console.WriteLine(child.Value);
             // }
             // var tree = new BasicTree<int>(root);
-            var asd = new HashSet<(int, int)>();
-            asd.Add((0, 0));
-            asd.Add((1, 0));
-            asd.Add((0, 0));
-
-            Day9Solution.Output();
+            Day10Solution.Output();
         }
         catch (Exception e)
         {
