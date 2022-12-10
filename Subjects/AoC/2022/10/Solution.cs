@@ -172,20 +172,6 @@ noop
     
     public static int DoIt()
     {
-        // foreach (var l in _exampleA.Split("\n"))
-        // {
-        //     var asd = l.Trim().Split(" ");
-        //     var op = asd[0];
-        //     if (op == "noop")
-        //     {
-        //         cycle++;
-        //     }
-        //
-        //     if (op == "addx")
-        //     {
-        //         
-        //     }
-        // }
 
         var checks = new int[] { 20, 60, 100, 140, 180, 220 };
         var signalChecks = new List<(int cycle, int signalPower)>();
@@ -216,16 +202,13 @@ noop
             cycle++;
             var line = asd[0];
 
-            // Debugger.Break();
             line.CyclesLeft--;
             
             if (checks.Any(x => x == cycle))
             {
                 signalChecks.Add((cycle, cycle * signal));
             }
-
-
-            // crt stuff
+            
             var symbol = ".";
             if (crt.Length % 40 <= signal + 1 && crt.Length % 40 >= signal - 1)
             {
@@ -240,8 +223,6 @@ noop
                 signal += line.Change;
                 asd.RemoveAt(0);
             }
-
-            // Debugger.Break();
         }
 
         Console.Write("Part 1: ");
@@ -257,10 +238,6 @@ noop
 
     public static void Output()
     {
-        // Console.Write("Part 1: ");
         Console.WriteLine(DoIt());
-        //
-        // Console.Write("Part 2: ");
-        // Console.WriteLine(DoPart2());
     }
 }
