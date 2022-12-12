@@ -176,7 +176,7 @@ noop
         var checks = new int[] { 20, 60, 100, 140, 180, 220 };
         var signalChecks = new List<(int cycle, int signalPower)>();
         
-        List<Line> asd = _input.Split("\n").Select<string, Line>(x =>
+        List<Line> lines = _input.Split("\n").Select<string, Line>(x =>
         {
             var split = x.Split(" ");
             if (split[0] == "addx")
@@ -197,10 +197,10 @@ noop
         var crt = "";
         while (true)
         {
-            if (asd.Count == 0) break;
+            if (lines.Count == 0) break;
 
             cycle++;
-            var line = asd[0];
+            var line = lines[0];
 
             line.CyclesLeft--;
             
@@ -221,7 +221,7 @@ noop
             if (line.CyclesLeft == 0)
             {
                 signal += line.Change;
-                asd.RemoveAt(0);
+                lines.RemoveAt(0);
             }
         }
 

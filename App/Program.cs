@@ -3,6 +3,7 @@ using System.Text;
 using Subjects.Algorithms;
 using Subjects.AoC._2022._1;
 using Subjects.AoC._2022._10;
+using Subjects.AoC._2022._11;
 using Subjects.AoC._2022._2;
 using Subjects.AoC._2022._3;
 using Subjects.AoC._2022._4;
@@ -22,25 +23,14 @@ class Program
         {
             // Benchmarks.Main.RunAllBenchmarks();
 
-            // Benchmarks.LeetCode.ReverseStringBenchmarks.RunBenchmarks();
-
-            // Benchmarks.Experiments.Span.StringExampleBenchmarks.RunBenchmarks();
-
-
-            // var root = new TreeNode<int>(100);
-            // var layer1 = new List<TreeNode<int>>
-            // {
-            //     new(50),
-            //     new(1),
-            //     new(150)
-            // };
-            // root.AddChildren(layer1);
-            // foreach (var child in root.Children)
-            // {
-            //     Console.WriteLine(child.Value);
-            // }
-            // var tree = new BasicTree<int>(root);
-            Day10Solution.Output();
+            // ulong asd = 80;
+            // int qwe = 23;
+            // var zxc = asd % (ulong)qwe;
+            //
+            // Func<ulong, bool> asdd = x => x % 23 == 0;
+            // var qwee = asdd(70);
+            // Debugger.Break();
+            Day11Solution.Output();
         }
         catch (Exception e)
         {
