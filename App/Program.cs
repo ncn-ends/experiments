@@ -4,6 +4,7 @@ using Subjects.Algorithms;
 using Subjects.AoC._2022._1;
 using Subjects.AoC._2022._10;
 using Subjects.AoC._2022._11;
+using Subjects.AoC._2022._12;
 using Subjects.AoC._2022._2;
 using Subjects.AoC._2022._3;
 using Subjects.AoC._2022._4;
@@ -30,7 +31,7 @@ class Program
             // Func<ulong, bool> asdd = x => x % 23 == 0;
             // var qwee = asdd(70);
             // Debugger.Break();
-            Day11Solution.Output();
+            Day12Solution.Output();
         }
         catch (Exception e)
         {
