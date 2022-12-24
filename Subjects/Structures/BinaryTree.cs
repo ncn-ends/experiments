@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 namespace Subjects.Structures;
 
 public class BinaryTreeNode<T>
@@ -9,6 +11,7 @@ public class BinaryTreeNode<T>
 
     public BinaryTreeNode<T> AddAsLeftNode(BinaryTreeNode<T> nodeToAdd)
     {
+        nodeToAdd.Parent ??= this;
         LeftNode = nodeToAdd;
         return nodeToAdd;
     }
@@ -18,6 +21,19 @@ public class BinaryTreeNode<T>
         RightNode = nodeToAdd;
         return nodeToAdd;
     }
+
+    public int GetHeight()
+    {
+        int GetHeightRecursive(BinaryTreeNode<T> currentNode)
+        {
+            Debugger.Break();
+            if (currentNode.Parent is null) return 1;
+            return GetHeightRecursive(currentNode.Parent) + 1;
+        }
+
+        return GetHeightRecursive(this);
+    }
+
 }
 
 public enum TraversalModeEnum
@@ -81,4 +97,9 @@ public class BinaryTree<T>
 
         return result;
     }
+
+    // public void TraverseOn<R>(TraversalModeEnum traversalMode, Func<T, R> action)
+    // {
+    //     
+    // }
 }

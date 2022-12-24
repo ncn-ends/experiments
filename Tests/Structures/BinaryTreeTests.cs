@@ -27,6 +27,10 @@ public class BinaryTreeTests
         {
             Value = 9,
         });
+        var rootLeftNodeLeftNodeLeftNode = rootLeftNodeLeftNode.AddAsLeftNode(new BinaryTreeNode<int>
+        {
+            Value = 4,
+        });
         var rootRightNode = rootNode.AddAsRightNode(new BinaryTreeNode<int>
         {
             Value = 0,
@@ -44,34 +48,28 @@ public class BinaryTreeTests
         var tree = _binaryTreeOfInts;
         
         var preOrderResults = tree.Traverse(TraversalModeEnum.PREORDER);
-        preOrderResults.Should().Equal(new List<int> {5, 3, 9, 0});
+        preOrderResults.Should().Equal(new List<int> {5, 3, 9, 4, 0});
 
         var inOrderResults = tree.Traverse(TraversalModeEnum.INORDER); 
-        inOrderResults.Should().Equal(new List<int> {9, 3, 5, 0});
+        inOrderResults.Should().Equal(new List<int> {4, 9, 3, 5, 0});
         inOrderResults.Should().NotEqual(preOrderResults);
 
         var postOrderResults = tree.Traverse(TraversalModeEnum.POSTORDER);
-        postOrderResults.Should().Equal(new List<int> {9, 3, 0, 5});
+        postOrderResults.Should().Equal(new List<int> {4, 9, 3, 0, 5});
         postOrderResults.Should().NotEqual(preOrderResults);
         postOrderResults.Should().NotEqual(inOrderResults);
+
+        tree.Root.LeftNode!.LeftNode!.LeftNode!.GetHeight().Should().Be(4);
     }
 
-    [Fact]
-    public void TraversalWithActionBinaryTreeOfInts()
-    {
-        var tree = _binaryTreeOfInts;
-        
-        var preOrderResults = tree.Traverse(TraversalModeEnum.PREORDER);
-        preOrderResults.Should().Equal(new List<int> {5, 3, 9, 0});
-
-        var inOrderResults = tree.Traverse(TraversalModeEnum.INORDER); 
-        inOrderResults.Should().Equal(new List<int> {9, 3, 5, 0});
-        inOrderResults.Should().NotEqual(preOrderResults);
-
-        var postOrderResults = tree.Traverse(TraversalModeEnum.POSTORDER);
-        postOrderResults.Should().Equal(new List<int> {9, 3, 0, 5});
-        postOrderResults.Should().NotEqual(preOrderResults);
-        postOrderResults.Should().NotEqual(inOrderResults);
-    }
+    // [Fact]
+    // public void TraversalWithActionBinaryTreeOfInts()
+    // {
+    //     var tree = _binaryTreeOfInts;
+    //     // Func<int, bool> predicate =  
+    //     
+    //     tree.TraverseOn(TraversalModeEnum.PREORDER);
+    //
+    // }
     
 }
