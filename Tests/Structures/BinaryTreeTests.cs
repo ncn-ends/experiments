@@ -39,51 +39,39 @@ public class BinaryTreeTests
     }
 
     [Fact]
-    public void BinaryTreeOfInts()
+    public void BasicTraversalBinaryTreeOfInts()
     {
         var tree = _binaryTreeOfInts;
         
-        var preOrderResults = new List<int>();
-        tree.TraversePreOrder(preOrderResults, tree.Root);
+        var preOrderResults = tree.Traverse(TraversalModeEnum.PREORDER);
         preOrderResults.Should().Equal(new List<int> {5, 3, 9, 0});
 
-        var inOrderResults = new List<int>();
-        tree.TraverseInOrder(inOrderResults, tree.Root);
-        inOrderResults.Should().Equal(new List<int> {3, 9, 5, 0});
+        var inOrderResults = tree.Traverse(TraversalModeEnum.INORDER); 
+        inOrderResults.Should().Equal(new List<int> {9, 3, 5, 0});
         inOrderResults.Should().NotEqual(preOrderResults);
-        
-        var postOrderResults = new List<int>();
-        tree.TraversePostOrder(postOrderResults, tree.Root);
-        postOrderResults.Should().Equal(new List<int> {3, 9, 0, 5});
+
+        var postOrderResults = tree.Traverse(TraversalModeEnum.POSTORDER);
+        postOrderResults.Should().Equal(new List<int> {9, 3, 0, 5});
         postOrderResults.Should().NotEqual(preOrderResults);
         postOrderResults.Should().NotEqual(inOrderResults);
     }
 
+    [Fact]
+    public void TraversalWithActionBinaryTreeOfInts()
+    {
+        var tree = _binaryTreeOfInts;
+        
+        var preOrderResults = tree.Traverse(TraversalModeEnum.PREORDER);
+        preOrderResults.Should().Equal(new List<int> {5, 3, 9, 0});
+
+        var inOrderResults = tree.Traverse(TraversalModeEnum.INORDER); 
+        inOrderResults.Should().Equal(new List<int> {9, 3, 5, 0});
+        inOrderResults.Should().NotEqual(preOrderResults);
+
+        var postOrderResults = tree.Traverse(TraversalModeEnum.POSTORDER);
+        postOrderResults.Should().Equal(new List<int> {9, 3, 0, 5});
+        postOrderResults.Should().NotEqual(preOrderResults);
+        postOrderResults.Should().NotEqual(inOrderResults);
+    }
     
-    // public class Person
-    // {
-    //     public int Id { get; set; } = -1;
-    //     public string Name { get; set; } = "UNSET NAME";
-    //     public string Title { get; set; } = "UNSET TITLE";
-    // }
-    //
-    // [Fact]
-    // public void BasicTreeOfPersons()
-    // {
-    //     var tree = new Tree<Person>(new TreeNode<Person>(new Person
-    //     {
-    //         Id = 1,
-    //         Name = "Marcin Jamro",
-    //         Title = "CEO"
-    //     }));
-    //     
-    //     tree.AddChildByValue(p => p.Id == 1, new TreeNode<Person>(new Person
-    //     {
-    //         Id = 2,
-    //         Name = "John Smith",
-    //         Title = "Head of Development"
-    //     }));
-    //     
-    //     tree.Root.Children.Count.Should().Be(1);
-    // }
 }

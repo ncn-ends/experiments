@@ -20,13 +20,18 @@ public class BinaryTreeNode<T>
     }
 }
 
-
+public enum TraversalModeEnum
+{
+    PREORDER,
+    INORDER,
+    POSTORDER
+}
 public class BinaryTree<T>
 {
     public BinaryTreeNode<T> Root { get; set; }
     public int Count { get; set; }
 
-    public void TraversePreOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraversePreOrder(List<T> result, BinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
@@ -36,24 +41,44 @@ public class BinaryTree<T>
         }
     }
 
-    public void TraverseInOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraverseInOrder(List<T> result, BinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
-            TraversePreOrder(result, currentNode.LeftNode );
+            TraverseInOrder(result, currentNode.LeftNode );
             result.Add(currentNode.Value);
-            TraversePreOrder(result, currentNode.RightNode );
+            TraverseInOrder(result, currentNode.RightNode );
         }
     }
 
-    public void TraversePostOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraversePostOrder(List<T> result, BinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
-            TraversePreOrder(result, currentNode.LeftNode );
-            TraversePreOrder(result, currentNode.RightNode );
+            TraversePostOrder(result, currentNode.LeftNode );
+            TraversePostOrder(result, currentNode.RightNode );
             result.Add(currentNode.Value);
         }
+    }
 
+    public List<T> Traverse(TraversalModeEnum traversalMode)
+    {
+        var result = new List<T>();
+        switch (traversalMode)
+        {
+            case TraversalModeEnum.PREORDER:
+                TraversePreOrder(result, Root);
+                break;
+            case TraversalModeEnum.INORDER:
+                TraverseInOrder(result, Root);
+                break;
+            case TraversalModeEnum.POSTORDER:
+                TraversePostOrder(result, Root);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(traversalMode), traversalMode, null);
+        }
+
+        return result;
     }
 }
