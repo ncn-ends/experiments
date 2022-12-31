@@ -11,38 +11,20 @@ namespace Tests.LeetCode;
 
 public class BSTTests
 {
-    private BinaryTree<int> _binaryTreeOfInts;
+    private readonly BST<int> _tree;
 
-    // public BSTTests()
-    // {
-    //     var rootNode = new BinaryTreeNode<int>
-    //     {
-    //         Value = 5,
-    //         Parent = null,
-    //     };
-    //
-    //     var rootLeftNode = rootNode.AddAsLeftNode(new BinaryTreeNode<int>
-    //     {
-    //         Value = 3,
-    //     });
-    //     var rootLeftNodeLeftNode = rootLeftNode.AddAsLeftNode(new BinaryTreeNode<int>
-    //     {
-    //         Value = 9,
-    //     });
-    //     var rootLeftNodeLeftNodeLeftNode = rootLeftNodeLeftNode.AddAsLeftNode(new BinaryTreeNode<int>
-    //     {
-    //         Value = 4,
-    //     });
-    //     var rootRightNode = rootNode.AddAsRightNode(new BinaryTreeNode<int>
-    //     {
-    //         Value = 0,
-    //     });
-    //     _binaryTreeOfInts = new BinaryTree<int>
-    //     {
-    //         Root = rootNode,
-    //         Count = 1
-    //     };
-    // }
+    public BSTTests()
+    {
+        _tree = new BST<int>();
+        _tree.Add(94);
+        _tree.Add(127);
+        _tree.Add(34);
+        _tree.Add(55);
+        _tree.Add(13);
+        _tree.Add(5);
+        _tree.Add(56);
+        _tree.Add(43);
+    }
 
     [Fact]
     public void BSTTests_TraversalAndList()
@@ -54,41 +36,47 @@ public class BSTTests
         var asList = tree.ToList();
         list.Should().Equal(asList);
     }
+
     [Fact]
     public void BSTTests_TraversalModes()
     {
-        var tree = new BST<int>();
-        tree.Add(94);
-        tree.Add(127);
-        tree.Add(34);
-        tree.Add(55);
-        tree.Add(13);
-        tree.Add(5);
-        tree.Add(56);
-        tree.Add(43);
-
-        tree.ToList(TraversalMode.PREORDER).Should().Equal(new List<int> { 94, 34, 13, 5, 55, 43, 56, 127 });
-        tree.ToList(TraversalMode.INORDER).Should().Equal(new List<int> { 5, 13, 34, 43, 55, 56, 94, 127 });
-        tree.ToList(TraversalMode.POSTORDER).Should().Equal(new List<int> { 5, 13, 43, 56, 55, 34, 127, 94});
-        tree.ToList().OrderBy(x => x).Should().Equal(tree.ToList(TraversalMode.INORDER));
-        tree.ToOrderedList().Should().Equal(tree.ToList(TraversalMode.INORDER));
+        _tree.ToList(TraversalMode.PREORDER).Should().Equal(new List<int> {94, 34, 13, 5, 55, 43, 56, 127});
+        _tree.ToList(TraversalMode.INORDER).Should().Equal(new List<int> {5, 13, 34, 43, 55, 56, 94, 127});
+        _tree.ToList(TraversalMode.POSTORDER).Should().Equal(new List<int> {5, 13, 43, 56, 55, 34, 127, 94});
+        _tree.ToList().OrderBy(x => x).Should().Equal(_tree.ToList(TraversalMode.INORDER));
+        _tree.ToOrderedList().Should().Equal(_tree.ToList(TraversalMode.INORDER));
     }
 
     [Fact]
     public void BSTTests_Print()
     {
-        var tree = new BST<int>();
-        tree.Add(94);
-        tree.Add(127);
-        tree.Add(34);
-        tree.Add(55);
-        tree.Add(13);
-        tree.Add(5);
-        tree.Add(56);
-        tree.Add(43);
-
-        var printed = tree.Print();
+        var printed = _tree.Print();
 
         Debugger.Break();
+    }
+
+    [Fact]
+    public void BSTTests_FindByValue()
+    {
+        var nodeA = _tree.FindNodeByValue(94);
+        nodeA.Should().NotBeNull();
+        nodeA!.IsRoot.Should().BeTrue();
+
+        var nodeB = _tree.FindNodeByValue(500);
+        nodeB.Should().BeNull();
+
+        var nodeC = _tree.FindNodeByValue(5);
+        nodeC.Should().NotBeNull();
+        nodeC!.Value.Should().Be(5);
+    }
+    
+    [Fact]
+    public void BSTTests_Contains()
+    {
+        _tree.Contains(94).Should().BeTrue();
+        _tree.Contains(127).Should().BeTrue();
+        _tree.Contains(43).Should().BeTrue();
+        _tree.Contains(100).Should().BeFalse();
+        _tree.Contains(0).Should().BeFalse();
     }
 }

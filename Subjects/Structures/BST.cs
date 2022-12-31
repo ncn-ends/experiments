@@ -55,21 +55,6 @@ public enum TraversalMode
 public class BST<T> where T : IComparable
 {
     public new BSTNode<T>? Root { get; set; }
-    // public bool Contains(T data)
-    // {
-    //     BSTNode<T>? currentNode = Root;
-    //
-    //     while (currentNode is not null)
-    //     {
-    //         var compared = data.CompareTo(currentNode.Value);
-    //         if (compared == 0) return true;
-    //         if (compared > 1) currentNode = currentNode.RightNode;
-    //         else if (compared < 1) currentNode = currentNode.LeftNode;
-    //         else break;
-    //     }
-    //
-    //     return false;
-    // }
 
 
     public void Traverse(Action<T> action, TraversalMode mode = TraversalMode.PREORDER)
@@ -96,6 +81,7 @@ public class BST<T> where T : IComparable
                 TraversePreOrder(currentNode.RightNode);
             }
         }
+
         void TraverseInOrder(BSTNode<T>? currentNode)
         {
             if (currentNode is not null)
@@ -105,6 +91,7 @@ public class BST<T> where T : IComparable
                 TraverseInOrder(currentNode.RightNode);
             }
         }
+
         void TraversePostOrder(BSTNode<T>? currentNode)
         {
             if (currentNode is not null)
@@ -122,6 +109,7 @@ public class BST<T> where T : IComparable
         Traverse(x => list.Add(x), mode);
         return list;
     }
+
     public List<T> ToOrderedList()
     {
         return ToList(TraversalMode.INORDER);
@@ -138,6 +126,28 @@ public class BST<T> where T : IComparable
         };
         return Root;
     }
+
+    
+    public BSTNode<T>? FindNodeByValue(T value)
+    {
+        BSTNode<T>? currentNode = Root;
+
+        while (currentNode is not null)
+        {
+            var compared = value.CompareTo(currentNode.Value);
+            if (compared == 0) return currentNode;
+            if (compared < 0) currentNode = currentNode.LeftNode;
+            else currentNode = currentNode.RightNode;
+        }
+
+        return null;
+    }
+
+    public bool Contains(T value)
+    {
+        return FindNodeByValue(value) is not null;
+    }
+
 
     public string Print()
     {
@@ -182,5 +192,4 @@ public class BST<T> where T : IComparable
             return toReturn;
         }
     }
-
 }
