@@ -2,20 +2,31 @@ using System.Diagnostics;
 
 namespace Subjects.Structures;
 
-public class BinaryTreeNode<T>
+public interface IBinaryTreeNode<T>
+{
+    T Value { get; init; }
+    IBinaryTreeNode<T>? Parent { get; set; }
+    IBinaryTreeNode<T>? LeftNode { get; set; }
+    IBinaryTreeNode<T>? RightNode { get; set; }
+    IBinaryTreeNode<T> AddAsLeftNode(IBinaryTreeNode<T> nodeToAdd);
+    IBinaryTreeNode<T> AddAsRightNode(IBinaryTreeNode<T> nodeToAdd);
+    int GetHeight();
+}
+
+public class BinaryTreeNode<T> : IBinaryTreeNode<T>
 {
     public required T Value { get; init; }
-    public  BinaryTreeNode<T>? Parent { get; set; }
-    public BinaryTreeNode<T>? LeftNode { get; set; }  
-    public BinaryTreeNode<T>? RightNode { get; set; }
+    public  IBinaryTreeNode<T>? Parent { get; set; }
+    public IBinaryTreeNode<T>? LeftNode { get; set; }  
+    public IBinaryTreeNode<T>? RightNode { get; set; }
 
-    public BinaryTreeNode<T> AddAsLeftNode(BinaryTreeNode<T> nodeToAdd)
+    public IBinaryTreeNode<T> AddAsLeftNode(IBinaryTreeNode<T> nodeToAdd)
     {
         nodeToAdd.Parent ??= this;
         LeftNode = nodeToAdd;
         return nodeToAdd;
     }
-    public BinaryTreeNode<T> AddAsRightNode(BinaryTreeNode<T> nodeToAdd)
+    public IBinaryTreeNode<T> AddAsRightNode(IBinaryTreeNode<T> nodeToAdd)
     {
         nodeToAdd.Parent ??= this;
         RightNode = nodeToAdd;
@@ -24,7 +35,7 @@ public class BinaryTreeNode<T>
 
     public int GetHeight()
     {
-        int GetHeightRecursive(BinaryTreeNode<T> currentNode)
+        int GetHeightRecursive(IBinaryTreeNode<T> currentNode)
         {
             Debugger.Break();
             if (currentNode.Parent is null) return 1;
@@ -33,7 +44,6 @@ public class BinaryTreeNode<T>
 
         return GetHeightRecursive(this);
     }
-
 }
 
 public enum TraversalModeEnum
@@ -44,10 +54,10 @@ public enum TraversalModeEnum
 }
 public class BinaryTree<T>
 {
-    public BinaryTreeNode<T> Root { get; set; }
+    public BinaryTreeNode<T>? Root { get; set; }
     public int Count { get; set; }
 
-    private void TraversePreOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraversePreOrder(List<T> result, IBinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
@@ -57,7 +67,7 @@ public class BinaryTree<T>
         }
     }
 
-    private void TraverseInOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraverseInOrder(List<T> result, IBinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
@@ -67,7 +77,7 @@ public class BinaryTree<T>
         }
     }
 
-    private void TraversePostOrder(List<T> result, BinaryTreeNode<T>? currentNode)
+    private void TraversePostOrder(List<T> result, IBinaryTreeNode<T>? currentNode)
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
@@ -77,8 +87,9 @@ public class BinaryTree<T>
         }
     }
 
-    public List<T> Traverse(TraversalModeEnum traversalMode)
+    public List<T> Traverse(TraversalModeEnum traversalMode = TraversalModeEnum.PREORDER)
     {
+        Debugger.Break();
         var result = new List<T>();
         switch (traversalMode)
         {
