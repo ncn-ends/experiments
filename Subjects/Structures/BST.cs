@@ -79,8 +79,13 @@ public class BST<T> where T : IComparable
             case (TraversalMode.PREORDER):
                 TraversePreOrder(Root);
                 return;
+            case TraversalMode.INORDER:
+                TraverseInOrder(Root);
+                return;
+            case TraversalMode.POSTORDER:
+                TraversePostOrder(Root);
+                return;
         }
-
 
         void TraversePreOrder(BSTNode<T>? currentNode)
         {
@@ -91,13 +96,35 @@ public class BST<T> where T : IComparable
                 TraversePreOrder(currentNode.RightNode);
             }
         }
+        void TraverseInOrder(BSTNode<T>? currentNode)
+        {
+            if (currentNode is not null)
+            {
+                TraverseInOrder(currentNode.LeftNode);
+                action(currentNode.Value);
+                TraverseInOrder(currentNode.RightNode);
+            }
+        }
+        void TraversePostOrder(BSTNode<T>? currentNode)
+        {
+            if (currentNode is not null)
+            {
+                TraversePostOrder(currentNode.LeftNode);
+                TraversePostOrder(currentNode.RightNode);
+                action(currentNode.Value);
+            }
+        }
     }
 
-    public List<T> ToList()
+    public List<T> ToList(TraversalMode mode = TraversalMode.PREORDER)
     {
         var list = new List<T>();
-        Traverse(x => list.Add(x));
+        Traverse(x => list.Add(x), mode);
         return list;
+    }
+    public List<T> ToOrderedList()
+    {
+        return ToList(TraversalMode.INORDER);
     }
 
     public BSTNode<T> Add(T data)
@@ -112,21 +139,11 @@ public class BST<T> where T : IComparable
         return Root;
     }
 
-    // public void BalancedAdd(T data)
-    // {
-    // var list = ToList();
-    // if (list.Contains(data)) throw new ArgumentException("Duplicate data");
-    // var midpoint = list[list.Count / 2];
-    //
-    // }
-
-
     public string Print()
     {
-
         var lines = "graph TB;\n";
         var usedKeys = new HashSet<string>();
-        
+
         PrintForNode(Root);
         return lines;
 
@@ -140,7 +157,7 @@ public class BST<T> where T : IComparable
                 lines += $"{key}{rootOnlyField}-->{leftKey}(({node.LeftNode.Value}))\n";
                 PrintForNode(node.LeftNode, leftKey);
             }
-            
+
             if (node.RightNode is not null)
             {
                 var rightKey = GetRandomCharacters();
@@ -148,6 +165,7 @@ public class BST<T> where T : IComparable
                 PrintForNode(node.RightNode, rightKey);
             }
         }
+
         string GetRandomCharacters()
         {
             var text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -164,4 +182,5 @@ public class BST<T> where T : IComparable
             return toReturn;
         }
     }
+
 }
