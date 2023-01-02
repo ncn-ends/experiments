@@ -1,4 +1,4 @@
-namespace Subjects.Structures;
+namespace Subjects.Structures.Trees;
 
 public class BSTNode<T> where T : IComparable
 {
@@ -43,31 +43,58 @@ public class BSTNode<T> where T : IComparable
         if (LeftNode is not null) return LeftNode.Add(value);
         return AddAsLeftNode(value);
     }
+
+    public BSTNode<T> GetRoot() => Parent is null ? this : Parent.GetRoot();
+
+    public BSTNode<T>? GetInOrderPredecessor()
+    {
+        return LeftNode is null
+            ? null
+            : GetInOrderPredecessor(LeftNode);
+    }
+    public BSTNode<T>? GetInOrderSuccessor()
+    {
+        return RightNode is null
+            ? null
+            : GetInOrderSuccessor(RightNode);
+    }
+
+    private BSTNode<T> GetInOrderPredecessor(BSTNode<T> currentNode)
+    {
+        return currentNode.RightNode is not null 
+            ? GetInOrderPredecessor(currentNode.RightNode) 
+            : currentNode;
+    }
+    private BSTNode<T>? GetInOrderSuccessor(BSTNode<T> currentNode)
+    {
+        return currentNode.LeftNode is not null 
+            ? GetInOrderPredecessor(currentNode.LeftNode) 
+            : currentNode;
+    }
 }
 
 public enum TraversalMode
 {
-    PREORDER,
-    INORDER,
-    POSTORDER
+    PreOrder,
+    InOrder,
+    PostOrder
 }
 
 public class BST<T> where T : IComparable
 {
-    public new BSTNode<T>? Root { get; set; }
+    public BSTNode<T>? Root { get; set; }
 
-
-    public void Traverse(Action<T> action, TraversalMode mode = TraversalMode.PREORDER)
+    public void Traverse(Action<T> action, TraversalMode mode = TraversalMode.PreOrder)
     {
         switch (mode)
         {
-            case (TraversalMode.PREORDER):
+            case TraversalMode.PreOrder:
                 TraversePreOrder(Root);
                 return;
-            case TraversalMode.INORDER:
+            case TraversalMode.InOrder:
                 TraverseInOrder(Root);
                 return;
-            case TraversalMode.POSTORDER:
+            case TraversalMode.PostOrder:
                 TraversePostOrder(Root);
                 return;
         }
@@ -103,7 +130,7 @@ public class BST<T> where T : IComparable
         }
     }
 
-    public List<T> ToList(TraversalMode mode = TraversalMode.PREORDER)
+    public List<T> ToList(TraversalMode mode = TraversalMode.PreOrder)
     {
         var list = new List<T>();
         Traverse(x => list.Add(x), mode);
@@ -112,7 +139,7 @@ public class BST<T> where T : IComparable
 
     public List<T> ToOrderedList()
     {
-        return ToList(TraversalMode.INORDER);
+        return ToList(TraversalMode.InOrder);
     }
 
     public BSTNode<T> Add(T data)
@@ -127,7 +154,7 @@ public class BST<T> where T : IComparable
         return Root;
     }
 
-    
+
     public BSTNode<T>? FindNodeByValue(T value)
     {
         BSTNode<T>? currentNode = Root;
@@ -143,10 +170,7 @@ public class BST<T> where T : IComparable
         return null;
     }
 
-    public bool Contains(T value)
-    {
-        return FindNodeByValue(value) is not null;
-    }
+    public bool Contains(T value) => FindNodeByValue(value) is not null;
 
 
     public string Print()
@@ -192,4 +216,41 @@ public class BST<T> where T : IComparable
             return toReturn;
         }
     }
+
+    /*
+     * Remove = (data: T) => bool;
+     *      
+     * find node to delete
+     *      - compare nodeToDelete to currentNode
+     *          - if equal to 0, found node
+     *          - if less than 0, check leftNode
+     *              - if leftNode is not null, go to leftNode
+     *              - if leftNode is null, return false
+     *          - if greater than 0, check rightNode
+     *              - if rightNode is not null, go to rightNode
+     *              - if rightNode is null, return false
+     * root
+     *      - traits
+     *          - parent is null
+     *          - has 2 children
+     *      - implementation 
+     *          - 
+     * leaf
+     *      - traits
+     *          - parent is not null
+     *          - leftNode and rightNode are both null
+     *      - implementation 
+     *          - just remove node
+     * node
+     *      - traits
+     *          - parent is not null
+     *          - leftNode might be null
+     *          - rightNode might be null
+     *      - implementation
+     *          - 
+     */
+    // public bool Remove(T data)
+    // {
+    //     
+    // }
 }

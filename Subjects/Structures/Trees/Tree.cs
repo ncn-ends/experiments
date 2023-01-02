@@ -1,6 +1,4 @@
-using System.Diagnostics;
-
-namespace Subjects.Structures;
+namespace Subjects.Structures.Trees;
 
 public class Tree<T> where T : notnull
 {

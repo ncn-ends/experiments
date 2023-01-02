@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Subjects.Structures;
+namespace Subjects.Structures.Trees;
 
 public interface IBinaryTreeNode<T>
 {
@@ -16,8 +16,8 @@ public interface IBinaryTreeNode<T>
 public class BinaryTreeNode<T> : IBinaryTreeNode<T>
 {
     public required T Value { get; init; }
-    public  IBinaryTreeNode<T>? Parent { get; set; }
-    public IBinaryTreeNode<T>? LeftNode { get; set; }  
+    public IBinaryTreeNode<T>? Parent { get; set; }
+    public IBinaryTreeNode<T>? LeftNode { get; set; }
     public IBinaryTreeNode<T>? RightNode { get; set; }
 
     public IBinaryTreeNode<T> AddAsLeftNode(IBinaryTreeNode<T> nodeToAdd)
@@ -26,6 +26,7 @@ public class BinaryTreeNode<T> : IBinaryTreeNode<T>
         LeftNode = nodeToAdd;
         return nodeToAdd;
     }
+
     public IBinaryTreeNode<T> AddAsRightNode(IBinaryTreeNode<T> nodeToAdd)
     {
         nodeToAdd.Parent ??= this;
@@ -52,6 +53,7 @@ public enum TraversalModeEnum
     INORDER,
     POSTORDER
 }
+
 public class BinaryTree<T>
 {
     public BinaryTreeNode<T>? Root { get; set; }
@@ -62,8 +64,8 @@ public class BinaryTree<T>
         if (currentNode is not null && currentNode.Value is not null)
         {
             result.Add(currentNode.Value);
-            TraversePreOrder(result, currentNode.LeftNode );
-            TraversePreOrder(result, currentNode.RightNode );
+            TraversePreOrder(result, currentNode.LeftNode);
+            TraversePreOrder(result, currentNode.RightNode);
         }
     }
 
@@ -71,9 +73,9 @@ public class BinaryTree<T>
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
-            TraverseInOrder(result, currentNode.LeftNode );
+            TraverseInOrder(result, currentNode.LeftNode);
             result.Add(currentNode.Value);
-            TraverseInOrder(result, currentNode.RightNode );
+            TraverseInOrder(result, currentNode.RightNode);
         }
     }
 
@@ -81,15 +83,14 @@ public class BinaryTree<T>
     {
         if (currentNode is not null && currentNode.Value is not null)
         {
-            TraversePostOrder(result, currentNode.LeftNode );
-            TraversePostOrder(result, currentNode.RightNode );
+            TraversePostOrder(result, currentNode.LeftNode);
+            TraversePostOrder(result, currentNode.RightNode);
             result.Add(currentNode.Value);
         }
     }
 
     public List<T> Traverse(TraversalModeEnum traversalMode = TraversalModeEnum.PREORDER)
     {
-        Debugger.Break();
         var result = new List<T>();
         switch (traversalMode)
         {
@@ -108,9 +109,4 @@ public class BinaryTree<T>
 
         return result;
     }
-
-    // public void TraverseOn<R>(TraversalModeEnum traversalMode, Func<T, R> action)
-    // {
-    //     
-    // }
 }

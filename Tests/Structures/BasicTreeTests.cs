@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using FluentAssertions;
-using Subjects.LeetCode;
-using Subjects.Structures;
+using Subjects.Structures.Trees;
 using Xunit;
 
-namespace Tests.LeetCode;
+namespace Tests.Structures;
 
 public class BasicTreeTests
 {
