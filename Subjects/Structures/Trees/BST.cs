@@ -1,12 +1,25 @@
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Subjects.Structures.Trees;
 
 public class BSTNode<T> where T : IComparable
 {
-    public T Value { get; set; }
+    public T Value { get; set; } = default!;
     public BSTNode<T>? Parent { get; set; }
     public BSTNode<T>? LeftNode { get; set; }
     public BSTNode<T>? RightNode { get; set; }
+
     public bool IsRoot => Parent is null;
+
+    [MemberNotNullWhen(true, nameof(Parent))]
+    public bool IsLeaf => Parent is not null && LeftNode is null && RightNode is null;
+
+    public bool IsLeftNode => Parent?.LeftNode is not null &&
+                              Parent.LeftNode.Value.CompareTo(Value) == 0;
+
+    public bool IsRightNode => Parent?.RightNode is not null &&
+                               Parent.RightNode.Value.CompareTo(Value) == 0;
 
     public BSTNode<T> AddAsLeftNode(T value)
     {
@@ -52,6 +65,7 @@ public class BSTNode<T> where T : IComparable
             ? null
             : GetInOrderPredecessor(LeftNode);
     }
+
     public BSTNode<T>? GetInOrderSuccessor()
     {
         return RightNode is null
@@ -61,14 +75,15 @@ public class BSTNode<T> where T : IComparable
 
     private BSTNode<T> GetInOrderPredecessor(BSTNode<T> currentNode)
     {
-        return currentNode.RightNode is not null 
-            ? GetInOrderPredecessor(currentNode.RightNode) 
+        return currentNode.RightNode is not null
+            ? GetInOrderPredecessor(currentNode.RightNode)
             : currentNode;
     }
+
     private BSTNode<T>? GetInOrderSuccessor(BSTNode<T> currentNode)
     {
-        return currentNode.LeftNode is not null 
-            ? GetInOrderPredecessor(currentNode.LeftNode) 
+        return currentNode.LeftNode is not null
+            ? GetInOrderPredecessor(currentNode.LeftNode)
             : currentNode;
     }
 }
@@ -172,7 +187,6 @@ public class BST<T> where T : IComparable
 
     public bool Contains(T value) => FindNodeByValue(value) is not null;
 
-
     public string Print()
     {
         var lines = "graph TB;\n";
@@ -249,8 +263,70 @@ public class BST<T> where T : IComparable
      *      - implementation
      *          - 
      */
-    // public bool Remove(T data)
-    // {
-    //     
-    // }
+    public bool Remove(T data)
+    {
+        var node = FindNodeByValue(data);
+
+        if (node is null) return false;
+
+        if (node.IsLeaf)
+        {
+            if (node.IsLeftNode)
+            {
+                node.Parent.LeftNode = null;
+                return true;
+            }
+
+            if (node.IsRightNode)
+            {
+                node.Parent.RightNode = null;
+                return true;
+            }
+        }
+
+        if (node.RightNode is null && node.LeftNode is not null)
+        {
+            node.LeftNode.Parent = node.Parent;
+            
+            if (node.Parent is null) node.LeftNode.Parent = null;
+            else if (node.IsLeftNode) node.Parent.LeftNode = node.LeftNode;
+            else node.Parent.RightNode = node.LeftNode;
+            
+            return true;
+        }
+
+        if (node.RightNode is not null && node.LeftNode is null)
+        {
+            node.RightNode.Parent = node.Parent;
+            
+            if (node.Parent is null) node.RightNode.Parent = null;
+            else if (node.IsLeftNode) node.Parent.LeftNode = node.LeftNode;
+            else node.Parent.RightNode = node.LeftNode;
+
+            return true;
+        }
+
+        var p = node.GetInOrderPredecessor();
+        var s = node.GetInOrderSuccessor();
+
+        if (p is null || s is null) return false;
+
+        // TODO: make difference operation to decide whether to use predecessor or successor
+        // TODO: make it so that you can delete root
+        
+        if (node.IsRoot) return false;
+
+        s.LeftNode = node.LeftNode;
+        s.RightNode = node.RightNode;
+        node.LeftNode!.Parent = s;
+        node.RightNode!.Parent = s;
+
+        if (node.IsLeftNode) node.Parent!.LeftNode = s;
+        else if (node.IsRightNode) node.Parent!.RightNode = s;
+
+        if (s.IsLeftNode) s.Parent!.LeftNode = null;
+        else if (s.IsRightNode) s.Parent!.RightNode = null;
+
+        return true;
+    }
 }

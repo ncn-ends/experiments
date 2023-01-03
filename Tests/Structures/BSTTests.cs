@@ -116,41 +116,54 @@ public class BSTTests
     }
 
     [Fact]
-    public void BSTTests_Remove()
+    public void BSTTests_PropertyTests()
     {
-        var print = _bigTree.Print();
-        Debugger.Break();
-        /*
-         * Remove = (nodeToDelete: BSTNode<T>) => bool;
-         *      
-         * find node to delete
-         *      - compare nodeToDelete to currentNode
-         *          - if equal to 0, found node
-         *          - if less than 0, check leftNode
-         *              - if leftNode is not null, go to leftNode
-         *              - if leftNode is null, return false
-         *          - if greater than 0, check rightNode
-         *              - if rightNode is not null, go to rightNode
-         *              - if rightNode is null, return false
-         * root
-         *      - traits
-         *          - parent is null
-         *          - has 2 children
-         *      - implementation 
-         *          - 
-         * leaf
-         *      - traits
-         *          - parent is not null
-         *          - leftNode and rightNode are both null
-         *      - implementation 
-         *          - just remove node
-         * node
-         *      - traits
-         *          - parent is not null
-         *          - leftNode might be null
-         *          - rightNode might be null
-         *      - implementation
-         *          - 
-         */
+        _tree.FindNodeByValue(5).IsLeaf.Should().BeTrue();
+        _tree.FindNodeByValue(43).IsLeaf.Should().BeTrue();
+        _tree.FindNodeByValue(56).IsLeaf.Should().BeTrue();
+        _tree.FindNodeByValue(127).IsLeaf.Should().BeTrue();
+        _tree.FindNodeByValue(34).IsLeaf.Should().BeFalse();
+
+        _tree.FindNodeByValue(94).IsRoot.Should().BeTrue();
+        _tree.FindNodeByValue(127).IsRoot.Should().BeFalse();
+
+        _tree.FindNodeByValue(13).IsLeftNode.Should().BeTrue();
+        _tree.FindNodeByValue(13).IsRightNode.Should().BeFalse();
+        _tree.FindNodeByValue(56).IsRightNode.Should().BeTrue();
+        _tree.FindNodeByValue(13).IsLeftNode.Should().BeTrue();
+    }
+
+    [Fact]
+    public void BSTTests_Remove_Leaf()
+    {
+        _tree.Remove(5).Should().Be(true);
+        _tree.FindNodeByValue(13).LeftNode.Should().BeNull();
+        _tree.FindNodeByValue(5).Should().BeNull();
+    }
+
+    [Fact]
+    public void BSTTests_Remove_OneChild_LeftNode()
+    {
+        _tree.Remove(13).Should().BeTrue();
+        _tree.FindNodeByValue(5).Parent.Value.Should().Be(34);
+        _tree.FindNodeByValue(34).LeftNode.Value.Should().Be(5);
+        _tree.ToList().Should().NotContain(13);
+        
+    }
+    
+    [Fact]
+    public void BSTTests_Remove_TwoChild_Root()
+    {
+        // TODO: temp solution to make it easier
+        _tree.Remove(94).Should().BeFalse();
+    }
+    
+    [Fact]
+    public void BSTTests_Remove_TwoChild()
+    {
+        _tree.Remove(34).Should().BeTrue();
+        _tree.FindNodeByValue(94).LeftNode.Value.Should().Be(43);
+        _tree.FindNodeByValue(55).LeftNode.Should().BeNull();
+        _tree.FindNodeByValue(13).Parent.Value.Should().Be(43);
     }
 }
