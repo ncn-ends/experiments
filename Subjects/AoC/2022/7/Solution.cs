@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using Subjects.Structures;
+using Subjects.Structures.Trees;
 using Utils;
 
 namespace Subjects.AoC._2022._7;
@@ -59,7 +60,7 @@ public static class Day7Solution
             var (childFileName, childFileSize) = child.Value;
             if (childFileSize == -1) total += SearchForDirectories(child);
         }
-    
+
         return total;
     }
 
@@ -81,10 +82,10 @@ public static class Day7Solution
 
     private static Tree<(string, int)> ConvertInputToTree()
     {
-        
+
         var root = new TreeNode<(string, int)>(("/", -1));
         var tree = new Tree<(string, int)>(root);
-        
+
         var lines = _input.Split("\n");
         var cwd = root; // default to root, but will change
         for (int i = 1; i < lines.Length; i++)
@@ -112,7 +113,7 @@ public static class Day7Solution
             }
 
             if (s.Split(" ") is not [var fileSize, var fileName]) throw new Exception("bad");
-            
+
             cwd.AddChild(new TreeNode<(string, int)>((fileName, int.Parse(fileSize))));
         }
 
@@ -141,7 +142,7 @@ public static class Day7Solution
 
         // 20646114 = too high
         Debugger.Break();
-        
+
         // return sizes.LastOrDefault(x => x > minSizeToDelete);
         return 0;
     }
@@ -150,7 +151,7 @@ public static class Day7Solution
     {
         Console.Write("Part 1: ");
         // Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

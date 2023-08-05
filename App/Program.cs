@@ -12,6 +12,7 @@ using Subjects.AoC._2022._5;
 using Subjects.AoC._2022._7;
 using Subjects.AoC._2022._8;
 using Subjects.AoC._2022._9;
+using Subjects.OneOf;
 using Subjects.Structures;
 
 namespace App;
@@ -22,16 +23,8 @@ class Program
     {
         try
         {
-            // Benchmarks.Main.RunAllBenchmarks();
-
-            // ulong asd = 80;
-            // int qwe = 23;
-            // var zxc = asd % (ulong)qwe;
-            //
-            // Func<ulong, bool> asdd = x => x % 23 == 0;
-            // var qwee = asdd(70);
-            // Debugger.Break();
-            Day12Solution.Output();
+            var ro = new ReturnObject();
+            var asd = ro.GetResult(true);
         }
         catch (Exception e)
         {
