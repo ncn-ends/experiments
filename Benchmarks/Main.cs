@@ -6,6 +6,6 @@ public class Main
 {
     public static void RunAllBenchmarks()
     {
-        TwoSumBenchmarks.RunBenchmarks();
+        FibonacciBenchmarks.RunBenchmarks();
     }
 }

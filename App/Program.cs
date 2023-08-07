@@ -14,6 +14,7 @@ using Subjects.AoC._2022._8;
 using Subjects.AoC._2022._9;
 using Subjects.OneOf;
 using Subjects.Structures;
+using static Benchmarks.Main;
 
 namespace App;
 
@@ -21,14 +22,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        try
-        {
-            var ro = new ReturnObject();
-            var asd = ro.GetResult(true);
-        }
-        catch (Exception e)
-        {
-            Console.WriteLine(e.ToString());
-        }
+        RunAllBenchmarks();
     }
 }
