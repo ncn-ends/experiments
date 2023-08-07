@@ -2,12 +2,15 @@ namespace Subjects.LeetCode;
 
 public class ValidParantheses
 {
-    public bool DoIterative(string str)
+    /* speed: 62ms, top 97%
+       memory: 38.32mb, top 21%
+     */
+    public bool DoIterative(string s)
     {
         List<char> openings = new();
-        var s = str;
+        var str = s;
 
-        foreach (var c in s)
+        foreach (var c in str)
         {
             if (new[] {'(', '{', '['}.Contains(c))
             {
