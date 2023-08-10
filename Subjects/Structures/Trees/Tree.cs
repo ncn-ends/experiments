@@ -13,7 +13,7 @@ public class Tree<T> where T : notnull
     public bool AddChildByValue(T searchValue, TreeNode<T>? treeNode, TreeNode<T>? searchingNode = null)
     {
         if (addedValues.Contains(treeNode.Value)) return false;
-        
+
         searchingNode ??= Root;
 
         if (searchValue.Equals(searchingNode.Value))
@@ -29,15 +29,15 @@ public class Tree<T> where T : notnull
 
         return false;
     }
-    
-    
+
+
     public bool AddChildByValue(Func<T, bool> predicate, TreeNode<T>? treeNodeAdding, TreeNode<T>? searchingNode = null)
     {
         if (addedValues.Contains(treeNodeAdding.Value)) return false;
-        
+
         searchingNode ??= Root;
-        
-        
+
+
         var matched = predicate(searchingNode.Value);
         if (matched)
         {
@@ -55,7 +55,7 @@ public class Tree<T> where T : notnull
 
     public TreeNode<T>? FindNodeByValue(T searchValue, TreeNode<T>? searchingNode = null)
     {
-        
+
         searchingNode ??= Root;
         if (searchValue == null) return null;
 
@@ -65,9 +65,9 @@ public class Tree<T> where T : notnull
             .Select(child => FindNodeByValue(searchValue, child))
             .FirstOrDefault(found => found is not null);
     }
-    
+
     // TODO: formatted print
-    
+
     // public List<TreeNode<T>> ChildrenValuesToList()
     // {
     //     var current = Root;
@@ -77,20 +77,20 @@ public class Tree<T> where T : notnull
     //     {
     //         list.
     //     }
-    //     
+    //
     //     return list;
     // }
 
     // public void Search()
     // {
-    //     
+    //
     // }
 }
 
 public class TreeNode<T> where T : notnull
 {
     public TreeNode<T>? Parent = null;
-    public List<TreeNode<T>?> Children = new();
+    public IList<TreeNode<T>?> Children = new List<TreeNode<T>>()!;
     public T Value;
 
     public TreeNode(T value, TreeNode<T>? parent = null)
@@ -103,15 +103,15 @@ public class TreeNode<T> where T : notnull
     {
         if (childToAdd.Parent is null) childToAdd.Parent = this;
         Children.Add(childToAdd);
-    } 
-    
+    }
+
     public void AddChildren(List<TreeNode<T>> childrenToAdd)
     {
         Children = new List<TreeNode<T>?>(Children.Concat(childrenToAdd));
     }
 
-    public TreeNode<T>? GetChildByValue(T value)
-    {
-        return Children.Find(x => EqualityComparer<T>.Default.Equals(x.Value, value));
-    }
+    // public TreeNode<T>? GetChildByValue(T value)
+    // {
+    //     return Children.Find(x => EqualityComparer<T>.Default.Equals(x.Value, value));
+    // }
 }
