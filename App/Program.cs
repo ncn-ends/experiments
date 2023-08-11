@@ -1,9 +1,6 @@
-﻿namespace App;
+﻿using Subjects.LeetCode;
 
-class Program
-{
-    static void Main(string[] args)
-    {
-        Console.WriteLine("hello");
-    }
-}
+var arr = new[] {0, 1, 0, 3, 12};
+MoveZeroes.Do(arr);
+foreach (var i in arr)
+    Console.WriteLine(i);
