@@ -1,6 +1,5 @@
 ﻿using Subjects.LeetCode;
 
-var arr = new[] {0, 1, 0, 3, 12};
-MoveZeroes.Do(arr);
-foreach (var i in arr)
-    Console.WriteLine(i);
+Console.WriteLine(MergeStringsAlternately.Do("abc", "pqr"));
+Console.WriteLine(MergeStringsAlternately.Do("ab", "pqrs"));
+Console.WriteLine(MergeStringsAlternately.Do("abcd", "pq"));
