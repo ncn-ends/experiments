@@ -13,4 +13,15 @@ public class SmallProblems
 
         return arr;
     }
+
+    static int[] BuildArray(int[] nums)
+    {
+        var l = new int[nums.Length];
+        for (var i = 0; i < nums.Length; i++)
+        {
+            l[i] = nums[nums[i]];
+        }
+
+        return l;
+    }
 }
