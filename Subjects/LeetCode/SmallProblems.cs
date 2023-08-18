@@ -24,4 +24,18 @@ public class SmallProblems
 
         return l;
     }
+
+    /* https://leetcode.com/problems/contains-duplicate/description/ */
+    static bool ContainsDuplicate(int[] nums)
+    {
+        var dict = new Dictionary<int, int?>();
+        for (var i = 0; i < nums.Length; i++)
+        {
+            dict.TryGetValue(nums[i], out var val);
+            if (val != null) return true;
+            dict.Add(nums[i], i);
+        }
+
+        return false;
+    }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Tests.Utils;
 
@@ -9,5 +10,10 @@ public static class PrintUtility
     {
         var p = string.Join(",", l);
         Console.WriteLine(p);
+    }
+
+    public static void Print(IConvertible b)
+    {
+        Console.WriteLine(b.ToString(CultureInfo.InvariantCulture));
     }
 }
