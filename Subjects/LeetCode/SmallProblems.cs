@@ -38,4 +38,9 @@ public class SmallProblems
 
         return false;
     }
+
+    static IList<bool> KidsWithCandies(int[] candies, int extraCandies)
+    {
+        return candies.Select(x => x + extraCandies >= candies.Max()).ToList();
+    }
 }
