@@ -58,4 +58,23 @@ public class SmallProblems
 
         return actual;
     }
+
+    static IList<int> FindAnagrams(string s, string p)
+    {
+        var pCharArray = p.ToCharArray();
+        Array.Sort(pCharArray);
+        var pSorted = new string(pCharArray);
+
+        var res = new List<int>();
+        for (int i = 0; i <= s.Length - p.Length; i++)
+        {
+            var win = s.Substring(i, p.Length).ToCharArray();
+            Array.Sort(win);
+            var winSorted = new string(win);
+
+            if (winSorted == pSorted) res.Add(i);
+        }
+
+        return res;
+    }
 }
