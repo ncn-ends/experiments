@@ -43,4 +43,19 @@ public class SmallProblems
     {
         return candies.Select(x => x + extraCandies >= candies.Max()).ToList();
     }
+
+    static IList<string> FindRepeatedDnaSequences(string s)
+    {
+        var all = new HashSet<string>();
+        var actual = new List<string>();
+        var a = 0;
+        for (var i = 0; i + 9 < s.Length; i++)
+        {
+            var win = s.Substring(a, 10);
+            if (!all.Add(win)) actual.Add(win);
+            a++;
+        }
+
+        return actual;
+    }
 }
