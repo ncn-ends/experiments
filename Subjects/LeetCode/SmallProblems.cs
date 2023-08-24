@@ -93,4 +93,22 @@ public class SmallProblems
 
         return retS.ToString();
     }
+
+    /* https://leetcode.com/problems/top-k-frequent-elements/description/ */
+    static int[] TopKFrequent(int[] nums, int k)
+    {
+        var dict = new Dictionary<int, int>();
+        foreach (var num in nums)
+        {
+            dict.TryGetValue(num, out var exists);
+            if (exists != default) dict[num]++;
+            else dict.Add(num, 1);
+        }
+
+        return dict
+            .OrderByDescending(x => x.Value)
+            .Take(k)
+            .Select(x => x.Key)
+            .ToArray();
+    }
 }
