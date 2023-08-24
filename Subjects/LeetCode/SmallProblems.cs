@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace Subjects.LeetCode;
 
 public class SmallProblems
@@ -76,5 +78,19 @@ public class SmallProblems
         }
 
         return res;
+    }
+
+    /* https://leetcode.com/problems/removing-stars-from-a-string/?envType=study-plan-v2&envId=leetcode-75 */
+    static string RemoveStars(string s)
+    {
+        var retS = new StringBuilder();
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (i == 0 && s[i] == '*')  continue;
+            if (s[i] == '*') retS.Remove(retS.Length - 1, 1);
+            else retS.Append(s[i]);
+        }
+
+        return retS.ToString();
     }
 }
