@@ -111,4 +111,12 @@ public class SmallProblems
             .Select(x => x.Key)
             .ToArray();
     }
+
+    /* https://leetcode.com/problems/missing-number/description/ */
+    static int MissingNumber(int[] nums)
+    {
+        int total = nums.Length * (nums.Length + 1) / 2;
+        for (int i = 0; i < nums.Length; i++) total -= nums[i];
+        return total;
+    }
 }
