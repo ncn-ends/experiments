@@ -2,7 +2,7 @@ using System.Text;
 
 namespace Subjects.LeetCode;
 
-public class SmallProblems
+public class LeetCodeProblems
 {
     public static int[] GetConcatenation(int[] nums)
     {
