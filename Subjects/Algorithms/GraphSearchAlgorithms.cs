@@ -45,4 +45,46 @@ public static class GraphSearchAlgorithms
             }
         }
     }
+
+    // /// <summary>
+    // ///
+    // /// </summary>
+    // /// <param name="graph"></param>
+    // /// <param name="action"></param>
+    // /// <param name="start">If not provided, will default to the first key in the adjacency map</param>
+    // /// <param name="end">If not provided, will default to the last key in the adjacency map</param>
+    // /// <exception cref="Exception"></exception>
+    // public static void BFS(Dictionary<char, List<(char targetNode, int weight)>> graph,
+    //     Action<char> action,
+    //     char? start = null,
+    //     char? end = null)
+    // {
+    //     start ??= graph.Keys.FirstOrDefault();
+    //     end ??= graph.Keys.LastOrDefault();
+    //     if (start is null || end is null) throw new Exception("Graph was empty.");
+    //
+    //     var q = new Queue<char>();
+    //     q.Enqueue((char)start);
+    //
+    //     var visited = new Dictionary<char, bool>();
+    //     visited[(char) start] = true;
+    //
+    //     var prev = new Dictionary<char, char>(); /* may want to change this structure */
+    //     while (q.Any())
+    //     {
+    //         var node = q.Dequeue();
+    //         var connections = graph[node]; /* this access will change depending on graph type */
+    //
+    //         foreach (var (targetNode, weight) in connections)
+    //         {
+    //             if (visited.ContainsKey(targetNode)) continue;
+    //
+    //             q.Enqueue(targetNode);
+    //             visited[targetNode] = true;
+    //             prev[targetNode] = node;
+    //         }
+    //     }
+    //
+    //     Debugger.Break();
+    // }
 }
