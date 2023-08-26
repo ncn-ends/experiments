@@ -119,4 +119,44 @@ public class SmallProblems
         for (int i = 0; i < nums.Length; i++) total -= nums[i];
         return total;
     }
+
+    /* https://leetcode.com/problems/flood-fill/ */
+    static int[][] FloodFill(int[][] image, int sr, int sc, int color)
+    {
+        var origin = image[sr][sc];
+        var q = new Queue<(int x, int y)>();
+        q.Enqueue((sr, sc));
+        var visited = new HashSet<(int x, int y)>();
+        while (q.Any())
+        {
+            var node = q.Dequeue();
+            if (image[node.x][node.y] != origin) continue;
+            image[node.x][node.y] = color;
+
+            if (node.x > 0 && !visited.Contains((node.x - 1, node.y)))
+            {
+                visited.Add((node.x - 1, node.y));
+                q.Enqueue((node.x - 1, node.y));
+            }
+            if (node.x < image.Length - 1 && !visited.Contains((node.x + 1, node.y)))
+            {
+                visited.Add((node.x + 1, node.y));
+                q.Enqueue((node.x + 1, node.y));
+            }
+            if (node.y < image[node.x].Length - 1 && !visited.Contains((node.x, node.y + 1)))
+            {
+                visited.Add((node.x, node.y + 1));
+                q.Enqueue((node.x, node.y + 1));
+            }
+            if (node.y > 0 && !visited.Contains((node.x, node.y - 1)))
+            {
+                visited.Add((node.x , node.y - 1));
+                q.Enqueue((node.x, node.y - 1));
+            }
+
+            visited.Add(node);
+        }
+
+        return image;
+    }
 }
