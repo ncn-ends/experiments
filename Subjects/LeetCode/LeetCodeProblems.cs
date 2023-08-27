@@ -86,7 +86,7 @@ public class LeetCodeProblems
         var retS = new StringBuilder();
         for (int i = 0; i < s.Length; i++)
         {
-            if (i == 0 && s[i] == '*')  continue;
+            if (i == 0 && s[i] == '*') continue;
             if (s[i] == '*') retS.Remove(retS.Length - 1, 1);
             else retS.Append(s[i]);
         }
@@ -138,19 +138,22 @@ public class LeetCodeProblems
                 visited.Add((node.x - 1, node.y));
                 q.Enqueue((node.x - 1, node.y));
             }
+
             if (node.x < image.Length - 1 && !visited.Contains((node.x + 1, node.y)))
             {
                 visited.Add((node.x + 1, node.y));
                 q.Enqueue((node.x + 1, node.y));
             }
+
             if (node.y < image[node.x].Length - 1 && !visited.Contains((node.x, node.y + 1)))
             {
                 visited.Add((node.x, node.y + 1));
                 q.Enqueue((node.x, node.y + 1));
             }
+
             if (node.y > 0 && !visited.Contains((node.x, node.y - 1)))
             {
-                visited.Add((node.x , node.y - 1));
+                visited.Add((node.x, node.y - 1));
                 q.Enqueue((node.x, node.y - 1));
             }
 
@@ -164,23 +167,23 @@ public class LeetCodeProblems
     /* https://leetcode.com/problems/deepest-leaves-sum/description/ */
     static int DeepestLeavesSum(TreeNode root)
     {
-        var dict = new Dictionary<int, List<int>>(); // depth, node values
-        Iterate(root, 1);
-        return dict.MaxBy(x => x.Key).Value.Sum();
+        var leavesByDepth = new Dictionary<int, List<int>>(); // depth, leaf values
+        FindAndSetLeaves(root, 1);
+        return leavesByDepth.MaxBy(x => x.Key).Value.Sum();
 
-        void Iterate(TreeNode node, int depth)
+        void FindAndSetLeaves(TreeNode node, int depth)
         {
             if (node.left is null && node.right is null)
             {
-                if (dict.ContainsKey(depth)) dict[depth].Add(node.val);
-                else dict[depth] = new List<int>() {node.val};
+                if (leavesByDepth.ContainsKey(depth)) leavesByDepth[depth].Add(node.val);
+                else leavesByDepth[depth] = new List<int> {node.val};
                 return;
             }
 
             if (node.left is not null)
-                Iterate(node.left, depth + 1);
+                FindAndSetLeaves(node.left, depth + 1);
             if (node.right is not null)
-                Iterate(node.right, depth + 1);
+                FindAndSetLeaves(node.right, depth + 1);
         }
     }
 }
