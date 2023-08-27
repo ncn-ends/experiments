@@ -159,4 +159,28 @@ public class LeetCodeProblems
 
         return image;
     }
+
+
+    /* https://leetcode.com/problems/deepest-leaves-sum/description/ */
+    static int DeepestLeavesSum(TreeNode root)
+    {
+        var dict = new Dictionary<int, List<int>>(); // depth, node values
+        Iterate(root, 1);
+        return dict.MaxBy(x => x.Key).Value.Sum();
+
+        void Iterate(TreeNode node, int depth)
+        {
+            if (node.left is null && node.right is null)
+            {
+                if (dict.ContainsKey(depth)) dict[depth].Add(node.val);
+                else dict[depth] = new List<int>() {node.val};
+                return;
+            }
+
+            if (node.left is not null)
+                Iterate(node.left, depth + 1);
+            if (node.right is not null)
+                Iterate(node.right, depth + 1);
+        }
+    }
 }
