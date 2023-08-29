@@ -186,4 +186,42 @@ public class LeetCodeProblems
                 FindAndSetLeaves(node.right, depth + 1);
         }
     }
+
+
+    /* https://leetcode.com/problems/longest-increasing-path-in-a-matrix/ */
+    static int LongestIncreasingPath(int[][] matrix)
+    {
+        var memo = new Dictionary<(int y, int x), int>();
+        var overallMax = 0;
+
+        for (var y = 0; y < matrix.Length; y++)
+        {
+            for (var x = 0; x < matrix[y].Length; x++)
+            {
+                Asd(y, x);
+            }
+        }
+
+        return overallMax;
+
+        int Asd(int y, int x)
+        {
+            var current = matrix[y][x];
+            var paths = new List<int>();
+
+            if (memo.ContainsKey((y, x))) return memo[(y, x)];
+
+            if (x > 0 && matrix[y][x - 1] > current) paths.Add(Asd(y, x - 1));
+            if (y > 0 && matrix[y - 1][x] > current) paths.Add(Asd(y - 1, x));
+            if (y < matrix.Length - 1 && matrix[y + 1][x] > current) paths.Add(Asd(y + 1, x));
+            if (x < matrix[0].Length - 1 && matrix[y][x + 1] > current) paths.Add(Asd(y, x + 1));
+
+            var max = paths.Count > 0
+                ? 1 + paths.Max()
+                : 1;
+            if (overallMax < max) overallMax = max;
+            memo.Add((y, x), max);
+            return max;
+        }
+    }
 }
