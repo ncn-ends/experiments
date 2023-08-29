@@ -224,4 +224,44 @@ public class LeetCodeProblems
             return max;
         }
     }
+
+
+    /* https://leetcode.com/problems/same-tree/ */
+    static bool IsSameTree(TreeNode p, TreeNode q)
+    {
+        if (p is null && q is not null ||
+            p is not null && q is null) return false;
+
+        if (p is null && q is null) return true;
+
+        var pq = new Queue<TreeNode>();
+        var qq = new Queue<TreeNode>();
+        pq.Enqueue(p);
+        qq.Enqueue(q);
+
+        while (pq.Any())
+        {
+            var pc = pq.Dequeue();
+            var qc = qq.Dequeue();
+
+            if (pc.val != qc.val) return false;
+            if (pc.left is not null && qc.left is null ||
+                pc.left is null && qc.left is not null) return false;
+            if (pc.left is not null)
+            {
+                pq.Enqueue(pc.left);
+                qq.Enqueue(qc.left!);
+            }
+
+            if (pc.right is not null && qc.right is null ||
+                pc.right is null && qc.right is not null) return false;
+            if (pc.right is not null)
+            {
+                pq.Enqueue(pc.right);
+                qq.Enqueue(qc.right!);
+            }
+        }
+
+        return pq.Count == qq.Count;
+    }
 }
