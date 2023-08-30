@@ -264,4 +264,38 @@ public class LeetCodeProblems
 
         return pq.Count == qq.Count;
     }
+
+
+    /* https://leetcode.com/problems/max-area-of-island/ */
+    static int MaxAreaOfIsland(int[][] grid)
+    {
+        var visited = new HashSet<(int y, int x)>();
+        var maxArea = 0;
+
+        for (var y = 0; y < grid.Length; y++)
+        {
+            for (var x = 0; x < grid[y].Length; x++)
+            {
+                Explore(y, x);
+            }
+        }
+
+        return maxArea;
+
+        int Explore(int y, int x)
+        {
+            if (grid[y][x] == 0) return 0;
+            if (visited.Contains((y, x))) return 0;
+            visited.Add((y, x));
+
+            var sum = 1;
+            if (x > 0) sum += Explore(y, x - 1);
+            if (y > 0) sum += Explore(y - 1, x);
+            if (y < grid.Length - 1) sum += Explore(y + 1, x );
+            if (x < grid[y].Length - 1) sum += Explore(y, x + 1);
+
+            if (maxArea < sum) maxArea = sum;
+            return sum;
+        }
+    }
 }
