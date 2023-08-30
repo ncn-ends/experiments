@@ -291,11 +291,77 @@ public class LeetCodeProblems
             var sum = 1;
             if (x > 0) sum += Explore(y, x - 1);
             if (y > 0) sum += Explore(y - 1, x);
-            if (y < grid.Length - 1) sum += Explore(y + 1, x );
+            if (y < grid.Length - 1) sum += Explore(y + 1, x);
             if (x < grid[y].Length - 1) sum += Explore(y, x + 1);
 
             if (maxArea < sum) maxArea = sum;
             return sum;
+        }
+    }
+
+
+    /* FIXME: incomplete, the list types were causing problems */
+    /* https://leetcode.com/problems/binary-tree-level-order-traversal/ */
+    static IList<IList<int>> LevelOrder(TreeNode root)
+    {
+        var q = new Queue<(TreeNode node, int level)>();
+        q.Enqueue((root, 0));
+        var result = new List<IList<int>>();
+
+        while (q.Any())
+        {
+            var (node, level) = q.Dequeue();
+            if (result.Count - 1 == level) result[level].Add(node.val);
+            else result.Add(new List<int> {node.val});
+            if (node.left is not null) q.Enqueue((node.left, level + 1));
+            if (node.right is not null) q.Enqueue((node.right, level + 1));
+        }
+
+        return result;
+    }
+
+    /* https://leetcode.com/problems/maximum-depth-of-binary-tree */
+    static int MaxDepth(TreeNode root)
+    {
+        if (root is null) return 0;
+        var q = new Queue<(TreeNode node, int level)>();
+        q.Enqueue((root, 1));
+        var max = 1;
+        while (q.Any())
+        {
+            var c = q.Dequeue();
+            if (max < c.level) max = c.level;
+            if (c.node.left is not null) q.Enqueue((c.node.left, c.level + 1));
+            if (c.node.right is not null) q.Enqueue((c.node.right, c.level + 1));
+        }
+
+        return max;
+    }
+
+    /* https://leetcode.com/problems/leaf-similar-trees/ */
+    static bool LeafSimilar(TreeNode root1, TreeNode root2)
+    {
+        var leftSequence = new List<int>();
+        var rightSequence = new List<int>();
+
+        Do(root1, leftSequence);
+        Do(root2, rightSequence);
+
+        if (leftSequence.Count != rightSequence.Count) return false;
+        for (var i = 0; i < leftSequence.Count; i++)
+            if (leftSequence[i] != rightSequence[i]) return false;
+
+        return true;
+
+        void Do(TreeNode node, IList<int> sequence)
+        {
+            if (node.left is null && node.right is null)
+            {
+                sequence.Add(node.val);
+            }
+
+            if (node.left is not null) Do(node.left, sequence);
+            if (node.right is not null) Do(node.right, sequence);
         }
     }
 }
