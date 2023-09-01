@@ -364,4 +364,34 @@ public class LeetCodeProblems
             if (node.right is not null) Do(node.right, sequence);
         }
     }
+
+    /* https://leetcode.com/problems/path-sum/ */
+    static bool HasPathSum(TreeNode root, int targetSum)
+    {
+        if (root is null) return false;
+        return Do(root, targetSum);
+
+        bool Do(TreeNode node, int sumLeft)
+        {
+            var sum = sumLeft - node.val;
+            if (node.left is null && node.right is null)
+            {
+                if (sum == 0) return true;
+                else return false;
+            }
+
+
+            if (node.left is not null)
+            {
+                var leftRes = Do(node.left, sum);
+                if (leftRes) return true;
+            }
+
+            if (node.right is null) return false;
+            var rightRes = Do(node.right, sum);
+            if (rightRes) return true;
+            return false;
+        }
+    }
+
 }
