@@ -394,4 +394,57 @@ public class LeetCodeProblems
         }
     }
 
+    /* FIXME: failed to solve after 3 attempts / 15 min */
+    /* https://leetcode.com/problems/extra-characters-in-a-string/ */
+    static int MinExtraChar(string s, string[] dictionary)
+    {
+        var cleanedDict = dictionary.Where(d => s.Contains(d)).ToArray();
+        var min = Int32.MaxValue;
+        Do(s);
+        return min;
+
+        void Do(string str)
+        {
+            if (str.Length == 0)
+            {
+                min = 0;
+                return;
+            }
+            bool changesHappened = false;
+            foreach (var d in cleanedDict)
+            {
+                var di = str.IndexOf(d);
+                if (di == -1) continue;
+                changesHappened = true;
+                var newStr = str.Remove(di, d.Length);
+                Do(newStr);
+            }
+
+            if (!changesHappened && min > str.Length) min = str.Length;
+        }
+    }
+
+    /* https://leetcode.com/problems/minimum-depth-of-binary-tree/ */
+    static int MinDepth(TreeNode root)
+    {
+        if (root is null) return 0;
+        var q = new Queue<(TreeNode node, int level)>();
+        q.Enqueue((root, 1));
+        var minLevel = Int32.MaxValue;
+
+        while (q.Any())
+        {
+            var (node, level) = q.Dequeue();
+            if (level > minLevel) continue;
+
+            var isLeaf = node.left is null && node.right is null;
+            if (isLeaf && level < minLevel) minLevel = level;
+
+            if (node.left is not null) q.Enqueue((node.left, level + 1));
+            if (node.right is not null) q.Enqueue((node.right, level + 1));
+        }
+
+        return minLevel;
+    }
+
 }
