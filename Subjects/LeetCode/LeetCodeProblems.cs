@@ -447,4 +447,23 @@ public class LeetCodeProblems
         return minLevel;
     }
 
+
+    /* https://leetcode.com/problems/kth-smallest-element-in-a-bst/ */
+    static int KthSmallest(TreeNode root, int k)
+    {
+        if (root is null) return 0;
+        var l = new List<int>();
+        Do(root);
+        return l[k - 1];
+
+        void Do(TreeNode node)
+        {
+            if (node.left is not null) Do(node.left);
+            if (l.Count == k) return;
+            l.Add(node.val);
+            if (node.right is not null) Do(node.right);
+        }
+    }
+
+
 }
