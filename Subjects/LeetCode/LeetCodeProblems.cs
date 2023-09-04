@@ -2,6 +2,18 @@ using System.Text;
 
 namespace Subjects.LeetCode;
 
+public class ListNode
+{
+    public int val;
+    public ListNode? next;
+
+    public ListNode(int x)
+    {
+        val = x;
+        next = null;
+    }
+}
+
 public class LeetCodeProblems
 {
     public static int[] GetConcatenation(int[] nums)
@@ -487,5 +499,22 @@ public class LeetCodeProblems
         }
 
         return dict.Select(x => x.Value).ToList();
+    }
+
+    /* https://leetcode.com/problems/linked-list-cycle/ */
+    static bool HasCycle(ListNode head)
+    {
+        if (head == null || head.next == null) return false;
+        var slowP = head;
+        var fastP = head.next;
+
+        while (fastP != null && slowP != null && fastP.next != null)
+        {
+            if (fastP == slowP) return true;
+            slowP = slowP.next;
+            fastP = fastP.next.next;
+        }
+
+        return false;
     }
 }
