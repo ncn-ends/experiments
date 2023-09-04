@@ -349,7 +349,8 @@ public class LeetCodeProblems
 
         if (leftSequence.Count != rightSequence.Count) return false;
         for (var i = 0; i < leftSequence.Count; i++)
-            if (leftSequence[i] != rightSequence[i]) return false;
+            if (leftSequence[i] != rightSequence[i])
+                return false;
 
         return true;
 
@@ -410,6 +411,7 @@ public class LeetCodeProblems
                 min = 0;
                 return;
             }
+
             bool changesHappened = false;
             foreach (var d in cleanedDict)
             {
@@ -465,5 +467,25 @@ public class LeetCodeProblems
         }
     }
 
+    /* https://leetcode.com/problems/binary-tree-right-side-view/ */
+    static IList<int> RightSideView(TreeNode root)
+    {
+        if (root is null) return new List<int>();
 
+        var q = new Queue<(TreeNode node, int level)>();
+        q.Enqueue((root, 1));
+        var dict = new Dictionary<int, int>(); // level, value
+
+        while (q.Any())
+        {
+            var (node, level) = q.Dequeue();
+
+            dict.TryAdd(level, node.val);
+
+            if (node.right is not null) q.Enqueue((node.right, level + 1));
+            if (node.left is not null) q.Enqueue((node.left, level + 1));
+        }
+
+        return dict.Select(x => x.Value).ToList();
+    }
 }
