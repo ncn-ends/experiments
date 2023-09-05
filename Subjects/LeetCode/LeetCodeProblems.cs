@@ -14,6 +14,20 @@ public class ListNode
     }
 }
 
+public class Node {
+    public int val;
+    public Node next;
+    public Node random;
+
+    public Node(int _val) {
+        val = _val;
+        next = null;
+        random = null;
+    }
+}
+
+
+
 public class LeetCodeProblems
 {
     public static int[] GetConcatenation(int[] nums)
@@ -555,4 +569,33 @@ public class LeetCodeProblems
         }
     }
 
+    /* https://leetcode.com/problems/copy-list-with-random-pointer/ */
+    static Node CopyRandomList(Node head)
+    {
+        if (head is null) return null;
+
+        var map = new Dictionary<Node, Node>();
+        var node = head;
+
+        while (node is not null)
+        {
+            var copy = new Node(node.val);
+            map[node] = copy;
+            node = node.next;
+        }
+
+        node = head;
+        while (node is not null)
+        {
+            var copy = map[node];
+            if (node.next is null) copy.next = null;
+            else copy.next = map[node.next];
+            if (node.random is null) copy.random = null;
+            else copy.random = map[node.random];
+
+            node = node.next;
+        }
+
+        return map[head];
+    }
 }
