@@ -517,4 +517,42 @@ public class LeetCodeProblems
 
         return false;
     }
+
+    /* https://leetcode.com/problems/unique-paths-iii/ */
+    static int UniquePathsIII(int[][] grid)
+    {
+        var allPaths = new List<HashSet<(int y, int x)>>();
+
+        for (var y = 0; y < grid.Length; y++)
+        {
+            for (var x = 0; x < grid[y].Length; x++)
+            {
+                if (grid[y][x] == 1) Do(new HashSet<(int y, int x)>(), (y, x));
+            }
+        }
+
+        var max = grid.Sum(x => x.Count(y => y != -1));
+        return allPaths.Count(x => x.Count == max);
+
+        void Do(HashSet<(int y, int x)> path, (int y, int x) pointCoords)
+        {
+            var (y, x) = pointCoords;
+            var point = grid[y][x];
+            if (point == -1) return;
+            if (point == 2)
+            {
+                allPaths.Add(path.Concat(new[] {(y, x)}).ToHashSet());
+                return;
+            }
+            if (path.Contains((y, x))) return;
+
+            var newPath = path.Concat(new[] {(y, x)}).ToHashSet();
+
+            if (y > 0) Do(newPath, (y - 1, x));
+            if (x > 0) Do(newPath, (y, x - 1));
+            if (y < grid.Length - 1) Do(newPath, (y + 1, x));
+            if (x < grid[y].Length - 1) Do(newPath, (y, x + 1));
+        }
+    }
+
 }
