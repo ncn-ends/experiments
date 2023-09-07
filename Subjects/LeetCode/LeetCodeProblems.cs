@@ -570,6 +570,7 @@ public class LeetCodeProblems
     }
 
     /* https://leetcode.com/problems/copy-list-with-random-pointer/ */
+    /* TODO: come back to this, make sure you can implement it again */
     static Node CopyRandomList(Node head)
     {
         if (head is null) return null;
@@ -597,5 +598,47 @@ public class LeetCodeProblems
         }
 
         return map[head];
+    }
+
+
+    /* https://leetcode.com/problems/split-linked-list-in-parts/ */
+    /* TODO: optimize */
+    static ListNode[] SplitListToParts(ListNode head, int k)
+    {
+        ListNode? curr = head;
+        var vals = new Queue<int>();
+        while (curr is not null)
+        {
+            vals.Enqueue(curr.val);
+            curr = curr.next;
+        }
+
+        var asd = new int[k];
+        var n3 = 0;
+        for (int i = vals.Count; i > 0; i--)
+        {
+            asd[n3]++;
+            if (++n3 == k) n3 = 0;
+        }
+
+        var listPositioning = asd.ToList();
+        var finalList = new ListNode[k];
+        while (vals.Count > 0)
+        {
+            var pos = listPositioning.FindIndex(x => x > 0);
+
+            var node = vals.Dequeue();
+            if (finalList[pos] is null) finalList[pos] = new ListNode(node);
+            else
+            {
+                var c = finalList[pos];
+                while (c.next is not null) c = c.next;
+                c.next = new ListNode(node);
+            }
+
+            listPositioning[pos]--;
+        }
+
+        return finalList;
     }
 }
