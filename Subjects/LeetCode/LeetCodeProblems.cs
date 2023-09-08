@@ -641,4 +641,65 @@ public class LeetCodeProblems
 
         return finalList;
     }
+
+    /* https://leetcode.com/problems/reverse-linked-list-ii/ */
+    /* FIXME: incomplete, need to fix */
+    static ListNode ReverseBetween(ListNode head, int left, int right)
+    {
+        if (head is null) return head;
+
+        var dict = new Dictionary<ListNode, ListNode>();
+        var p = 1;
+        var c = head;
+        while (p <= right)
+        {
+            if (p >= left && p <= right)
+            {
+                // dict[]
+            }
+            c = c.next;
+            p++;
+        }
+
+        p = 1;
+        while (c is not null)
+        {
+            if (p + 1 >= left && p + 1 <= right)
+            {
+
+            }
+
+            c = c.next;
+        }
+
+
+
+        return head;
+    }
+
+
+    /* https://leetcode.com/problems/pascals-triangle/ */
+    static IList<IList<int>> Generate(int numRows)
+    {
+        var l = new List<IList<int>>();
+        if (numRows == 0) return l;
+        l.Add(new List<int>(){ 1 });
+        if (numRows == 1) return l;
+        l.Add(new List<int>(){ 1, 1 });
+        if (numRows == 2) return l;
+
+        for (int i = 2; i < numRows; i++)
+        {
+            l.Add(new List<int>() { 1 });
+            for (int j = 1; j < i; j++)
+            {
+                var left = l[i - 1][j - 1];
+                var right = l[i - 1][j];
+                l[i].Add(left + right);
+            }
+            l[i].Add(1);
+        }
+
+        return l;
+    }
 }
