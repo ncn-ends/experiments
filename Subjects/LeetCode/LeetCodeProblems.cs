@@ -702,4 +702,29 @@ public class LeetCodeProblems
 
         return l;
     }
+
+    /* https://leetcode.com/problems/pascals-triangle-ii/ */
+    /* TODO: to optimize */
+    static IList<int> GetRow(int rowIndex)
+    {
+        var l = new List<IList<int>>();
+        l.Add(new List<int> { 1 });
+        l.Add(new List<int> { 1, 1 });
+        if (rowIndex < 2) return l[rowIndex];
+
+        for (int i = 2; i < rowIndex + 1; i++)
+        {
+            l.Add(new List<int>() { 1 });
+            for (int j = 1; j < i; j++)
+            {
+                var left = l[i - 1][j - 1];
+                var right = l[i - 1][j];
+                l[i].Add(left + right);
+            }
+            l[i].Add(1);
+        }
+
+        return l[rowIndex];
+    }
+
 }
