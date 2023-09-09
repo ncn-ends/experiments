@@ -751,4 +751,61 @@ public class LeetCodeProblems
         }
     }
 
+
+/* https://leetcode.com/problems/maximum-average-subarray-i/ */
+/* TODO: good practice problem */
+    static double FindMaxAverage(int[] nums, int k)
+    {
+        var max = Double.MinValue;
+        var winSum = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (i < k)
+            {
+                winSum += nums[i];
+                max = winSum;
+                continue;
+            }
+
+            winSum -= nums[i - k];
+            winSum += nums[i];
+            if (winSum > max) max = winSum;
+        }
+
+        return max / k;
+    }
+
+/* bad solution, O(n^2) */
+    static double FindMaxAverage_Bad2(int[] nums, int k)
+    {
+        var q = new Queue<int>();
+        var max = Double.MinValue;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            q.Enqueue(nums[i]);
+            if (q.Count < k) continue;
+            var asd = q.Average();
+            if (asd > max) max = asd;
+            q.Dequeue();
+        }
+
+        return max;
+    }
+
+
+/* bad solution, time limit exceeded - but it's clean */
+    static double FindMaxAverage_Bad(int[] nums, int k)
+    {
+        var max = Double.MinValue;
+        for (int i = 0; i < nums.Length - k + 1; i++)
+        {
+            var asd = nums.Skip(i).Take(k).Average();
+            if (asd > max) max = asd;
+        }
+
+        return max;
+    }
+
+
+
 }
