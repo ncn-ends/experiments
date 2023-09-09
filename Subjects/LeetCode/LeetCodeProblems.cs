@@ -727,4 +727,28 @@ public class LeetCodeProblems
         return l[rowIndex];
     }
 
+    /* https://leetcode.com/problems/combination-sum-iv/ */
+    /* TODO: try bottom up approach */
+    static int CombinationSum4(int[] nums, int target)
+    {
+        var dict = new Dictionary<int, int>();
+        return Helper(target);
+
+        int Helper(int remaining)
+        {
+            if (remaining == 0) return 1;
+            if (remaining < 0) return 0;
+
+            if (dict.ContainsKey(remaining)) return dict[remaining];
+
+            var sum = 0;
+            foreach (var num in nums)
+                sum += Helper(remaining - num);
+
+            dict[remaining] = sum;
+
+            return sum;
+        }
+    }
+
 }
