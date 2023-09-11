@@ -806,6 +806,44 @@ public class LeetCodeProblems
         return max;
     }
 
+    /* bad, doesn't work */
+    static int[] DailyTemperatures(int[] temperatures)
+    {
+        var ret = new int[temperatures.Length];
+        var s = new Stack<(int temp, int place)>();
+        s.Push((temperatures[0], 0));
 
+        for (var i = 1; i < temperatures.Length; i++)
+        {
+            if (s.Count == 0 || s.Peek().temp >= temperatures[i])
+            {
+                s.Push((temperatures[i], i));
+                continue;
+            }
+
+            while (s.Count > 0 && s.Peek().temp < temperatures[i])
+            {
+                var asd = s.Pop();
+                ret[asd.place] = i - asd.place;
+            }
+        }
+
+        return ret;
+
+    }
+
+    /* TODO: could optimize somehow */
+    static int MajorityElement(int[] nums)
+    {
+        var dict = new Dictionary<int, int>();
+
+        foreach (var num in nums)
+        {
+            if (dict.ContainsKey(num)) dict[num]++;
+            else dict[num] = 1;
+        }
+
+        return dict.MaxBy(x => x.Value).Key;
+    }
 
 }
