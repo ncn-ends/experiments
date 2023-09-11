@@ -846,4 +846,23 @@ public class LeetCodeProblems
         return dict.MaxBy(x => x.Value).Key;
     }
 
+    /* https://leetcode.com/problems/move-zeroes/ */
+    static void MoveZeroes(int[] nums)
+    {
+        var p = 0;
+        var z = 0;
+        for (var i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] == 0) { z++; continue; }
+
+            nums[p] = nums[i];
+            p++;
+        }
+
+        for (int i = 0; i < z; i++)
+        {
+            nums[nums.Length - 1 - i] = 0;
+        }
+    }
+
 }
