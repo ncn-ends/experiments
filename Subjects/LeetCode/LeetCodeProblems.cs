@@ -878,4 +878,20 @@ public class LeetCodeProblems
 
         return h;
     }
+
+    /* https://leetcode.com/problems/find-pivot-index/ */
+    static int PivotIndex(int[] nums)
+    {
+        var left = 0;
+        var right = nums.Sum();
+        for (var i = 0; i < nums.Length; i++)
+        {
+            left += nums[i];
+            if (left == right) return i;
+            right -= nums[i];
+        }
+
+        return -1;
+    }
+
 }
