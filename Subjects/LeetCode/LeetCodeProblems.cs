@@ -894,4 +894,39 @@ public class LeetCodeProblems
         return -1;
     }
 
+    /* https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/ */
+    static int MaxVowels(string s, int k)
+    {
+        var set = new HashSet<char>()
+        {
+            'a', 'e', 'i', 'o', 'u'
+        };
+
+        var p1 = 0;
+        var p2 = 0;
+        var c = 0;
+        var max = 0;
+
+        while (p2 < k)
+        {
+            if (!set.Contains(s[p2])) p2++;
+            else
+            {
+                p2++;
+                c++;
+                if (max < c) max = c;
+            }
+        }
+
+        while (p2 < s.Length)
+        {
+            if (set.Contains(s[p1])) c--;
+            if (set.Contains(s[p2])) c++;
+            if (max < c) max = c;
+            p1++;
+            p2++;
+        }
+
+        return max;
+    }
 }
