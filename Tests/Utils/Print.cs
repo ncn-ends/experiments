@@ -16,4 +16,6 @@ public static class PrintUtility
     {
         Console.WriteLine(b.ToString(CultureInfo.InvariantCulture));
     }
+
+    public static void Print(string s) => Console.WriteLine(s);
 }
