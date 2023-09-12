@@ -865,4 +865,17 @@ public class LeetCodeProblems
         }
     }
 
+    /* https://leetcode.com/problems/find-the-highest-altitude/ */
+    static int LargestAltitude(int[] gain)
+    {
+        var h = 0;
+        for (var i = 0; i < gain.Length; i++)
+        {
+            var last = i == 0 ? 0 : gain[i - 1];
+            gain[i] = last + gain[i];
+            if (h < gain[i]) h = gain[i];
+        }
+
+        return h;
+    }
 }
