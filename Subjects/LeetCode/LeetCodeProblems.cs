@@ -929,4 +929,40 @@ public class LeetCodeProblems
 
         return max;
     }
+
+    /* https://leetcode.com/problems/min-stack/ */
+    public class MinStack
+    {
+        private Stack<(int val, int min)> _internalStack = new Stack<(int val, int min)>();
+        private int _internalMin = Int32.MaxValue;
+
+        public MinStack() {
+
+        }
+
+        public void Push(int val)
+        {
+            if (val < _internalMin) _internalMin = val;
+            _internalStack.Push((val, _internalMin));
+        }
+
+        public void Pop()
+        {
+            _internalStack.TryPop(out var asd);
+            var passed = _internalStack.TryPeek(out var zxc);
+            _internalMin = !passed ? Int32.MaxValue : zxc.min;
+        }
+
+        public int Top()
+        {
+            _internalStack.TryPeek(out var zxc);
+            return zxc.val;
+        }
+
+        public int GetMin()
+        {
+            return _internalMin;
+        }
+    }
+
 }
