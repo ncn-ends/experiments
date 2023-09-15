@@ -978,4 +978,21 @@ public class LeetCodeProblems
 
         return dict.Values.Count == dict.Values.ToHashSet().Count;
     }
+
+
+    /* https://leetcode.com/problems/find-the-difference/ */
+    static char FindTheDifference(string s, string t)
+    {
+        var dict = new Dictionary<char, int>();
+        foreach (var c in t)
+        {
+            if (dict.ContainsKey(c)) dict[c]++;
+            else dict[c] = 1;
+        }
+
+        foreach (var c in s) dict[c]--;
+
+        return dict.First(x => x.Value > 0).Key;
+    }
+
 }
