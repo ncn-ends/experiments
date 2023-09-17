@@ -995,4 +995,16 @@ public class LeetCodeProblems
         return dict.First(x => x.Value > 0).Key;
     }
 
+    /* https://leetcode.com/problems/sign-of-the-product-of-an-array/ */
+    static int ArraySign(int[] nums)
+    {
+        var sign = 1;
+        foreach (var num in nums)
+        {
+            if (num == 0) return 0;
+            if (num < 0) sign *= -1;
+        }
+
+        return sign;
+    }
 }
