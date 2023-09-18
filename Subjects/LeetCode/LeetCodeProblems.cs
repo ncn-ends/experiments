@@ -1007,4 +1007,11 @@ public class LeetCodeProblems
 
         return sign;
     }
+
+    /* https://leetcode.com/problems/richest-customer-wealth/ */
+    static int MaximumWealth(int[][] accounts)
+    {
+        return accounts.Select(account => account.Sum()).Max();
+    }
+
 }
