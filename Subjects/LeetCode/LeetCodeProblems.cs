@@ -1039,4 +1039,17 @@ public class LeetCodeProblems
             }
         }
     }
+
+    /* https://leetcode.com/problems/reverse-words-in-a-string/ */
+    /* TODO: improve, should have O(1) auxiliary space */
+    static string ReverseWords(string s)
+    {
+        var l = s.Trim().Split(' ').Where(x => x != "" && x != " ");
+        var stack = new Stack<string>();
+        foreach (var w in l)
+            stack.Push(w);
+
+        return string.Join(' ', stack);
+    }
+
 }
