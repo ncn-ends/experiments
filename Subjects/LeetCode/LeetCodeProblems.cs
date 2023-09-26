@@ -1014,4 +1014,29 @@ public class LeetCodeProblems
         return accounts.Select(account => account.Sum()).Max();
     }
 
+    /* https://leetcode.com/problems/set-matrix-zeroes/ */
+    static void SetZeroes(int[][] matrix)
+    {
+        var zeroRows = new HashSet<int>();
+        var zeroCols = new HashSet<int>();
+
+        for (var y = 0; y < matrix.Length; y++)
+        {
+            for (var x = 0; x < matrix[y].Length; x++)
+            {
+                if (matrix[y][x] != 0) continue;
+                zeroRows.Add(y);
+                zeroCols.Add(x);
+            }
+        }
+
+        for (var y = 0; y < matrix.Length; y++)
+        {
+            for (var x = 0; x < matrix[y].Length; x++)
+            {
+                if (zeroRows.Contains(y)) matrix[y][x] = 0;
+                if (zeroCols.Contains(x)) matrix[y][x] = 0;
+            }
+        }
+    }
 }
