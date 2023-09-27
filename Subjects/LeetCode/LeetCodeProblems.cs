@@ -1078,4 +1078,14 @@ public class LeetCodeProblems
         }
         return nums;
     }
+
+    /* https://leetcode.com/problems/find-the-difference-of-two-arrays/ */
+    static IList<IList<int>> FindDifferences(int[] nums1, int[] nums2)
+    {
+        return new List<IList<int>>
+        {
+            nums1.ToHashSet().Where(x => !nums2.Contains(x)).ToList(),
+            nums2.ToHashSet().Where(x => !nums1.Contains(x)).ToList()
+        };
+    }
 }
