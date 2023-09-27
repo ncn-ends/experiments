@@ -1052,4 +1052,30 @@ public class LeetCodeProblems
         return string.Join(' ', stack);
     }
 
+    /* https://leetcode.com/problems/product-of-array-except-self/ */
+    static int[] ProductExceptSelf(int[] nums)
+    {
+        var right = new int[nums.Length];
+        for (var i = nums.Length - 1; i >= 0; i--)
+        {
+            if (i == nums.Length - 1) right[i] = nums[i];
+            else right[i] = nums[i] * right[i + 1];
+        }
+
+        var left = new int[nums.Length];
+        for (var i = 0; i < nums.Length; i++)
+        {
+            if (i == 0) left[i] = nums[i];
+            else left[i] = left[i - 1] * nums[i];
+        }
+
+        for (var i = 0; i < nums.Length; i++)
+        {
+            var p = 1;
+            if (i > 0) p *= left[i - 1];
+            if (i < nums.Length - 1) p *= right[i + 1];
+            nums[i] = p;
+        }
+        return nums;
+    }
 }
