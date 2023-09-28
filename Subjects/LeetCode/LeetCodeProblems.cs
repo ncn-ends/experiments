@@ -1088,4 +1088,31 @@ public class LeetCodeProblems
             nums2.ToHashSet().Where(x => !nums1.Contains(x)).ToList()
         };
     }
+
+    /* https://leetcode.com/problems/equal-row-and-column-pairs/ */
+    static int EqualPairs(int[][] grid)
+    {
+        var set = new List<string>();
+
+        for (var y = 0; y < grid.Length; y++)
+        {
+            var rowAsString = string.Join(',', grid[y]);
+            set.Add(rowAsString);
+        }
+
+        var count = 0;
+        for (var x = 0; x < grid[0].Length; x++)
+        {
+            var z = "";
+            for (int y = 0; y < grid.Length; y++)
+            {
+                if (z != "") z += ',';
+                z += grid[y][x];
+            }
+
+            count += set.Count(x => x == z);
+        }
+
+        return count;
+    }
 }
