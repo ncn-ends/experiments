@@ -1115,4 +1115,28 @@ public class LeetCodeProblems
 
         return count;
     }
+
+    /* https://leetcode.com/problems/monotonic-array/ */
+    static bool IsMonotonic(int[] nums)
+    {
+        if (nums.Length <= 2) return true;
+        var dir = 0;
+
+        for (var i = 1; i < nums.Length; i++)
+        {
+            if (nums[i] < nums[i - 1])
+            {
+                if (dir == 1) return false;
+                else dir = -1;
+            }
+
+            if (nums[i] > nums[i - 1])
+            {
+                if (dir == -1) return false;
+                else dir = 1;
+            }
+        }
+
+        return true;
+    }
 }
