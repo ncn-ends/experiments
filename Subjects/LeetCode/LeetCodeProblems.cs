@@ -1139,4 +1139,32 @@ public class LeetCodeProblems
 
         return true;
     }
+
+    /* https://leetcode.com/problems/linked-list-cycle-ii/ */
+    static ListNode DetectCycle(ListNode head)
+    {
+        if (head is null || head.next is null) return null;
+
+        var p1 = head;
+        var p2 = head;
+
+        while (p1 != null && p2 != null && p2.next != null)
+        {
+            p1 = p1.next;
+            p2 = p2.next.next;
+
+            if (p1 == p2) break;
+        }
+
+        if (p1 is null || p2 is null || p2.next is null) return null;
+
+        var p3 = head;
+        while (p1 != p3)
+        {
+            p1 = p1.next;
+            p3 = p3.next;
+        }
+
+        return p3;
+    }
 }
