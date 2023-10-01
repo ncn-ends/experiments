@@ -31,9 +31,8 @@
 
 
 # Variable names
-`p` pointer (if single)  
-`a` starting pointer (if two pointers)  
-`z` ending pointer (if two pointers)  
+`p` pointer (single)  
+`p1-5` pointers (multiple)
 `s` stack   
 `q` queue  
 `l` list  
