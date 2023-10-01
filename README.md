@@ -3,7 +3,7 @@
 ## Personal rules: LeetCode
 - Max 3 attempts per problem. If failed all 3 attempts, leave and come back on different day
 - Max 30 min per problem. If fail to solve, leave and come back on different day
-- Look up a solution only to learn from, but then don't attempt the problem until at least a month after
+- Look up a solution or use AI tools for help only to learn from, but if you do then don't attempt the problem until at least a month has gone by
 - Focus is on optimal time complexity
 
 ## Personal rules: Advent Of Code
