@@ -19,7 +19,6 @@ I like to monitor my progress and the completionism of problem lists is satisfyi
 
 # Progress
 
-
 ## Progress: Advent of Code
 
 **★**  = completed within 24 hours  

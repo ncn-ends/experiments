@@ -1167,4 +1167,24 @@ public class LeetCodeProblems
 
         return p3;
     }
+
+    /* https://leetcode.com/problems/all-paths-from-source-to-target/ */
+    static IList<IList<int>> AllPathsSourceTarget(int[][] graph)
+    {
+        var paths = new List<IList<int>>();
+        Helper(new List<int>{0});
+        void Helper(List<int> path)
+        {
+            var last = path.Last();
+            var node = graph[last];
+
+            if (last == graph.Length - 1)
+                paths.Add(path);
+
+            foreach (var next in node)
+                Helper(path.Concat(new List<int>(){next}).ToList());
+        }
+
+        return paths;
+    }
 }
