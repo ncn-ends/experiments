@@ -1,1 +1,3 @@
-﻿using Subjects.LeetCode;
+using static Tests.Utils.PrintUtility;
+
+Print("test");

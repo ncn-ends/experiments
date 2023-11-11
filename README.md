@@ -1,10 +1,9 @@
-# Personal Rules
+# Intro
 
-## Personal rules: LeetCode
-- Max 3 attempts per problem. If failed all 3 attempts, leave and come back on different day
-- Max 30 min per problem. If fail to solve, leave and come back on different day
-- Look up a solution or use AI tools for help only to learn from, but if you do then don't attempt the problem until at least a month has gone by
-- Focus is on optimal time complexity
+I like to do coding puzzles for fun and these are my personal solutions and misc C# specific experiments.   
+I like to monitor my progress and the completionism of problem lists is satisfying as well.  
+
+# Personal Rules
 
 ## Personal rules: Advent Of Code
 - No AI tools
@@ -12,7 +11,16 @@
 - No looking up solutions at all, even to learn from
 - Focus is completing as fast as possible
 
-# Advent of Code Progress
+## Personal rules: LeetCode
+- Max 3 attempts per problem. If failed all 3 attempts, leave and come back on different day
+- Max 30 min per problem. If fail to solve, leave and come back on different day
+- Look up a solution or use AI tools for help only to learn from, but if you do then don't attempt the problem until at least a month has gone by
+- Focus is on optimal time complexity
+
+# Progress
+
+
+## Progress: Advent of Code
 
 **★**  = completed within 24 hours  
 *✓* = completed some time after  
@@ -29,6 +37,9 @@
 | 2016 |       |       |       |       |       |       |       |       |       |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |
 | 2015 |   *✓✓*    |   *✓✓*    |   *✓✓*    |   *✓✓*    |   *✓✓*    |  *✓✓*     |       |       |       |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |        |
 
+## Progress: LeetCode
+
+https://leetcode.com/ncn-ends/
 
 # Variable names
 `p` pointer (single)  
