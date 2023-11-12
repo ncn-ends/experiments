@@ -1,13 +1,11 @@
-using System.Diagnostics;
-using System.Globalization;
 using Utils;
 
 namespace Subjects.AoC._2022._6;
 
 public static class Day6Solution
 {
-    private static string _input = AOCInput.Import().Trim();
-    
+    private static string _input = AocInputHandler.ImportFile().Trim();
+
     public static int SolveBySeqLimit(int seqLimit)
     {
         for (int i = seqLimit - 1; i < _input.Length; i++)
@@ -17,7 +15,7 @@ public static class Day6Solution
         }
         throw new Exception("bad");
     }
-    
+
     public static int DoPart1()
     {
         for (int i = 3; i < _input.Length; i++)
@@ -43,7 +41,7 @@ public static class Day6Solution
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
         Console.WriteLine(SolveBySeqLimit(4));
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
         Console.WriteLine(SolveBySeqLimit(14));

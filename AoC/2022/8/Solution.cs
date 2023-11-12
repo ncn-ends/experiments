@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using System.Globalization;
-using Subjects.Structures;
 using Utils;
 
 namespace Subjects.AoC._2022._8;
@@ -17,8 +14,8 @@ class Point
 
 public static class Day8Solution
 {
-    private static string _input = AOCInput.Import().Trim();
-    
+    private static string _input = AocInputHandler.ImportFile().Trim();
+
     private static string _example = """
                                         30373
                                         25512
@@ -26,7 +23,7 @@ public static class Day8Solution
                                         33549
                                         35390
                                     """;
-    
+
     private static char[][] _grid = _input.Trim().Split("\n").Select(x => x.Trim().ToCharArray()).ToArray();
     private static Point[][]  _treesChecked = _grid.Select(yLine => yLine.Select(pointValue => new Point
     {
@@ -37,10 +34,10 @@ public static class Day8Solution
 
     private static bool CheckIsVisibleX(int point, int x, int y)
     {
-        return _treesChecked[y][..x].All(s => point > s.Value) 
+        return _treesChecked[y][..x].All(s => point > s.Value)
                || _treesChecked[y][(x + 1)..].All(s => point > s.Value);
     }
-    
+
     private static bool CheckIsVisibleY(int point, int x, int y)
     {
         var aboveIsVisible = true;
@@ -58,7 +55,7 @@ public static class Day8Solution
 
         return aboveIsVisible || belowIsVisible;
     }
-    
+
     public static int DoPart1()
     {
         var count = 0;
@@ -84,7 +81,7 @@ public static class Day8Solution
     {
         var line = _treesChecked[y];
         var value = _treesChecked[y][x].Value;
-        
+
         var leftCount = 0;
         for (int i = x - 1; i >= 0; i--)
         {
@@ -112,7 +109,7 @@ public static class Day8Solution
             downCount++;
             if (_treesChecked[i][x].Value >= value) break;
         }
-        
+
         return upCount * rightCount * downCount * leftCount;
     }
 
@@ -138,7 +135,7 @@ public static class Day8Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

@@ -1,6 +1,4 @@
 using System.Diagnostics;
-using System.Globalization;
-using Subjects.Structures;
 using Utils;
 
 namespace Subjects.AoC._2022._12;
@@ -13,7 +11,7 @@ namespace Subjects.AoC._2022._12;
 
 public static class Day12Solution
 {
-    private static char[][] _input = AOCInput.Import().Trim().Split("\n").Select(x => x.Trim().ToCharArray()).ToArray();
+    private static char[][] _input = AocInputHandler.ImportFile().Trim().Split("\n").Select(x => x.Trim().ToCharArray()).ToArray();
 //     private static char[][] _input = """
 // Sabqponm
 // abcryxxl
@@ -22,7 +20,7 @@ public static class Day12Solution
 // abdefghi
 // """.Split("\n").Select(x => x.ToCharArray()).ToArray();
 
-    // private static (int x, int y) startingPoint = (0, 20); 
+    // private static (int x, int y) startingPoint = (0, 20);
 
     public static (int answer, string bestPath) DoPart1()
     {
@@ -56,10 +54,10 @@ public static class Day12Solution
                     if (step == 'v') hereY += 1;
                     if (step == '^') hereY -= 1;
                 }
-        
+
                 return (hereX, hereY);
             };
-        
+
             Func<(int x, int y), bool> canGoRight = pos =>
             {
                 var (x, y) = pos;
@@ -68,7 +66,7 @@ public static class Day12Solution
                 var rightChar = _input[y][x + 1];
                 return GetValueFromChar(rightChar) - GetValueFromChar(currentChar) <= 1;
             };
-        
+
             Func<(int x, int y), bool> canGoLeft = pos =>
             {
                 var (x, y) = pos;
@@ -77,7 +75,7 @@ public static class Day12Solution
                 var leftChar = _input[y][x - 1];
                 return GetValueFromChar(leftChar) - GetValueFromChar(currentChar) <= 1;
             };
-        
+
             Func<(int x, int y), bool> canGoUp = pos =>
             {
                 var (x, y) = pos;
@@ -86,7 +84,7 @@ public static class Day12Solution
                 var upChar = _input[y - 1][x];
                 return GetValueFromChar(upChar) - GetValueFromChar(currentChar) <= 1;
             };
-        
+
             Func<(int x, int y), bool> canGoDown = pos =>
             {
                 var (x, y) = pos;
@@ -95,37 +93,37 @@ public static class Day12Solution
                 var downChar = _input[y + 1][x];
                 return GetValueFromChar(downChar) - GetValueFromChar(currentChar) <= 1;
             };
-        
-        
+
+
             Func<(int x, int y), char?> nextToPeak = pos =>
             {
                 var (x, y) = pos;
-        
+
                 if (_input[y][x] == 'E') return 'E';
                 if (_input[y][x] != 'z' && _input[y][x] != 'y') return null;
                 if (y > 0 && _input[y - 1][x] == 'E') return '^';
                 if (x < _input[0].Length - 1 && _input[y][x + 1] == 'E') return '>';
                 if (y < _input.Length - 1 && _input[y + 1][x] == 'E') return 'v';
                 if (x > 0 && _input[y][x - 1] == 'E') return '<';
-        
+
                 return null;
             };
-        
-        
+
+
             HashSet<string> checkedPaths = new();
             HashSet<string> completedPaths = new();
             Queue<string> undiscoveredPaths = new();
             undiscoveredPaths.Enqueue("");
-        
+
             do
             {
                 var path = undiscoveredPaths.Dequeue();
                 var posAfterPath = getPositionFromPath(path);
                 checkedPaths.Add(path);
-        
+
                 // Debugger.Break();
                 // Console.WriteLine(path);
-        
+
                 /* if it's possible to end the path,
                  * it's logical to end the path before checking for any other potential paths.
                  * since it's already dequeued, don't have to do anything else. */
@@ -136,13 +134,13 @@ public static class Day12Solution
                     completedPaths.Add(completedPath);
                     continue;
                 }
-        
+
                 var potentialPathsToAdd = new List<string>();
                 if (canGoUp(posAfterPath)) potentialPathsToAdd.Add($"{path}^");
                 if (canGoRight(posAfterPath)) potentialPathsToAdd.Add($"{path}>");
                 if (canGoDown(posAfterPath)) potentialPathsToAdd.Add($"{path}v");
                 if (canGoLeft(posAfterPath)) potentialPathsToAdd.Add($"{path}<");
-        
+
                 /* now we get rid of the paths that can be added that are redundant */
                 foreach (var p in potentialPathsToAdd)
                 {
@@ -157,7 +155,7 @@ public static class Day12Solution
                         else if (c == '<') pointX -= 1;
                         pointsInPath.Add((pointX, pointY));
                     }
-        
+
                     /* checking to make sure the path hasn't created a self closing loop */
                     var hasLoopedInItself = false;
                     for (int i = 0; i < pointsInPath.Count; i++)
@@ -170,15 +168,15 @@ public static class Day12Solution
                             break;
                         }
                     }
-        
+
                     if (hasLoopedInItself) continue;
-        
+
                     var alreadyChecked = checkedPaths.Contains(p);
                     if (alreadyChecked) continue;
-        
+
                     var alreadyQueued = undiscoveredPaths.Contains(p);
                     if (alreadyQueued) continue;
-        
+
                     // Debugger.Break();
                     /* making sure path isn't redundant */
                     var (fpX, fpY) = getPositionFromPath(p);
@@ -191,20 +189,20 @@ public static class Day12Solution
                     };
                     var pIsRedundant = checkedPaths.Any(pred) || undiscoveredPaths.Any(pred);
                     if (pIsRedundant) continue;
-        
+
                     undiscoveredPaths.Enqueue(p);
                 }
-        
+
                 Debugger.Break();
             } while (undiscoveredPaths.Count > 0);
-            
-            
+
+
             /* finished solving and formatting  answer */
             var completedPathsOrdered = completedPaths.Where(x => !x.Contains('-')).OrderBy(x => x.Length).ToArray();
             if (completedPathsOrdered.Length == 0) continue;
             var bestPath = completedPathsOrdered[0];
             var answer = bestPath.Length;
-        
+
             bestPaths.Add((answer, bestPath));
             Console.WriteLine($"Found bestPath: {bestPaths.Count}/{startingPoints.Count} with step cost of {answer}");
         }
@@ -225,7 +223,7 @@ public static class Day12Solution
         if (code is >= 97 and <= 122) return code - 96;
         throw new Exception("Bad argument");
     }
-    
+
     public static int DoPart2()
     {
         return 0;
@@ -236,7 +234,7 @@ public static class Day12Solution
         Console.Write("Part 1: ");
         // Console.WriteLine(DoPart1());
         DoPart1();
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

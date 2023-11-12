@@ -1,11 +1,10 @@
-using System.Diagnostics;
 using Utils;
 
 namespace Subjects.AoC._2022._1;
 
 public static class Solution
 {
-    private static string _input = AOCInput.Import().Trim();
+    private static string _input = AocInputHandler.ImportFile().Trim();
     
     // 67622
     public static int DoPart1()

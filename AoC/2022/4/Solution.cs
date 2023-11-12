@@ -1,12 +1,10 @@
-using System.Diagnostics;
-using System.Globalization;
 using Utils;
 
 namespace Subjects.AoC._2022._4;
 
 public static class Day4Solution
 {
-    private static string _input = AOCInput.Import().Trim();
+    private static string _input = AocInputHandler.ImportFile().Trim();
     
     public static int DoPart1()
     {

@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using System.Globalization;
-using Subjects.Structures;
 using Utils;
 
 namespace Subjects.AoC._2022._10;
@@ -13,7 +10,7 @@ class Line
 
 public static class Day10Solution
 {
-    private static string _input = AOCInput.Import().Trim();
+    private static string _input = AocInputHandler.ImportFile().Trim();
 
     private static string _exampleA = """
 noop
@@ -169,13 +166,13 @@ noop
 noop
 noop
 """;
-    
+
     public static int DoIt()
     {
 
         var checks = new int[] { 20, 60, 100, 140, 180, 220 };
         var signalChecks = new List<(int cycle, int signalPower)>();
-        
+
         List<Line> lines = _input.Split("\n").Select<string, Line>(x =>
         {
             var split = x.Split(" ");
@@ -203,12 +200,12 @@ noop
             var line = lines[0];
 
             line.CyclesLeft--;
-            
+
             if (checks.Any(x => x == cycle))
             {
                 signalChecks.Add((cycle, cycle * signal));
             }
-            
+
             var symbol = ".";
             if (crt.Length % 40 <= signal + 1 && crt.Length % 40 >= signal - 1)
             {
@@ -216,8 +213,8 @@ noop
             }
 
             crt += symbol;
-            
-            
+
+
             if (line.CyclesLeft == 0)
             {
                 signal += line.Change;

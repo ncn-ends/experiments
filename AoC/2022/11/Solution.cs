@@ -1,7 +1,4 @@
 using System.Diagnostics;
-using System.Globalization;
-using Subjects.Structures;
-using Utils;
 
 namespace Subjects.AoC._2022._11;
 
@@ -86,7 +83,7 @@ public static class Day11Solution
             FalseTarget = 2
         }
     };
-    
+
     // private static List<Monkey> _monkeysB = new()
     // {
     //     new Monkey
@@ -140,19 +137,19 @@ public static class Day11Solution
     //                 continue;
     //             }
     //             var initialWorryScore = monkey.Items[0];
-    //             
+    //
     //             // Debugger.Break();
     //             monkey.Inspections++;
     //             var appliedWorryScore = monkey.Op(initialWorryScore);
     //             // var temp = Math.Floor(appliedWorryScore / 3);
     //             var finalWorryScore = appliedWorryScore;
     //
-    //             var monkeyToThrowTo = monkey.Test(finalWorryScore) 
-    //                 ? monkey.TrueTarget 
+    //             var monkeyToThrowTo = monkey.Test(finalWorryScore)
+    //                 ? monkey.TrueTarget
     //                 : monkey.FalseTarget;
     //             monkeys[monkeyToThrowTo].Items.Add(finalWorryScore);
     //             monkey.Items.RemoveAt(0);
-    //             
+    //
     //             var monkeyHasNoItems = monkeys[monkeyPos].Items.Count == 0;
     //             var monkeyIsLastMonkey = monkeyPos == monkeys.Count - 1;
     //             if (monkeyHasNoItems && monkeyIsLastMonkey) break;
@@ -164,7 +161,7 @@ public static class Day11Solution
     //     }
     //
     //     var orderedByInspections = monkeys.OrderByDescending(x => x.Inspections).ToArray();
-    //     
+    //
     //     return orderedByInspections[0].Inspections * orderedByInspections[1].Inspections;
     // }
 
@@ -197,9 +194,9 @@ public static class Day11Solution
 
             var asd = "qwe";
         }
-        
+
         var orderedByInspections = monkeys.OrderByDescending(x => x.Inspections).ToArray();
-        
+
         Debugger.Break();
         return (ulong)orderedByInspections[0].Inspections * (ulong)orderedByInspections[1].Inspections;
     }
@@ -209,7 +206,7 @@ public static class Day11Solution
     {
         // Console.Write("Part 1: ");
         // Console.WriteLine(DoIt(1));
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(Rewrite());
     }

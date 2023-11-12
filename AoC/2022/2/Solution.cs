@@ -1,11 +1,10 @@
-using System.Diagnostics;
 using Utils;
 
 namespace Subjects.AoC._2022._2;
 
 public static class Day2Solution
 {
-    private static string _input = AOCInput.Import().Trim();
+    private static string _input = AocInputHandler.ImportFile().Trim();
 
 
     // A for Rock, B for Paper, and C for Scissors

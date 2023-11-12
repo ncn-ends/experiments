@@ -6,10 +6,13 @@ I like to monitor my progress and the completionism of problem lists is satisfyi
 # Personal Rules
 
 ## Personal rules: Advent Of Code
-- No AI tools
+- No AI tools (GH CoPilot, ChatGPT)
 - Each year the goal is to do each puzzle within 24 hours of it getting released, and to see how long you can survive
 - No looking up solutions at all, even to learn from
-- Focus is completing as fast as possible
+- Focus is completing as fast as possible, not optimal solution
+- No 3rd party libs (personally built libs and standard library is fine)
+- No asking for help from other people; no discussing problems until after they're complete
+- Googling is fine as long as not looking up solutions
 
 ## Personal rules: LeetCode
 - Max 3 attempts per problem. If failed all 3 attempts, leave and come back on different day

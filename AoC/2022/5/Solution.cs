@@ -1,12 +1,10 @@
-using System.Diagnostics;
-using System.Globalization;
 using Utils;
 
 namespace Subjects.AoC._2022._5;
 
 public static class Day5Solution
 {
-    private static string _input = AOCInput.Import().Trim();
+    private static string _input = AocInputHandler.ImportFile().Trim();
 
     private static Dictionary<int, Stack<char>> _crates = new()
     {
