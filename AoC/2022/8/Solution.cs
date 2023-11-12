@@ -1,3 +1,4 @@
+using AoC;
 using Utils;
 
 namespace Subjects.AoC._2022._8;

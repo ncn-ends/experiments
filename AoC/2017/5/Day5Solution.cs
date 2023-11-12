@@ -1,9 +1,8 @@
 using System.Diagnostics;
-using AoC;
 
-namespace Utils._2017._4;
+namespace AoC._2017._5;
 
-public static class Day4Solution
+public static class Day5Solution
 {
     public static void Do()
     {
