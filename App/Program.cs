@@ -1,6 +1,7 @@
 
 
 
-using AoC._2017._5;
+using AoC.Y2017;
 
-Day5Solution.Do();
+var asd = Day4Solution.SolvePart1();
+Console.WriteLine(asd);
