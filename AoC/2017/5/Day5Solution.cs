@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace AoC._2017._5;
+namespace AoC.Y2017;
 
 public static class Day5Solution
 {

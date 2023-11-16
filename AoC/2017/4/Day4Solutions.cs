@@ -4,13 +4,13 @@ using Utils.Extensions;
 
 namespace AoC.Y2017;
 
-public static class Day4Solution
+public static class Day4Solutions
 {
     public static int SolvePart1()
     {
         var input = AocInputHandler.ImportHttp();
         var validPassphrases = 0;
-        input.IterateOnEachLine(line =>
+        input.IterateOnEachLine((line, _) =>
         {
             var usedWords = new HashSet<string>();
             var hasDuplicates = false;
@@ -31,7 +31,7 @@ public static class Day4Solution
     {
         var input = AocInputHandler.ImportHttp();
         var validPassphrases = 0;
-        input.IterateOnEachLine(line =>
+        input.IterateOnEachLine((line, _) =>
         {
             var usedWords = new HashSet<string>();
             var hasDuplicates = false;
