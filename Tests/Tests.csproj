@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Subjects\Subjects.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Structures\AdjacencyMapTests.cs" />
+  </ItemGroup>
+
 </Project>

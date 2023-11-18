@@ -2,11 +2,11 @@
 
 
 using System.Diagnostics;
-using AoC.Y2015;
+using AoC.Y2017;
 using static Tests.Utils.PrintUtility;
 
-var solution = Day8Solutions.SolvePart2();
-Print(solution);
+// var solution = Day12Solutions.SolvePart1();
+// Print(solution);
 
 // List<int> qwe = [1, 2, 3, 4];
 // var zxc = new List<int>([4, 5, 6]);

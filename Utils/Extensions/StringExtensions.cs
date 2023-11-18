@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 namespace Utils.Extensions;
 
 public class LoopManager
@@ -79,6 +81,13 @@ public static class StringExtensions
         var chars = s.ToCharArray().ToList();
         chars.Sort();
         return string.Join("", chars);
+    }
+
+    public static List<int> ExtractNumbers(this string s)
+    {
+        const string pattern = @"\d+";
+        var matches = Regex.Matches(s, pattern);
+        return matches.Select(x => int.Parse(x.Value)).ToList();
     }
 
 }
