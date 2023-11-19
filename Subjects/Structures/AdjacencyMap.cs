@@ -96,4 +96,30 @@ public class AdjacencyMap
 
         Process.Start("xdg-open", "https://google.com");
     }
+
+    public BFSState DoSimpleBFS()
+    {
+        var state = new BFSState();
+        var queue = state.Queue;
+        var visited = state.Visited;
+        queue.Enqueue(From(0));
+
+        while (queue.Any())
+        {
+            var current = queue.Dequeue();
+            visited.Add(current);
+            foreach (var edge in current.Edges)
+            {
+                if (!visited.Contains(edge)) queue.Enqueue(edge);
+            }
+        }
+
+        return state;
+    }
+
+    public record BFSState
+    {
+        public HashSet<AdjacencyMapNode> Visited { get; set; }
+        public Queue<AdjacencyMapNode> Queue { get; set; }
+    }
 }

@@ -30,21 +30,9 @@ public static class Day12Solutions
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
         });
 
-        var visited = new HashSet<AdjacencyMapNode>();
-        var queue = new Queue<AdjacencyMapNode>();
-        queue.Enqueue(map.From(0));
+        var result = map.DoSimpleBFS();
 
-        while (queue.Any())
-        {
-            var current = queue.Dequeue();
-            visited.Add(current);
-            foreach (var edge in current.Edges)
-            {
-               if (!visited.Contains(edge)) queue.Enqueue(edge);
-            }
-        }
-
-        return visited.Count;
+        return result.Visited.Count;
     }
 
     public static int SolvePart2()
