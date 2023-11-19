@@ -1,3 +1,5 @@
+using System.Diagnostics;
+using Plotly.NET.CSharp;
 using Subjects.LeetCode;
 
 namespace Subjects.Structures.Graphs;
@@ -65,6 +67,8 @@ public class AdjacencyMap
         return possiblyFoundNode;
     }
 
+    public AdjacencyMapNode From(int startingNode) => FindNodeByKey(startingNode) ?? throw new InvalidOperationException();
+
     public bool DoesNodeExist(int nodeKey) => FindNodeByKey(nodeKey) is not null;
 
     private void Interconnect(AdjacencyMapNode homeNode, List<AdjacencyMapNode> connectingNodes)
@@ -77,5 +81,19 @@ public class AdjacencyMap
             if (connectingNode != homeNode) homeNode.ConnectNode(connectingNode);
             if (!homeNode.HasConnection(connectingNode)) connectingNode.ConnectNode(homeNode);
         }
+    }
+
+    public void Visualize()
+    {
+        // Chart.Point<double, double, string>(
+        //         x: new double[] { 1, 2 },
+        //         y: new double[] { 5, 10 }
+        //     )
+        //     .WithTraceInfo("Hello from C#", ShowLegend: true)
+        //     .WithXAxisStyle<double, double, string>(Title: Plotly.NET.Title.init("xAxis"))
+        //     .WithYAxisStyle<double, double, string>(Title: Plotly.NET.Title.init("yAxis"))
+        //     .Show();
+
+        Process.Start("xdg-open", "https://google.com");
     }
 }

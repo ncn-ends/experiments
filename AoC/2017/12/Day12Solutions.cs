@@ -1,31 +1,52 @@
 using System.Diagnostics;
+using Subjects.Structures.Graphs;
 using Utils.Extensions;
 
 namespace AoC.Y2017;
 
-// convert a list of list of numbers to an adjacency list
-//      optional parameter "directed", if so, will make the first item the key
+
 public static class Day12Solutions
 {
     public static int SolvePart1()
     {
-        var dict = new Dictionary<int, List<int>> ();
+        var importExample =
+"""
+0 <-> 2
+1 <-> 1
+2 <-> 0, 3, 4
+3 <-> 2, 4
+4 <-> 2, 3, 6
+5 <-> 6
+6 <-> 4, 5
+""";
+        var map = new AdjacencyMap();
 
+
+        /* parse into adjacency map */
+        // importExample.
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
         {
-            var nums = x.ExtractNumbers(); // 10, 10, 129, 147, 1394
-            for (var i = 0; i < nums.Count; i++)
-            {
-                var num = nums[i];
-                // add num to the map as a key with an empty value
-                if (!dict.ContainsKey(num)) dict.Add(num, []);
-                for (var j = 0; j < nums.Count; j++)
-                {
-                    var num2 = nums[j];
-                }
-            }
-            Debugger.Break();
+            var nums = x.ExtractNumbers();
+            var homeNodeVal = nums[0];
+            var connections = nums.Skip(1);
+            map.AddNodeWithEdges(homeNodeVal, [..connections]);
         });
-        return default;
+
+        var visited = new HashSet<AdjacencyMapNode>();
+        var queue = new Queue<AdjacencyMapNode>();
+        queue.Enqueue(map.From(0));
+
+        while (queue.Any())
+        {
+            var current = queue.Dequeue();
+            visited.Add(current);
+            foreach (var edge in current.Edges)
+            {
+               if (!visited.Contains(edge)) queue.Enqueue(edge);
+            }
+        }
+
+        Debugger.Break();
+        return visited.Count;
     }
 }
