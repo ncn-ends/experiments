@@ -1,6 +1,7 @@
 using Utils;
 using Utils.Extensions;
-using static Utils.StringUtils;
+using Utils.Strings;
+using static Utils.StringHelpers;
 
 namespace AoC.Y2015;
 

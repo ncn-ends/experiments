@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace Utils.Extensions;
+namespace Utils.Strings;
 
 public class LoopManager
 {
@@ -33,10 +33,12 @@ public static class StringExtensions
         return s is null or "";
     }
 
-    public static List<string> SplitByLine(this string s)
+    public static List<string> Clean(this IEnumerable<string> str)
     {
-        return s.Split("\n").Where(x => !x.IsNullOrEmpty()).ToList();
+        return str.Where(x => !x.IsNullOrEmpty()).ToList();
     }
+
+    public static List<string> SplitByLine(this string s) => s.Split("\n").Clean();
 
     public static List<string> ToListByLine(this string s) => SplitByLine(s);
 
@@ -53,10 +55,7 @@ public static class StringExtensions
         }
     }
 
-    public static List<string> SplitBySpace(this string s)
-    {
-        return s.Split(" ").ToList();
-    }
+    public static List<string> SplitBySpace(this string s) => s.Split(" ").Clean();
 
     public static List<string> ToListBySpace(this string s) => SplitBySpace(s);
 

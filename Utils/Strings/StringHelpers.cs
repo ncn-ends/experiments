@@ -1,6 +1,6 @@
 namespace Utils;
 
-public static class StringUtils
+public static class StringHelpers
 {
     public static char SafeGet(string s, int place)
     {

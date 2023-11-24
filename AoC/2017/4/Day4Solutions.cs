@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using AoC;
 using Utils.Extensions;
+using Utils.Strings;
 
 namespace AoC.Y2017;
 
