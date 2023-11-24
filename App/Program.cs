@@ -2,10 +2,9 @@
 
 
 using System.Diagnostics;
-using AoC.Y2017;
 using static Tests.Utils.PrintUtility;
 
-var solution = Day12Solutions.SolvePart2();
+var solution = AoC.Y2015.Day9Solutions.SolvePart1();
 Print(solution);
 
 // List<int> qwe = [1, 2, 3, 4];

@@ -19,7 +19,7 @@ public static class Day12Solutions
 5 <-> 6
 6 <-> 4, 5
 """;
-        var map = new AdjacencyMap();
+        var map = new AdjacencyMap<int>();
 
         // importExample.
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
@@ -30,9 +30,10 @@ public static class Day12Solutions
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
         });
 
-        var result = map.DoSimpleBFS();
+        // var result = map.DoSimpleBFS(map.From(0));
 
-        return result.Visited.Count;
+        // return result.Visited.Count;
+        return default;
     }
 
     public static int SolvePart2()
@@ -47,7 +48,7 @@ public static class Day12Solutions
 5 <-> 6
 6 <-> 4, 5
 """;
-        var map = new AdjacencyMap();
+        var map = new AdjacencyMap<int>();
 
         // importExample
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
@@ -58,8 +59,8 @@ public static class Day12Solutions
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
         });
 
-        var visited = new HashSet<AdjacencyMapNode>();
-        var queue = new Queue<AdjacencyMapNode>();
+        var visited = new HashSet<AdjacencyMapNode<int>>();
+        var queue = new Queue<AdjacencyMapNode<int>>();
         var groups = 0;
 
         for (var nextNode = map.From(0);
@@ -71,8 +72,8 @@ public static class Day12Solutions
             {
                 var current = queue.Dequeue();
                 visited.Add(current);
-                foreach (var edge in current.Edges)
-                    if (!visited.Contains(edge)) queue.Enqueue(edge);
+                // foreach (var edge in current.Edges)
+                    // if (!visited.Contains(edge)) queue.Enqueue(edge);
             }
 
             groups++;
