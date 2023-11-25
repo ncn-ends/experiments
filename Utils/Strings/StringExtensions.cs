@@ -28,10 +28,7 @@ public class LoopManager
 
 public static class StringExtensions
 {
-    public static bool IsNullOrEmpty(this string? s)
-    {
-        return s is null or "";
-    }
+    public static bool IsNullOrEmpty(this string? s) => s is null or "";
 
     public static List<string> Clean(this IEnumerable<string> str)
     {
