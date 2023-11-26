@@ -18,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AoC\AoC.csproj" />
       <ProjectReference Include="..\Subjects\Subjects.csproj" />
     </ItemGroup>
 

@@ -14,7 +14,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AoC\AoC.csproj" />
       <ProjectReference Include="..\Benchmarks\Benchmarks.csproj" />
       <ProjectReference Include="..\Tests\Tests.csproj" />
     </ItemGroup>
