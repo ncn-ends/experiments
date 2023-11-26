@@ -35,6 +35,11 @@ public static class StringExtensions
         return str.Where(x => !x.IsNullOrEmpty()).ToList();
     }
 
+    public static List<string> SplitBy(this string s, string[] delimiters)
+    {
+        return new List<string>(s.Split(delimiters, StringSplitOptions.RemoveEmptyEntries));
+    }
+
     public static List<string> SplitByLine(this string s) => s.Split("\n").Clean();
 
     public static List<string> ToListByLine(this string s) => SplitByLine(s);
