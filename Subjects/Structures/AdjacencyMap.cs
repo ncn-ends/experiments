@@ -1,140 +1,79 @@
-using System.Diagnostics;
-using Plotly.NET.CSharp;
-using Subjects.LeetCode;
-
 namespace Subjects.Structures.Graphs;
 
-public record AdjacencyMapEdge<T>(AdjacencyMapNode<T> TargetNode,
-                                  int? Weight) where T : notnull;
-
-public record AdjacencyMapNode<T>(T Key, AdjacencyMap<T> Map) where T : notnull
+public record AdjacencyNode<T>(T Value) where T : IEquatable<T>
 {
-    public List<AdjacencyMapEdge<T>> Edges { get; set; } = [];
-
-    public void ConnectNode(AdjacencyMapNode<T> node, int? weight = null) =>
-        Edges.Add(new(node, weight));
-
-    public bool HasConnection(AdjacencyMapNode<T> node) =>
-        Edges.Any(edge => edge.TargetNode == node);
+    public List<AdjacencyEdge<T>> Connections { get; set; } = [];
 }
 
-public class AdjacencyMap<T> where T : notnull
+public class AdjacencyEdge<T>(AdjacencyMap<T> map,
+                              AdjacencyNode<T> fromNode,
+                              AdjacencyNode<T> toNode,
+                              int weight = 0) where T : IEquatable<T>
 {
-    public Dictionary<T, AdjacencyMapNode<T>> Nodes { get; init; } = [];
+    private AdjacencyMap<T> Map { get; set; } = map;
+    public int? Weight { get; set; } = weight;
+    public bool IsWeighted => Map.IsWeighted;
+    public AdjacencyNode<T> FromNode { get; init; } = fromNode;
+    public AdjacencyNode<T> ToNode { get; init; } = toNode;
+}
 
-    public AdjacencyMapNode<T> AddEmptyNode(T nodeKey)
+public class AdjacencyMap<T> where T : IEquatable<T>
+{
+    #region setup/data
+
+    public AdjacencyMap(bool isWeighted = false)
     {
-        var node = new AdjacencyMapNode<T>(nodeKey, this);
-        Nodes.TryAdd(nodeKey, node);
+        if (typeof(T) != typeof(int) && typeof(T) != typeof(string))
+            throw new Exception("Invalid type, only strings or ints allowed");
+
+        IsWeighted = isWeighted;
+    }
+
+    public bool IsWeighted { get; init; }
+    public HashSet<AdjacencyNode<T>> Nodes { get; set; } = [];
+
+    #endregion
+
+
+    public AdjacencyNode<T> AddNodeWithEdges(T originNodeValue,
+                                             (T nodeValue, int weight)[] connectingNodeValues)
+    {
+        var (originNode, _) = FindOrAddNode(originNodeValue);
+
+        foreach (var (nodeValue, weight) in connectingNodeValues)
+        {
+            var connectingNode = FindOrAddNode(nodeValue);
+
+            var nodeIsAlreadyConnected =
+                    connectingNode.found && originNode.Connections.Any(x => x.ToNode == connectingNode.node);
+            if (nodeIsAlreadyConnected) continue;
+
+            var newEdge = new AdjacencyEdge<T>(this, originNode, connectingNode.node, weight);
+            originNode.Connections.Add(newEdge);
+        }
+
+        return originNode;
+    }
+
+    public AdjacencyNode<T>? FindNode(T nodeValue)
+    {
+        var node = Nodes.FirstOrDefault(x => x.Value.Equals(nodeValue));
         return node;
     }
 
-    // public AdjacencyMapNode<T> AddNodeWithEdges(T nodeKey, List<AdjacencyMapNode<T>> edges)
-    // {
-    //     var node = new AdjacencyMapNode<T>(nodeKey, this)
-    //     {
-    //         Edges = edges
-    //     };
-    //     Nodes.Add(nodeKey, node);
-    //     return node;
-    // }
 
-    public AdjacencyMapNode<T> AddNodeWithEdges(T nodeKey, List<T> edgeValues)
+    #region helpers
+
+    private (AdjacencyNode<T> node, bool found) FindOrAddNode(T nodeValue)
     {
-        var edgeNodes = edgeValues.Select(FindOrCreateNode).ToList();
-        var homeNode = FindOrCreateNode(nodeKey);
-        Interconnect(homeNode, edgeNodes);
+        var node = Nodes.FirstOrDefault(x => x.Value.Equals(nodeValue));
+        if (node != default)
+            return (node, true);
 
-        return homeNode;
+        var newNode = new AdjacencyNode<T>(nodeValue);
+        Nodes.Add(newNode);
+        return (newNode, false);
     }
 
-    public AdjacencyMapNode<T> AddNodeWithEdge(T homeNodeKey, T targetHomeKey, int? weight)
-    {
-        var homeNode = FindOrCreateNode(homeNodeKey);
-        var targetNode = FindOrCreateNode(targetHomeKey);
-        DirectedConnect(homeNode, [targetNode], weight);
-        return homeNode;
-    }
-
-    public AdjacencyMapNode<T>? FindNodeByKey(T nodeKey)
-    {
-        Nodes.TryGetValue(nodeKey, out var node);
-        return node;
-    }
-
-    public AdjacencyMapNode<T> FindOrCreateNode(T nodeKey)
-    {
-        var possiblyFoundNode = FindNodeByKey(nodeKey);
-        possiblyFoundNode ??= AddEmptyNode(nodeKey);
-        return possiblyFoundNode;
-    }
-
-    public AdjacencyMapNode<T> From(T startingNode) => FindNodeByKey(startingNode) ?? throw new InvalidOperationException();
-
-    public bool DoesNodeExist(T nodeKey) => FindNodeByKey(nodeKey) is not null;
-
-    private void DirectedConnect(AdjacencyMapNode<T> homeNode,
-                                 List<AdjacencyMapNode<T>> connectingNodes,
-                                 int? weight)
-    {
-        if (!DoesNodeExist(homeNode.Key) || connectingNodes.Any(x => !DoesNodeExist(x.Key)))
-            throw new Exception("Trying to connect node that doesn't exist yet");
-
-        foreach (var connectingNode in connectingNodes)
-        {
-            if (connectingNode != homeNode) homeNode.ConnectNode(connectingNode, weight);
-        }
-    }
-
-    private void Interconnect(AdjacencyMapNode<T> homeNode, List<AdjacencyMapNode<T>> connectingNodes)
-    {
-        /* TODO: no weight applied */
-        if (!DoesNodeExist(homeNode.Key) || connectingNodes.Any(x => !DoesNodeExist(x.Key)))
-            throw new Exception("Trying to connect node that doesn't exist yet");
-
-        foreach (var connectingNode in connectingNodes)
-        {
-            if (connectingNode != homeNode) homeNode.ConnectNode(connectingNode);
-            if (!homeNode.HasConnection(connectingNode)) connectingNode.ConnectNode(homeNode);
-        }
-    }
-
-    // public BFSState DoSimpleBFS(AdjacencyMapNode<T> startingNode)
-    // {
-    //     var state = new BFSState();
-    //     var queue = state.Queue;
-    //     var visited = state.Visited;
-    //     queue.Enqueue(startingNode);
-    //
-    //     while (queue.Any())
-    //     {
-    //         var current = queue.Dequeue();
-    //         visited.Add(current);
-    //         foreach (var edge in current.Edges)
-    //         {
-    //             if (!visited.Contains(edge)) queue.Enqueue(edge);
-    //         }
-    //     }
-    //
-    //     return state;
-    // }
-
-    public void DoSimpleDFS(AdjacencyMapNode<T> startingNode,
-                            Action<AdjacencyMapNode<T>> action)
-    {
-        Helper(startingNode);
-
-        void Helper(AdjacencyMapNode<T> node)
-        {
-            action(node);
-            foreach (var edge in node.Edges)
-                Helper(edge.TargetNode);
-        }
-    }
-
-    public record BFSState
-    {
-        public HashSet<AdjacencyMapNode<T>> Visited { get; set; }
-        public Queue<AdjacencyMapNode<T>> Queue { get; set; }
-    }
+    #endregion
 }

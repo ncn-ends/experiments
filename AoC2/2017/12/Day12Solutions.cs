@@ -20,7 +20,7 @@ public static class Day12Solutions
 5 <-> 6
 6 <-> 4, 5
 """;
-        var map = new AdjacencyMap<int>();
+        var map = new AdjacencyMapOld<int>();
 
         // importExample.
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
@@ -49,7 +49,7 @@ public static class Day12Solutions
 5 <-> 6
 6 <-> 4, 5
 """;
-        var map = new AdjacencyMap<int>();
+        var map = new AdjacencyMapOld<int>();
 
         // importExample
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
@@ -60,8 +60,8 @@ public static class Day12Solutions
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
         });
 
-        var visited = new HashSet<AdjacencyMapNode<int>>();
-        var queue = new Queue<AdjacencyMapNode<int>>();
+        var visited = new HashSet<AdjacencyMapNodeOld<int>>();
+        var queue = new Queue<AdjacencyMapNodeOld<int>>();
         var groups = 0;
 
         for (var nextNode = map.From(0);
