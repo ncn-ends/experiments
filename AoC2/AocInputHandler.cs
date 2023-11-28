@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Utils.Extensions;
 using Utils.Strings;
 
+
 namespace AoC;
 
 public static class AocInputHandler
@@ -55,16 +56,15 @@ public static class AocInputHandler
                                     string? day = null,
                                     [CallerFilePath] string callerFilePath = "")
     {
-
         if (_aocToken is null)
         {
             const string tokenKey = "AOC_SESSION_TOKEN";
 
             /* try to get session token from user secrets / env var */
             _builder ??= new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddEnvironmentVariables()
-                .AddUserSecrets(Assembly.GetExecutingAssembly(), optional: false);
+                         .SetBasePath(Directory.GetCurrentDirectory())
+                         .AddEnvironmentVariables()
+                         .AddUserSecrets(Assembly.GetExecutingAssembly(), optional: false);
             _config = _builder.Build();
 
             var sessionToken = _config[tokenKey];
@@ -76,15 +76,26 @@ public static class AocInputHandler
         }
 
 
-        /* infer year and day from file path */
+        /* infer year and day from file path if not provided */
         if (year is null || day is null)
         {
             var split = callerFilePath.Split("/");
-            year ??= split[^3];
-            day ??= split[^2];
+            /* Supports these paths:
+             *   AoC/<year>/<day>/Day<day>Solutions.cs
+             *   AoC/<year>/Day<day>Solutions.cs
+             */
+            if (split[^2].Length == 4 && split[^2].IsInt())
+            {
+                year ??= split[^2];
+                day ??= split[^1].Split("Day")[1].Split("S")[0];
+            }
+            else
+            {
+                year ??= split[^3];
+                day ??= split[^2];
+            }
         }
 
-        // var asd = Task.Run(() => ResolveInput(year, day)).Result;
         var finalInput = ResolveInput(year, day).GetAwaiter().GetResult();
 
         return finalInput;
@@ -105,5 +116,4 @@ public static class AocInputHandler
 
         return await res.Content.ReadAsStringAsync();
     }
-
 }
