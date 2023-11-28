@@ -36,7 +36,8 @@ public class AdjacencyMap<T> where T : IEquatable<T>
 
 
     public AdjacencyNode<T> AddNodeWithEdges(T originNodeValue,
-                                             (T nodeValue, int weight)[] connectingNodeValues)
+                                             (T nodeValue, int weight)[] connectingNodeValues,
+                                             bool interConnect = false)
     {
         var (originNode, _) = FindOrAddNode(originNodeValue);
 
@@ -50,6 +51,10 @@ public class AdjacencyMap<T> where T : IEquatable<T>
 
             var newEdge = new AdjacencyEdge<T>(this, originNode, connectingNode.node, weight);
             originNode.Connections.Add(newEdge);
+
+            if (!interConnect) continue;
+
+            connectingNode.node.Connections.Add(newEdge);
         }
 
         return originNode;

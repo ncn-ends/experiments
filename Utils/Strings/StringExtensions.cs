@@ -51,9 +51,18 @@ public static class StringExtensions
         for (var i = 0; i < lines.Count; i++)
         {
             loopManager.SetIndex(i);
-            var line = lines[i];
+            var line = lines[i].Trim();
             if (loopManager.ShouldEnd) break;
             action(line, loopManager);
+        }
+    }
+    public static void IterateOnEachLine(this string s, Action<string> action)
+    {
+        var lines = s.SplitByLine();
+        for (var i = 0; i < lines.Count; i++)
+        {
+            var line = lines[i].Trim();
+            action(line);
         }
     }
 
@@ -68,13 +77,19 @@ public static class StringExtensions
         foreach (var word in words)
         {
             if (end) break;
-            action(word, EndLoop);
+            action(word.Trim(), EndLoop);
         }
 
         void EndLoop()
         {
             end = true;
         }
+    }
+    public static void IterateOnEachWord(this string s, Action<string> action)
+    {
+        var words = s.SplitBySpace();
+        foreach (var word in words)
+            action(word.Trim());
     }
 
     public static string ToSorted(this string s)
