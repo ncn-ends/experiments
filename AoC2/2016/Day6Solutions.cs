@@ -24,7 +24,7 @@ public class Day6Solutions
                                               enarar
                                               """;
 
-    [Test]
+    [Test][OutputTime]
     public void DoPart1()
     {
         Assert.That(SolvePart1(_example), Is.EqualTo("easter"));
@@ -59,7 +59,7 @@ public class Day6Solutions
         return msg;
     }
 
-    [Test]
+    [Test][OutputTime]
     public static void DoPart2()
     {
         Assert.That(SolvePart2(_example), Is.EqualTo("advent"));

@@ -6,7 +6,7 @@ namespace AoC.Y2016;
 
 public static class Day13Solutions
 {
-    [Test]
+    [Test] [OutputTime]
     public static void Run()
     {
         // example test

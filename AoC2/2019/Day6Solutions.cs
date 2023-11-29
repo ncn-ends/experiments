@@ -37,7 +37,7 @@ public class Day6Solutions
                                       I)SAN
                                       """;
 
-    [Test]
+    [Test][OutputTime]
     public static void Run()
     {
         Assert.That(SolvePart1(_example1), Is.EqualTo(42));

@@ -12,7 +12,7 @@ public static class Day2Solutions
                                               2-9 c: ccccccccc
                                               """;
 
-    [Test]
+    [Test][OutputTime]
     public static void DoPart1()
     {
         Assert.That(SolvePart1(_example), Is.EqualTo(2));
@@ -39,7 +39,7 @@ public static class Day2Solutions
         return valid;
     }
 
-    [Test]
+    [Test][OutputTime]
     public static void DoPart2()
     {
         Assert.That(SolvePart2(_example), Is.EqualTo(1));

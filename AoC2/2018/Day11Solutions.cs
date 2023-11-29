@@ -87,34 +87,24 @@ public class Day11Solutions
         Assert.That(GetPowerLevel(xInput, yInput, serialNumber), Is.EqualTo(expected));
     }
 
-    [Test]
+    [Test][OutputTime]
     public void DoPart1()
     {
+        Assert.That(DoBaseSolution(3, 18).total, Is.EqualTo(29));
+        Assert.That(DoBaseSolution(3, 42).total, Is.EqualTo(30));
+
         var result = SolvePart1();
         TestContext.Out.WriteLine(result);
     }
 
-    [Test]
+    [Test][OutputTime][Ignore("Part 2 incomplete")]
     public void DoPart2()
     {
+        Assert.That(SolvePart2(18).total, Is.EqualTo(113));
+
         var result = SolvePart2(18);
         TestContext.Out.WriteLine(result);
     }
-
-    [Test]
-    public void Test_Part1()
-    {
-        Assert.That(DoBaseSolution(3, 18).total, Is.EqualTo(29));
-        Assert.That(DoBaseSolution(3, 42).total, Is.EqualTo(30));
-    }
-
-    [Test]
-    [Ignore("Incomplete part 2")]
-    public void Test_Part2()
-    {
-        Assert.That(SolvePart2(18).total, Is.EqualTo(113));
-    }
-
     public static string SolvePart1(int? serialNumber = null)
     {
         serialNumber ??= _serialNumber;
