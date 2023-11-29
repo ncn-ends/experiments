@@ -98,7 +98,7 @@ public static class AocInputHandler
 
         var finalInput = ResolveInput(year, day).GetAwaiter().GetResult();
 
-        return finalInput;
+        return finalInput.Trim();
     }
 
 
