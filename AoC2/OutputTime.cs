@@ -18,7 +18,7 @@ public class OutputTimeAttribute : MethodInterceptionAspect
         args.Proceed();
 
         Console.WriteLine("-----");
-        Console.WriteLine($"{stopwatch.ElapsedMilliseconds}ms");
+        Console.WriteLine($"Ran in {stopwatch.Elapsed.Microseconds}µs");
         stopwatch.Stop();
     }
 }

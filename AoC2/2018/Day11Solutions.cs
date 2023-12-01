@@ -105,6 +105,7 @@ public class Day11Solutions
         var result = SolvePart2(18);
         TestContext.Out.WriteLine(result);
     }
+
     public static string SolvePart1(int? serialNumber = null)
     {
         serialNumber ??= _serialNumber;
