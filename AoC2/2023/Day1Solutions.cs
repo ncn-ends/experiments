@@ -9,7 +9,14 @@ public static class Day1Solutions
     [Test]
     public static void Run()
     {
-        var example = """
+        var example1 = """
+                       1abc2
+                       pqr3stu8vwx
+                       a1b2c3d4e5f
+                       treb7uchet
+                       """;
+
+        var example2 = """
                       two1nine
                       eightwothree
                       abcone2threexyz
@@ -21,8 +28,12 @@ public static class Day1Solutions
 
         var input = AocInputHandler.ImportHttp();
 
+        Assert.That(DoPart1(example1), Is.EqualTo(142));
+
         var res1 = DoPart1(input);
         TestContext.Out.WriteLine(res1);
+
+        Assert.That(DoPart2(example2), Is.EqualTo(281));
 
         var res2 = DoPart2(input);
         TestContext.Out.WriteLine(res2);
@@ -33,16 +44,7 @@ public static class Day1Solutions
         var total = 0;
         input.IterateOnEachLine(line =>
         {
-            var nums = new List<int>();
-            var asd = line.ToCharArray();
-            foreach (var c in asd)
-            {
-                if (int.TryParse(c.ToString(), out var parsed))
-                {
-                    nums.Add(parsed);
-                }
-            }
-
+            var nums = line.ExtractDigits().Select(n => n.val);
             var num = $"{nums.First()}{nums.Last()}".ToInt();
             total += num;
         });
@@ -55,43 +57,24 @@ public static class Day1Solutions
         var total = 0;
         input.IterateOnEachLine(line =>
         {
-            var numInds = new List<(int ind, int val)>();
+            var numInds = line.ExtractDigits();
 
-            numInds.AddRange(line.GetAllIndexesOf("one").Select(x => (x, 1)));
-            numInds.AddRange(line.GetAllIndexesOf("two").Select(x => (x, 2)));
-            numInds.AddRange(line.GetAllIndexesOf("three").Select(x => (x, 3)));
-            numInds.AddRange(line.GetAllIndexesOf("four").Select(x => (x, 4)));
-            numInds.AddRange(line.GetAllIndexesOf("five").Select(x => (x, 5)));
-            numInds.AddRange(line.GetAllIndexesOf("six").Select(x => (x, 6)));
-            numInds.AddRange(line.GetAllIndexesOf("seven").Select(x => (x, 7)));
-            numInds.AddRange(line.GetAllIndexesOf("eight").Select(x => (x, 8)));
-            numInds.AddRange(line.GetAllIndexesOf("nine").Select(x => (x, 9)));
+            numInds.AddRange(line.GetAllIndexesOf("one").Select(x => (1, x)));
+            numInds.AddRange(line.GetAllIndexesOf("two").Select(x => (2, x)));
+            numInds.AddRange(line.GetAllIndexesOf("three").Select(x => (3, x)));
+            numInds.AddRange(line.GetAllIndexesOf("four").Select(x => (4, x)));
+            numInds.AddRange(line.GetAllIndexesOf("five").Select(x => (5, x)));
+            numInds.AddRange(line.GetAllIndexesOf("six").Select(x => (6, x)));
+            numInds.AddRange(line.GetAllIndexesOf("seven").Select(x => (7, x)));
+            numInds.AddRange(line.GetAllIndexesOf("eight").Select(x => (8, x)));
+            numInds.AddRange(line.GetAllIndexesOf("nine").Select(x => (9, x)));
 
-            var asd = line.ToCharArray();
-            for (var i = 0; i < asd.Length; i++)
-            {
-                var c = asd[i];
-                if (int.TryParse(c.ToString(), out var parsed))
-                {
-                    numInds.Add((i, parsed));
-                }
-            }
-
-            var ordered = numInds.OrderBy(x => x.ind);
+            var ordered = numInds.OrderBy(x => x.pos);
             var num = $"{ordered.First().val}{ordered.Last().val}".ToInt();
 
             total += num;
         });
 
         return total;
-    }
-
-    private static IEnumerable<int> GetAllIndexesOf(this string s, string target)
-    {
-        if (target.Length > s.Length) return Enumerable.Empty<int>();
-
-        return Enumerable.Range(0, s.Length - target.Length + 1)
-                         .Where(i => s.Substring(i, target.Length).Equals(target));
-
     }
 }

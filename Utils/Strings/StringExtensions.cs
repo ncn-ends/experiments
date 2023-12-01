@@ -92,6 +92,13 @@ public static class StringExtensions
             action(word.Trim());
     }
 
+    public static void IterateOnEachCharacter(this string s, Action<char> action)
+    {
+        var chars = s.Trim().ToCharArray();
+        foreach (var c in chars)
+            action(c);
+    }
+
     public static string ToSorted(this string s)
     {
         var chars = s.ToCharArray().ToList();
@@ -99,19 +106,25 @@ public static class StringExtensions
         return string.Join("", chars);
     }
 
-    public static List<int> ExtractNumbers(this string s)
+    /* TODO: add tests for this */
+    public static List<(int val, int pos)> ExtractNumbers(this string s)
     {
         const string pattern = @"\d+";
         var matches = Regex.Matches(s, pattern);
-        return matches.Select(x => int.Parse(x.Value)).ToList();
+        return matches.Select(x => (int.Parse(x.Value), x.Index)).ToList();
+    }
+
+    /* TODO: add tests for this */
+    public static List<(int val, int pos)> ExtractDigits(this string s)
+    {
+        const string pattern = @"\d";
+        var matches = Regex.Matches(s, pattern);
+        return matches.Select(x => (int.Parse(x.Value), x.Index)).ToList();
     }
 
     /// <summary>
     /// Shouldn't be used in real code.
     /// </summary>
-    /// <param name="s"></param>
-    /// <returns></returns>
-    /// <exception cref="Exception"></exception>
     public static int ToInt(this string s)
     {
         var parsed = Int32.TryParse(s, out var num);
@@ -123,5 +136,14 @@ public static class StringExtensions
     {
         var parsed = Int32.TryParse(s, out var num);
         return parsed;
+    }
+
+    /* TODO: add tests for this */
+    public static IEnumerable<int> GetAllIndexesOf(this string s, string target)
+    {
+        if (target.Length > s.Length) return Enumerable.Empty<int>();
+
+        return Enumerable.Range(0, s.Length - target.Length + 1)
+                         .Where(i => s.Substring(i, target.Length).Equals(target));
     }
 }

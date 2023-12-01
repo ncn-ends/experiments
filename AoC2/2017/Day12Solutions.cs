@@ -25,7 +25,7 @@ public static class Day12Solutions
         // importExample.
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
         {
-            var nums = x.ExtractNumbers();
+            var nums = x.ExtractNumbers().Select(n => n.val).ToList();
             var homeNodeVal = nums[0];
             var connections = nums.Skip(1);
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
@@ -54,7 +54,7 @@ public static class Day12Solutions
         // importExample
         AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
         {
-            var nums = x.ExtractNumbers();
+            var nums = x.ExtractNumbers().Select(n => n.val).ToList();
             var homeNodeVal = nums[0];
             var connections = nums.Skip(1);
             map.AddNodeWithEdges(homeNodeVal, [..connections]);
