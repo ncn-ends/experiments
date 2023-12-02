@@ -1,11 +1,11 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._3;
+namespace AoC.Y2022;
 
 public static class Day3Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     static int GetValueFromChar(char c)
     {
@@ -25,13 +25,13 @@ public static class Day3Solution
         var last = s.Substring(s.Length / 2, s.Length / 2);
         return (first, last);
     }
-    
+
     public static int DoPart1()
     {
         var sum = 0;
-        
+
         // optimization: sort the lines so that you loop through the shortest one
-        
+
         foreach (var l in _input.Split("\n"))
         {
             var (firstHalf, secondHalf) = SplitStringInHalf(l);
@@ -46,7 +46,7 @@ public static class Day3Solution
 
         return sum;
     }
-    
+
     public static int DoPart2()
     {
         var lines = _input.Split("\n");
@@ -56,7 +56,7 @@ public static class Day3Solution
             var line1 = lines[i + 0];
             var line2 = lines[i + 1];
             var line3 = lines[i + 2];
-            
+
             // optimization: sort the lines so that you loop through the shortest one
 
             for (int k = 0; k < line1.Length; k++)
@@ -76,7 +76,7 @@ public static class Day3Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

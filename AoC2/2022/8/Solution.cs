@@ -1,7 +1,7 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._8;
+namespace AoC.Y2022;
 
 
 
@@ -15,7 +15,7 @@ class Point
 
 public static class Day8Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     private static string _example = """
                                         30373

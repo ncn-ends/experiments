@@ -1,12 +1,12 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._9;
+namespace AoC.Y2022;
 
 
 public static class Day9Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     private static string _example = """
     R 5

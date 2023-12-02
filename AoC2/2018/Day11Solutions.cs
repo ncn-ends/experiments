@@ -71,7 +71,7 @@ public class Day11Solutions
 {
     private static int _gridSize = 300;
     private static string _example = "18";
-    private static int _serialNumber = AocInputHandler.ImportHttp().ToInt();
+    private static int _serialNumber = AocHandler.ImportHttp().ToInt();
 
     [TestCase(3, 5, 8, 4)]
     [TestCase(122, 79, 57, -5)]

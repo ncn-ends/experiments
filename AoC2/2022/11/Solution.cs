@@ -1,6 +1,6 @@
 using System.Diagnostics;
 
-namespace Subjects.AoC._2022._11;
+namespace AoC.Y2022;
 
 
 class Monkey

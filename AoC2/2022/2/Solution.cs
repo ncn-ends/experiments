@@ -1,11 +1,11 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._2;
+namespace AoC.Y2022;
 
 public static class Day2Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
 
     // A for Rock, B for Paper, and C for Scissors
@@ -15,7 +15,7 @@ public static class Day2Solution
     public static int DoPart1()
     {
         int sum = 0;
-        
+
         foreach (var l in _input.Split("\n"))
         {
             var s = l.Split(" ");
@@ -54,7 +54,7 @@ public static class Day2Solution
                     _ => throw new ArgumentOutOfRangeException()
                 };
             }
-            
+
             if (other == "C")
             {
                 sum += my switch
@@ -69,7 +69,7 @@ public static class Day2Solution
 
         return sum;
     }
-    
+
     // A for Rock, B for Paper, and C for Scissors
     // (1 for Rock, 2 for Paper, and 3 for Scissors)
     // 6 if won, 3 if same, 0 if lose
@@ -96,7 +96,7 @@ public static class Day2Solution
                 {"Z", "A"}
             }},
         };
-        
+
         // X to lose, Y to tie, Z to win
         var pointsByAction = new Dictionary<string, int>
         {
@@ -104,7 +104,7 @@ public static class Day2Solution
             {"Y", 3},
             {"Z", 6}
         };
-        
+
         // 1 for rock, 2 for paper, 3 for scissors
         var pointsByGesture = new Dictionary<string, int>
         {
@@ -112,9 +112,9 @@ public static class Day2Solution
             {"B", 2},
             {"C", 3}
         };
-        
+
         int sum = 0;
-        
+
         foreach (var l in _input.Split("\n"))
         {
             var s = l.Split(" ");
@@ -134,7 +134,7 @@ public static class Day2Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

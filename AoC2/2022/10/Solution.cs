@@ -1,7 +1,7 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._10;
+namespace AoC.Y2022;
 
 class Line
 {
@@ -11,7 +11,7 @@ class Line
 
 public static class Day10Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     private static string _exampleA = """
 noop

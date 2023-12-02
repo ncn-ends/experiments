@@ -43,10 +43,10 @@ public class Day6Solutions
         Assert.That(SolvePart1(_example1), Is.EqualTo(42));
         Assert.That(SolvePart2(_example2), Is.EqualTo(4));
 
-        var res1 = SolvePart1(AocInputHandler.ImportHttp());
+        var res1 = SolvePart1(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res1);
 
-        var res2 = SolvePart2(AocInputHandler.ImportHttp());
+        var res2 = SolvePart2(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res2);
     }
 

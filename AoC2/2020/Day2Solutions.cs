@@ -2,7 +2,7 @@ using System.Diagnostics;
 using Utils;
 using Utils.Strings;
 
-namespace AoC._2020._2;
+namespace AoC.Y2020;
 
 public static class Day2Solutions
 {
@@ -17,7 +17,7 @@ public static class Day2Solutions
     {
         Assert.That(SolvePart1(_example), Is.EqualTo(2));
 
-        var res = SolvePart1(AocInputHandler.ImportHttp());
+        var res = SolvePart1(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res);
     }
 
@@ -44,7 +44,7 @@ public static class Day2Solutions
     {
         Assert.That(SolvePart2(_example), Is.EqualTo(1));
 
-        var res = SolvePart2(AocInputHandler.ImportHttp());
+        var res = SolvePart2(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res);
     }
 

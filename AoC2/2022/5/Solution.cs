@@ -1,11 +1,11 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._5;
+namespace AoC.Y2022;
 
 public static class Day5Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     private static Dictionary<int, Stack<char>> _crates = new()
     {
@@ -27,7 +27,7 @@ public static class Day5Solution
         var to = int.Parse(line.Split(" ")[5]);
         return (count, from, to);
     }
-    
+
     public static string DoPart1()
     {
         foreach (var l in _input.Split("\n"))
@@ -35,7 +35,7 @@ public static class Day5Solution
             if (!l.Contains("move")) continue;
             var (count, from, to) = GetActionDetails(l);
             var moving = new List<char>();
-            
+
             while (count > 0)
             {
                 moving.Add(_crates[from].Pop());
@@ -67,7 +67,7 @@ public static class Day5Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

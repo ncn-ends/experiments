@@ -1,11 +1,11 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._6;
+namespace AoC.Y2022;
 
 public static class Day6Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
+    private static string _input = AocHandler.ImportHttp();
 
     public static int SolveBySeqLimit(int seqLimit)
     {

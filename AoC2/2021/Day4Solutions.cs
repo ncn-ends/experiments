@@ -11,7 +11,7 @@ public static class Day6Solutions
 
     private static double CommonSolution(int days)
     {
-        var input = AocInputHandler.ImportHttp().Split(',').Clean().Select(x => x.ToInt()).ToList();
+        var input = AocHandler.ImportHttp().Split(',').Clean().Select(x => x.ToInt()).ToList();
         var dict = new Dictionary<int, double>
         {
             {0, 0},

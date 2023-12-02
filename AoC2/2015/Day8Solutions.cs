@@ -9,7 +9,7 @@ public static class Day8Solutions
 {
     public static int SolvePart1()
     {
-        var input = AocInputHandler.ImportHttp();
+        var input = AocHandler.ImportHttp();
         var totalCount = 0;
         input.IterateOnEachLine((line, manager) =>
         {
@@ -61,7 +61,7 @@ public static class Day8Solutions
 
     public static int SolvePart2()
     {
-        var input = AocInputHandler.ImportHttp();
+        var input = AocHandler.ImportHttp();
         var totalCount = 0;
         input.IterateOnEachLine((line, manager) =>
         {

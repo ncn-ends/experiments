@@ -2,7 +2,7 @@ using System.Diagnostics;
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._12;
+namespace AoC.Y2022;
 
 // class Path
 // {
@@ -12,7 +12,7 @@ namespace Subjects.AoC._2022._12;
 
 public static class Day12Solution
 {
-    private static char[][] _input = AocInputHandler.ImportFile().Trim().Split("\n").Select(x => x.Trim().ToCharArray()).ToArray();
+    private static char[][] _input = AocHandler.ImportHttp().Trim().Split("\n").Select(x => x.Trim().ToCharArray()).ToArray();
 //     private static char[][] _input = """
 // Sabqponm
 // abcryxxl

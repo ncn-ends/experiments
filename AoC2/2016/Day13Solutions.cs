@@ -12,7 +12,7 @@ public static class Day13Solutions
         // example test
         Assert.That(SolvePart1(10, 7, 4), Is.EqualTo(11));
 
-        var input = AocInputHandler.ImportHttp();
+        var input = AocHandler.ImportHttp();
 
         var res1 = SolvePart1(input.ToInt(), 31, 39);
         TestContext.Out.WriteLine(res1);

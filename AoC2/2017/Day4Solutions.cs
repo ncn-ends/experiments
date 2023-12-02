@@ -8,7 +8,7 @@ public static class Day4Solutions
 {
     public static int SolvePart1()
     {
-        var input = AocInputHandler.ImportHttp();
+        var input = AocHandler.ImportHttp();
         var validPassphrases = 0;
         input.IterateOnEachLine((line, _) =>
         {
@@ -29,7 +29,7 @@ public static class Day4Solutions
     }
     public static int SolvePart2()
     {
-        var input = AocInputHandler.ImportHttp();
+        var input = AocHandler.ImportHttp();
         var validPassphrases = 0;
         input.IterateOnEachLine((line, _) =>
         {

@@ -1,12 +1,12 @@
 using AoC;
 using Utils;
 
-namespace Subjects.AoC._2022._4;
+namespace AoC.Y2022;
 
 public static class Day4Solution
 {
-    private static string _input = AocInputHandler.ImportFile().Trim();
-    
+    private static string _input = AocHandler.ImportHttp();
+
     public static int DoPart1()
     {
         var count = 0;
@@ -22,7 +22,7 @@ public static class Day4Solution
 
             if (aInB || bInA) count++;
         }
-        
+
         return count;
     }
 
@@ -40,7 +40,7 @@ public static class Day4Solution
 
             if (aOverlapsWithB || bOverlapsWithA) count++;
         }
-        
+
         return count;
     }
 
@@ -48,7 +48,7 @@ public static class Day4Solution
     {
         Console.Write("Part 1: ");
         Console.WriteLine(DoPart1());
-        
+
         Console.Write("Part 2: ");
         Console.WriteLine(DoPart2());
     }

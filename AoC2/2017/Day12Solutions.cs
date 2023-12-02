@@ -23,7 +23,7 @@ public static class Day12Solutions
         var map = new AdjacencyMapOld<int>();
 
         // importExample.
-        AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
+        AocHandler.ImportHttp().IterateOnEachLine((x, _) =>
         {
             var nums = x.ExtractNumbers().Select(n => n.val).ToList();
             var homeNodeVal = nums[0];
@@ -52,7 +52,7 @@ public static class Day12Solutions
         var map = new AdjacencyMapOld<int>();
 
         // importExample
-        AocInputHandler.ImportHttp().IterateOnEachLine((x, _) =>
+        AocHandler.ImportHttp().IterateOnEachLine((x, _) =>
         {
             var nums = x.ExtractNumbers().Select(n => n.val).ToList();
             var homeNodeVal = nums[0];

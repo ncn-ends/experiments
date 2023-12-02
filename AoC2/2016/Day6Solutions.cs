@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Utils.Strings;
 
-namespace AoC._2016;
+namespace AoC.Y2016;
 
 public class Day6Solutions
 {
@@ -29,7 +29,7 @@ public class Day6Solutions
     {
         Assert.That(SolvePart1(_example), Is.EqualTo("easter"));
 
-        var res = SolvePart1(AocInputHandler.ImportHttp());
+        var res = SolvePart1(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res);
     }
 
@@ -64,7 +64,7 @@ public class Day6Solutions
     {
         Assert.That(SolvePart2(_example), Is.EqualTo("advent"));
 
-        var res = SolvePart2(AocInputHandler.ImportHttp());
+        var res = SolvePart2(AocHandler.ImportHttp());
         TestContext.Out.WriteLine(res);
     }
 
