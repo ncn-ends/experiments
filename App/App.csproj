@@ -16,7 +16,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Benchmarks\Benchmarks.csproj" />
       <ProjectReference Include="..\Tests\Tests.csproj" />
-      <ProjectReference Include="..\AoC2\AoC2.csproj" />
+      <ProjectReference Include="..\AoC\AoC.csproj" />
     </ItemGroup>
 
 </Project>
