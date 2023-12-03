@@ -35,9 +35,9 @@ public static class StringExtensions
         return str.Where(x => !x.IsNullOrEmpty()).ToList();
     }
 
-    public static List<string> SplitBy(this string s, string[] delimiters)
+    public static List<string> SplitBy(this string s, IEnumerable<string> delimiters)
     {
-        return new List<string>(s.Split(delimiters, StringSplitOptions.RemoveEmptyEntries));
+        return new List<string>(s.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries)).Select(x => x.Trim()).ToList();
     }
 
     public static List<string> SplitByLine(this string s) => s.Split("\n").Clean();
@@ -161,5 +161,14 @@ public static class StringExtensions
 
         return Enumerable.Range(0, s.Length - target.Length + 1)
                          .Where(i => s.Substring(i, target.Length).Equals(target));
+    }
+
+    /// <summary>
+    /// Extract the first item of possible items that appears in the string. Will default to the last item in the enumerable.
+    /// </summary>
+    public static string ExtractOutOf(this string str, IEnumerable<string> possible)
+    {
+        var cmd = possible.FirstOrDefault(s => str.Contains(s)) ?? possible.Last();
+        return cmd;
     }
 }
