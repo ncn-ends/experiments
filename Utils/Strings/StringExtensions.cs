@@ -132,9 +132,25 @@ public static class StringExtensions
         return num;
     }
 
+    /// <summary>
+    /// Shouldn't be used in real code.
+    /// </summary>
+    public static int ToInt(this char s)
+    {
+        var parsed = Int32.TryParse(s.ToString(), out var num);
+        if (!parsed) throw new Exception("Tried to parse number but failed.");
+        return num;
+    }
+
     public static bool IsInt(this string s)
     {
         var parsed = Int32.TryParse(s, out var num);
+        return parsed;
+    }
+
+    public static bool IsInt(this char s)
+    {
+        var parsed = Int32.TryParse(s.ToString(), out var num);
         return parsed;
     }
 

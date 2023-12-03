@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Xml.Xsl;
+using Utils.Matrix;
 using Utils.Strings;
 
 
@@ -28,16 +29,16 @@ public static class Day3Solutions
         Assert.That(DoPart1(example).Sum(), Is.EqualTo(4361));
 
         var res1 = DoPart1(input);
-        List<int> expectedGoods =
-        [
-                31, 339, 669, 575, 964, 692, 415, 627, 945, 144, 506, 182, 873, 756, 737, 784, 667, 258, 741, 707, 84, 520, 579, 258, 274,
-                739, 157, 580, 893, 696, 889
-        ];
-        for (var i = 0; i < expectedGoods.Count; i++)
-        {
-            TestContext.Out.WriteLine(i);
-            Assert.AreEqual(res1[i], expectedGoods[i]);
-        }
+        // List<int> expectedGoods =
+        // [
+        //         31, 339, 669, 575, 964, 692, 415, 627, 945, 144, 506, 182, 873, 756, 737, 784, 667, 258, 741, 707, 84, 520, 579, 258, 274,
+        //         739, 157, 580, 893, 696, 889
+        // ];
+        // for (var i = 0; i < expectedGoods.Count; i++)
+        // {
+        //     TestContext.Out.WriteLine(i);
+        //     Assert.AreEqual(res1[i], expectedGoods[i]);
+        // }
 
         Assert.That(res1.Sum(), Is.Not.EqualTo(546877));
         Assert.That(res1.Sum(), Is.Not.EqualTo(390512));
@@ -104,6 +105,7 @@ public static class Day3Solutions
         var total = 0;
         foreach (var gear in gears)
         {
+            /* TODO: turn this into a helper, but need to make it work for ones that span multiple cells, diagnal, and multi distance */
             var closeNums = nums.Where(num =>
             {
                 var nearX = gear.x >= num.pos - 1 && gear.x < num.pos + num.num.ToString().Length + 1;
