@@ -64,7 +64,6 @@ public static class Day2Solutions
         input.IterateOnEachLine(line =>
         {
             var asd = line.SplitBy([":", ";"]);
-            var gameId = asd[0].SplitBy([" "])[1].ToInt();
             var groups = asd[1..];
             var minBlues = int.MinValue;
             var minGreens = int.MinValue;
