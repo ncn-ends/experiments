@@ -105,7 +105,7 @@ public static class Day3Solutions
         var total = 0;
         foreach (var gear in gears)
         {
-            /* TODO: turn this into a helper, but need to make it work for ones that span multiple cells, diagnal, and multi distance */
+            /* TODO: turn this into a helper, but need to make it work for ones that span multiple cells, diagonal, and multi distance */
             var closeNums = nums.Where(num =>
             {
                 var nearX = gear.x >= num.pos - 1 && gear.x < num.pos + num.num.ToString().Length + 1;
