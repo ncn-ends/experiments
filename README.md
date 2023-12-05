@@ -1,7 +1,6 @@
 # Intro
 
-I like to do coding puzzles for fun and these are my personal solutions and misc C# specific experiments.   
-I like to monitor my progress and the completionism of problem lists is satisfying as well.  
+This repo contains random experiments and solutions for Advent of Code and LeetCode. 
 
 # Personal Rules
 
@@ -53,9 +52,7 @@ https://leetcode.com/ncn-ends/
 `c` catch-all "current"  
 `r` placeholder to be returned
 
-
-
-### File Templates
+### File Templates for C#
 
 `ild`  
 ```
