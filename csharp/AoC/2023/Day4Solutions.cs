@@ -48,31 +48,26 @@ public static class Day4Solutions
 
     private static int DoPart2(string input)
     {
-        var extras = new Dictionary<int, int>(); // card key, extras to account for
+        var cards = new Dictionary<int, int>();
         input.IterateOnEachLine(line =>
         {
             var groups = line.SplitBy([" | "]);
             var firstGroup = groups[0].ExtractNumbers();
             var card = firstGroup[0].val;
-            if (extras.ContainsKey(card)) extras[card] += 1;
-            else
-            {
-                extras[card] = 1;
-            }
 
-            var multiplier = extras[card];
+            if (!cards.TryAdd(card, 1)) cards[card] += 1;
+
+            var multiplier = cards[card];
             var winners = firstGroup.Skip(1).Select(x => x.val);
             var held = groups[1].ExtractNumbers().Select(x => x.val);
-            var nOfMatches = held.Count(x => winners.Contains(x));
+            var nOfMatches = held.Intersect(winners).Count();
             for (int i = 0; i < nOfMatches; i++)
             {
-                if (extras.ContainsKey(card + i + 1)) extras[card + i + 1] += 1 * multiplier;
-                else
-                {
-                    extras[card + i + 1] = 1 * multiplier;
-                }
+                var tar = card + i + 1;
+                if (cards.ContainsKey(tar)) cards[tar] += 1 * multiplier;
+                else cards[tar] = 1 * multiplier;
             }
         });
-        return extras.Sum(x => x.Value);
+        return cards.Sum(x => x.Value);
     }
 }
