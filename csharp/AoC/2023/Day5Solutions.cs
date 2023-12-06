@@ -48,12 +48,10 @@ public static class Day5Solutions
 
         var input = AocHandler.ImportHttp();
 
-        // Assert.That(DoPart1(example), Is.EqualTo(35));
-        // TestContext.Out.WriteLine(DoPart1(input).ToString());
+        Assert.That(DoPart1(example), Is.EqualTo(35));
+        TestContext.Out.WriteLine(DoPart1(input).ToString());
 
-        // Assert.That(DoPart2(example), Is.EqualTo(46));
-        // var not = new[] {292943};
-        // greaterThan 50985980
+        Assert.That(DoPart2(example), Is.EqualTo(46));
         TestContext.Out.WriteLine(DoPart2(input));
     }
 
@@ -103,24 +101,16 @@ public static class Day5Solutions
     {
         public List<(long start, long end)> PathItems { get; private set; } = path.ToList();
 
-        public static Path2 WithSeed((long start, long end) seed)
+        public static Path2 WithSeed(long seedStart, long seedEnd)
         {
-            return new Path2([seed]);
+            return new Path2([(seedStart, seedEnd)]);
         }
 
-        public void AddNext((long start, long end) next)
-        {
-            PathItems.Add(next);
-        }
         public void AddNext(long nextStart, long nextEnd)
         {
             PathItems.Add((nextStart, nextEnd));
         }
 
-        // public Path2 FromHere((long start, long end) here)
-        // {
-        //     return new Path2([..PathItems[1..(PathItems.Count-1)], here]);
-        // }
         public void AddDirect()
         {
             PathItems.Add((Last.start, Last.end));
@@ -152,15 +142,14 @@ public static class Day5Solutions
     private static long DoPart2(string input )
     {
         var split = input.SplitBy(["\n\n"]);
-        var seedPairs = split[0].SplitBy([" "])
-                                .Skip(1)
-                                .Select((x, i) => new { Index = i, Value = x})
-                                .GroupBy(x => x.Index / 2)
-                                .Select(x => x.Select(v => Convert.ToInt64(v.Value)).ToList())
-                                .ToList();
-        var paths = seedPairs.Select(x => Path2.WithSeed((x[0], x[0] + x[1]))).ToList();
+        var paths = split[0].SplitBy([" "]) /* first make seed pairs */
+                            .Skip(1)
+                            .Select(x => Convert.ToInt64(x))
+                            .Chunk(2)
+                            .Select(x => Path2.WithSeed(x[0], x[0] + x[1])) /* then make paths frm the seeds*/
+                            .ToList();
 
-        var groups = split[1..].Select(x => x.SplitBy(["\n"]).Skip(1)).ToList();
+        var groups = split[1..].Select(x => x.SplitBy(["\n"]).Skip(1)).ToList(); /* each group consists of maps. skip the group header. */
         for (var i = 0; i < groups.Count; i++)
         {
             var group = groups[i];
@@ -170,7 +159,7 @@ public static class Day5Solutions
 
             foreach (var map in maps)
             {
-                var diff = map[0] - map[1];
+                var diff = map[0] - map[1]; /* if matched, diff is applied from source to destination */
                 var minMatcher = map[1];
                 var maxMatcher = map[1] + map[2];
 
@@ -178,18 +167,19 @@ public static class Day5Solutions
                 for (var j = 0; j < ogPathsCount; j++)
                 {
                     var path = paths[j];
-                    if (path.Place == i + 2) continue; /* this means they were already added */
+                    if (path.Place == i + 2) continue; /* this means destination for path has already been added in this group */
 
-                    /* no match */
                     var noMatch = path.Last.end < minMatcher || path.Last.start > maxMatcher;
                     if (noMatch) continue;
 
-                    /* complete overlap */
-                    if (path.Last.start >= minMatcher && path.Last.end <= maxMatcher)
+                    var completeOverlap = path.Last.start >= minMatcher && path.Last.end <= maxMatcher;
+                    if (completeOverlap)
                     {
                         path.AddNext(path.Last.start + diff, path.Last.end + diff);
                         continue;
                     }
+
+                    /* at this point there is a partial match */
 
                     var (matchedStart, matchedEnd, pathHasLeftOver) = path.Last.end >= maxMatcher
                             ? (path.Last.start, maxMatcher, true)
@@ -201,8 +191,12 @@ public static class Day5Solutions
                     var nextEnd = matchedEnd + diff < 0
                             ? 0
                             : matchedEnd + diff;
+                    /* create a new path based on current path, but continuing where matched */
                     paths.Add(Path2.FromHere(path.PathItems, nextStart, nextEnd));
 
+                    /* the current path will be updated to the unmatched portion */
+                    /* without doing this, later maps can't match on the remainder */
+                    /* this means the path history is inaccurate, but doesn't matter for this puzzle */
                     var (unmatchedStart, unmatchedEnd) = pathHasLeftOver
                             ? (matchedEnd + 1, path.Last.end)
                             : (path.Last.start, matchedStart - 1);
@@ -211,121 +205,12 @@ public static class Day5Solutions
                 }
             }
 
+
+            /* any paths without a destination will just use source value for the destination */
             foreach (var path in paths)
-            {
-                // if (path.Place == i - 1) newPaths.Add(Path2.FromHere(path.PathItems, path.Last.start, path.Last.end));
                 if (path.Place == i + 1) path.AddDirect();
-            }
         }
 
-        var least = long.MaxValue;
-        foreach (var path in paths)
-        {
-            if (least > path.Loc.start) least = path.Loc.start;
-        }
-
-        return least;
+        return paths.Min(x => x.Loc.start);
     }
-    // private static long DoPart2(string input)
-    // {
-    //     var split = input.SplitBy(["\n\n"]);
-    //     var seedPairs = split[0].SplitBy([" "])
-    //                             .Skip(1)
-    //                             .Select((x, i) => new { Index = i, Value = x})
-    //                             .GroupBy(x => x.Index / 2)
-    //                             .Select(x => x.Select(v => Convert.ToInt64(v.Value)).ToList())
-    //                             .ToList();
-    //     var paths = seedPairs.Select(x => Path2.WithSeed((x[0], x[0] + x[1]))).ToList();
-    //
-    //     var groups = split[1..].Select(x => x.SplitBy(["\n"]).Skip(1));
-    //     foreach (var group in groups)
-    //     {
-    //         var maps = group.Select(x => x.ExtractLargeNumbers()
-    //                                       .Select(x => x.val)
-    //                                       .ToList())
-    //                         .Select((x, i) => new List<long> {x[0], x[1], x[2], i}).ToList();
-    //         maps.Sort((a, b) => (int) a[1] - (int) b[1]);
-    //         maps = maps.ToList();
-    //         var currentPathsCount = paths.Count;
-    //         for (var i = 0; i < currentPathsCount; i++)
-    //         {
-    //             var path = paths[i];
-    //             DoSomething(maps, path);
-    //         }
-    //
-    //         // if (paths.Any(x => paths[0].Place != x.Place)) throw new Exception("Mismatch in places");
-    //     }
-    //     // return paths.Min(x => x.Loc);
-    //     return default;
-    //
-    //     void DoSomething(List<List<long>> maps,
-    //                      Path2 path)
-    //     {
-    //         var firstPossibleMatch = maps[0][1];
-    //         var lastPossibleMatch = maps.Last()[1] + maps.Last()[2];
-    //         var ogPathLastStart = path.Last.start;
-    //         var ogPathLastEnd = path.Last.end;
-    //
-    //         /* if there's never any overlap, just add direct */
-    //         if (firstPossibleMatch > path.Last.end || lastPossibleMatch < ogPathLastStart)
-    //         {
-    //             path.AddDirect();
-    //             return;
-    //         }
-    //
-    //         /* add direct any remainder prior to map window */
-    //         if (ogPathLastStart < firstPossibleMatch)
-    //         {
-    //             paths.Add(Path2.FromHere(path.PathItems, ogPathLastStart, firstPossibleMatch - 1));
-    //         }
-    //
-    //         var partials = new List<(long start, long end, long diff)>();
-    //         var changingPathStart = ogPathLastStart;
-    //         var changingPathEnd = ogPathLastEnd;
-    //         for (var i = 0; i < maps.Count; i++)
-    //         {
-    //             var map = maps[i];
-    //             var diff = map[0] - map[1];
-    //             var minMatcher = map[1];
-    //             var maxMatcher = map[1] + map[2];
-    //
-    //             /* no match */
-    //             if (changingPathEnd < minMatcher || changingPathStart > maxMatcher) continue;
-    //
-    //             /* if the map completely encloses, then there's nothing more that needs to be done */
-    //             if (path.Last.start > minMatcher && path.Last.end < maxMatcher)
-    //             {
-    //                 path.AddNext((path.Last.start + diff, path.Last.end + diff));
-    //                 return;
-    //             }
-    //
-    //             /* now hard part is if there's a partial match */
-    //
-    //             var (newStart, newEnd, pathHasLeftOver) = ogPathLastEnd > maxMatcher
-    //                     ? (changingPathStart, maxMatcher, true)
-    //                     : (minMatcher, changingPathEnd, false);
-    //
-    //             /* if there's an overlap, need to find the map that comes first originally */
-    //             if (!pathHasLeftOver)
-    //             {
-    //                 Debugger.Break();
-    //             }
-    //
-    //             partials.Add((newStart, newEnd, diff));
-    //
-    //             (changingPathStart, changingPathEnd) = pathHasLeftOver
-    //                     ? (newEnd + 1, changingPathEnd)
-    //                     : (changingPathStart, newStart - 1);
-    //
-    //         }
-    //
-    //         foreach (var partial in partials)
-    //         {
-    //             paths.Add(Path2.FromHere(path.PathItems, partial.start + partial.diff, partial.end + partial.diff));
-    //         }
-    //
-    //         /* split the remainder directly from here */
-    //         paths.Add(Path2.FromHere(path.PathItems, changingPathStart, changingPathEnd));
-    //     }
-    // }
 }
