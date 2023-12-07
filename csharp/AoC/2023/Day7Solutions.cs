@@ -6,10 +6,12 @@ namespace AoC.Y2023;
 
 public static class Day7Solutions
 {
+    private static bool JacksAsWild { get; set; } = false;
+
     [Test]
     public static void Run()
     {
-        var example1 = """
+        var example = """
                        32T3K 765
                        T55J5 684
                        KK677 28
@@ -17,39 +19,24 @@ public static class Day7Solutions
                        QQQJA 483
                        """;
 
-        var example2 = """
-                       32T3K 765
-                       T55J5 684
-                       KK677 28
-                       KTJJT 220
-                       QQQJA 483
-                       """;
 
         var input = AocHandler.ImportHttp();
 
-        // Assert.That(DoPart1(example1), Is.EqualTo(6440));
-        // TestContext.Out.WriteLine(DoPart1(input));
+        Assert.That(DoPart1(example), Is.EqualTo(6440));
+        TestContext.Out.WriteLine(DoPart1(input));
 
-        Assert.That(DoPart2(example2), Is.EqualTo(5905));
+        JacksAsWild = true;
+
+        Assert.That(DoPart2(example), Is.EqualTo(5905));
         TestContext.Out.WriteLine(DoPart2(input));
     }
 
-    public static class CardTypes
-    {
-        public static List<string> Fives { get; set; } = new();
-        public static List<string> Fours { get; set; } = new();
-        public static List<string> FullHouse { get; set; } = new();
-        public static List<string> Threes { get; set; } = new();
-        public static List<string> TwoPair { get; set; } = new();
-        public static List<string> Twos { get; set; } = new();
-        public static List<string> Highs { get; set; } = new();
-    }
     private static int DoPart1(string input)
     {
 
         var games = input.SplitByLine()
-                       .Select(x => x.SplitBySpace().ToList())
-                       .ToDictionary(x => x[0], x => x[1].ToInt());
+                         .Select(x => x.SplitBySpace().ToList())
+                         .ToDictionary(x => x[0], x => x[1].ToInt());
 
         var fives = new List<string>();
         var fours = new List<string>();
@@ -101,6 +88,7 @@ public static class Day7Solutions
                 {'A', 14},
                 {'K', 13},
                 {'Q', 12},
+                {'J', JacksAsWild ? 1 : 11},
                 {'T', 10},
                 {'9', 9},
                 {'8', 8},
@@ -110,7 +98,6 @@ public static class Day7Solutions
                 {'4', 4},
                 {'3', 3},
                 {'2', 2},
-                {'J', 1},
         };
 
         return cardValues[c];
