@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Utils.Numbers;
 using Utils.Strings;
 
@@ -57,114 +56,64 @@ public static class Day8Solutions
     {
         var split = input.SplitByLine();
         var directions = split[0].ToCharArray();
-        var map = split[1..].Select(x => x.SplitBy(["=", " ", "(", ")", ","])).ToDictionary(x => x[0], x => new Tuple<string, string>(x[1], x[2]));
+        var map = split[1..]
+                  .Select(x => x.SplitBy(["=", " ", "(", ")", ","]))
+                  .ToDictionary(x => x[0], x => new[] {x[1], x[2]});
         var c = "AAA";
-        var i = 0;
         var steps = 0;
         while (c != "ZZZ")
         {
             var nextPossible = map[c];
-            c = directions[i] == 'L'
-                    ? nextPossible.Item1
-                    : nextPossible.Item2;
-            i = i + 1 == directions.Length
-                    ? 0
-                    : i + 1;
+            var dir = steps % directions.Length;
+            c = directions[dir] == 'L'
+                    ? nextPossible[0]
+                    : nextPossible[1];
             steps++;
         }
         return steps;
     }
 
-    /* too slow */
-    // private static int DoPart2(string input)
-    // {
-    //     var split = input.SplitByLine();
-    //     var directions = split[0].ToCharArray();
-    //     var map = split[1..].Select(x => x.SplitBy(["=", " ", "(", ")", ","])).ToDictionary(x => x[0], x => new Tuple<string, string>(x[1], x[2]));
-    //     var tracked = map.Where(x => x.Key.EndsWith("A")).Select(x => x.Key).ToList();
-    //     var direction = 0;
-    //     var steps = 0;
-    //     while (tracked.Any(x => !x.EndsWith("Z")))
-    //     {
-    //         for (var i = 0; i < tracked.Count; i++)
-    //         {
-    //             var track = tracked[i];
-    //             var nextPossible = map[track];
-    //             tracked[i] = directions[direction] == 'L'
-    //                     ? nextPossible.Item1
-    //                     : nextPossible.Item2;
-    //         }
-    //         steps++;
-    //         direction = direction + 1 == directions.Length
-    //                 ? 0
-    //                 : direction + 1;;
-    //     }
-    //     return steps;
-    // }
     private static long DoPart2(string input)
     {
         var split = input.SplitByLine();
+        /* the left/right directions */
         var directions = split[0].ToCharArray();
-        var map = split[1..].Select(x => x.SplitBy(["=", " ", "(", ")", ","])).ToDictionary(x => x[0], x => new Tuple<string, string>(x[1], x[2]));
+
+        /* map of points to their left/right nodes */
+        var map = split[1..]
+                  .Select(x => x.SplitBy(["=", " ", "(", ")", ","]))
+                  .ToDictionary(x => x[0], x => new[] { x[1], x[2] });
+
+        /* track nodes which originally ended with A */
         var tracked = map.Where(x => x.Key.EndsWith("A")).Select(x => x.Key).ToList();
+        /* track the tracked nodes by index and the step at which a node was found that ends with z */
         var trackedZs = tracked
                         .Select((_, i) => i)
                         .ToDictionary(x => x, x => new Dictionary<string, int>());
+
+        /* for each tracked node, need to find all the # of steps which a node that ends with z */
+        /* ensures duplicates aren't found based on the uniqueness of the map key */
         foreach (var pos in trackedZs.Keys)
         {
-            var dir = 0;
-            var cont = true;
             var steps = 0;
-            while (cont)
+            while (true)
             {
+                var dir = steps % directions.Length;
                 var current = tracked[pos];
                 var nextPossible = map[current];
                 var next = directions[dir] == 'L'
-                        ? nextPossible.Item1
-                        : nextPossible.Item2;
+                        ? nextPossible[0]
+                        : nextPossible[1];
+
                 tracked[pos] = next;
                 if (next.EndsWith("Z") && !trackedZs[pos].TryAdd(next, steps + 1)) break;
-                dir = dir + 1 == directions.Length
-                        ? 0
-                        : dir + 1;
+
                 steps++;
             }
         }
 
+        /* get LCM of all the nodes that originally started with A by the steps in
+         * which they found a node that ends with Z */
         return NumberHelpers.GetLCMLong(trackedZs.Values.SelectMany(x => x.Values).Select(x => (long)x));
-
-
-        // while (!allZ)
-        // {
-        //     allZ = true;
-        //     for (var i = 0; i < tracked.Count; i++)
-        //     {
-        //         var track = tracked[i];
-        //         var nextPossible = map[track];
-        //         tracked[i] = directions[direction] == 'L'
-        //                 ? nextPossible.Item1
-        //                 : nextPossible.Item2;
-        //         if (!tracked[i].EndsWith("Z")) allZ = false;
-        //         else trackedZs[i].Add(steps);
-        //     }
-        //     steps++;
-        //     direction = direction + 1 == directions.Length
-        //             ? 0
-        //             : direction + 1;;
-        // }
-        return default;
-    }
-
-    [Test]
-    public static void TestLCM()
-    {
-        List<int> case1 = [555, 444, 333];
-        Assert.AreEqual(NumberHelpers.GetLCM(case1), 6660);
-
-        List<int> case2 = [2, 3];
-        Assert.AreEqual(NumberHelpers.GetLCM(case2), 6);
-
-        List<long> case3 = [12169, 20093, 20659, 22357, 13301, 18961];
-        Assert.AreEqual(NumberHelpers.GetLCMLong(case3), 15690466351717);
     }
 }
