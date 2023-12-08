@@ -24,7 +24,7 @@ public static class NumberHelpers
         if (nums.Count() == 1) return nums.First();
         return nums.Aggregate(nums.First(), (a, b) => GetLCM(a, b));
     }
-    
+
     private static long GetGCDLong(long a, long b)
     {
         while (b != 0)
@@ -39,7 +39,7 @@ public static class NumberHelpers
     {
         return (a / GetGCDLong(a, b)) * b;
     }
-    
+
     public static long GetLCMLong(IEnumerable<long> nums)
     {
         if (nums.Count() == 0) throw new Exception("bad");
