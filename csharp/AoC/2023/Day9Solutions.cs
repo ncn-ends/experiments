@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Utils.Strings;
 
 
@@ -17,10 +16,8 @@ public static class Day9Solutions
 
         var input = AocHandler.ImportHttp();
 
-        // Assert.That(DoPart1(example1), Is.EqualTo(114));
-        // // not 2037738726
-        // // not 1884254626
-        // TestContext.Out.WriteLine(DoPart1(input));
+        Assert.That(DoPart1(example1), Is.EqualTo(114));
+        TestContext.Out.WriteLine(DoPart1(input));
 
         Assert.That(DoPart2(example1), Is.EqualTo(2));
         TestContext.Out.WriteLine(DoPart2(input));
