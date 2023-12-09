@@ -15,13 +15,13 @@ public static class NumberExtensions
         return bin;
     }
 
-    public static bool IsOdd(this int n)
+    public static bool IsOdd<T>(this T n) where T : INumber<T>
     {
-        return n % 2 != 0;
+        return n % (T.One + T.One) == T.Zero;
     }
 
-    public static bool IsEven(this int n)
+    public static bool IsEven<T>(this T n) where T : INumber<T>
     {
-        return n % 2 == 0;
+        return n % (T.One + T.One) == T.Zero;
     }
 }

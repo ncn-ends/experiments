@@ -114,6 +114,6 @@ public static class Day8Solutions
 
         /* get LCM of all the nodes that originally started with A by the steps in
          * which they found a node that ends with Z */
-        return NumberHelpers.GetLCMLong(trackedZs.Values.SelectMany(x => x.Values).Select(x => (long)x));
+        return NumberHelpers.GetLCM(trackedZs.Values.SelectMany(x => x.Values).Select(x => (long)x));
     }
 }

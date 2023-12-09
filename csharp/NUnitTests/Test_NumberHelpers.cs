@@ -15,6 +15,6 @@ public class Test_NumberHelpers
         Assert.That(NumberHelpers.GetLCM(case2), Is.EqualTo(6));
 
         List<long> case3 = [12169, 20093, 20659, 22357, 13301, 18961];
-        Assert.That(NumberHelpers.GetLCMLong(case3), Is.EqualTo(15690466351717));
+        Assert.That(NumberHelpers.GetLCM(case3), Is.EqualTo(15690466351717));
     }
 }
