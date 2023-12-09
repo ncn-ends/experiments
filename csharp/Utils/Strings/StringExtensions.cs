@@ -109,13 +109,13 @@ public static class StringExtensions
     /* TODO: add tests for this */
     public static List<(int val, int pos)> ExtractNumbers(this string s)
     {
-        const string pattern = @"\d+";
+        const string pattern = @"-?\d+";
         var matches = Regex.Matches(s, pattern);
         return matches.Select(x => (int.Parse(x.Value), x.Index)).ToList();
     }
     public static List<(long val, int pos)> ExtractLargeNumbers(this string s)
     {
-        const string pattern = @"\d+";
+        const string pattern = @"-?\d+";
         var matches = Regex.Matches(s, pattern);
         return matches.Select(x => (Convert.ToInt64(x.Value), x.Index)).ToList();
     }
