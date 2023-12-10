@@ -178,9 +178,9 @@ public static class StringExtensions
         return cmd;
     }
 
-    public static string[][] ToStringMatrix(this string str)
+    public static string[][] ToStringGrid(this string str)
     {
-        return str.SplitByLine().Select(x => x.SplitBy([""]).ToArray()).ToArray();
+        return str.SplitByLine().Select(x => x.Select(y => y.ToString()).ToArray()).ToArray();
     }
 
     public static int[][] ToIntMatrix(this string str)
