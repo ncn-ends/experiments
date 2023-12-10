@@ -177,4 +177,21 @@ public static class StringExtensions
         var cmd = possible.FirstOrDefault(s => str.Contains(s)) ?? possible.Last();
         return cmd;
     }
+
+    public static string[][] ToStringMatrix(this string str)
+    {
+        return str.SplitByLine().Select(x => x.SplitBy([""]).ToArray()).ToArray();
+    }
+
+    public static int[][] ToIntMatrix(this string str)
+    {
+        return str.SplitByLine().Select(x => x.ExtractDigits().Select(x => x.val).ToArray()).ToArray();
+    }
+
+    public static List<string> SplitByChar(this string str)
+    {
+        var toReturn = str.Select(c => c.ToString()).ToList();
+
+        return toReturn;
+    }
 }
