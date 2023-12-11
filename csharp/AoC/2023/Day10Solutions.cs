@@ -29,8 +29,6 @@ public static class Day10Solutions
 
         Assert.That(DoPart1(example1), Is.EqualTo(4));
         Assert.That(DoPart1(example2), Is.EqualTo(8));
-        // not 8355
-        // 6778
         TestContext.Out.WriteLine(DoPart1(input));
 
         // Assert.That(DoPart2(example2), Is.EqualTo(0));
@@ -89,9 +87,32 @@ public static class Day10Solutions
         return (int) Math.Ceiling((decimal) (pipe.Count / 2));
     }
 
+    public static (List<List<MatrixNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
+    {
+        var inputA = AocHandler.ImportHttp();
+        var inputB = """
+                    ..........
+                    .S------7.
+                    .|F----7|.
+                    .||OOOO||.
+                    .||OOO0||.
+                    .|L-7F-J|.
+                    .|II||II|.
+                    .L--JL--J.
+                    ..........
+                    """;
+        var input = inputA;
+        var matrix = input.ToWeightedMatrix();
+        var pipe = GetMainPipe(input);
+
+        return (matrix, pipe);
+    }
+
     private static int DoPart2(string input)
     {
+        var matrix = input.ToWeightedMatrix();
         var pipe = GetMainPipe(input);
+
         return default;
     }
 }

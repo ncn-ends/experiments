@@ -41,4 +41,21 @@ public static class MovementHelpers
             Movement.DownRight,
             Movement.DownLeft
     ];
+
+    public static (int modX, int modY)[] GetAllWithin2Tiles(bool centerInclusive)
+    {
+        var directions = new List<(int, int)>();
+
+        for (int x = -2; x <= 2; x++)
+        {
+            for (int y = -2; y <= 2; y++)
+            {
+                var isCenter = x == 0 && y == 0;
+                if (isCenter && !centerInclusive) continue;
+                directions.Add((x, y));
+            }
+        }
+
+        return directions.ToArray();
+    }
 }
