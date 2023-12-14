@@ -1,3 +1,4 @@
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace Utils.Strings;
@@ -193,5 +194,28 @@ public static class StringExtensions
         var toReturn = str.Select(c => c.ToString()).ToList();
 
         return toReturn;
+    }
+
+    public static string WithModifiedChar(this string str,
+                                          int index,
+                                          char c)
+    {
+        var asd = str.ToCharArray();
+        asd[index] = c;
+        return new string(asd);
+
+    }
+
+    public static string WithModifiedChars(this string str,
+                                           int startIndex,
+                                           int endIndex,
+                                           char c)
+    {
+        var sb = new StringBuilder(str);
+        for (int i = startIndex; i < endIndex; i++)
+        {
+            sb[i] = c;
+        }
+        return sb.ToString();
     }
 }
