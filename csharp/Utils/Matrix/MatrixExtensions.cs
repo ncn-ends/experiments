@@ -14,12 +14,24 @@ public static class MatrixExtensions
     public static List<List<MatrixNode>> ToWeightedMatrix(this string str)
     {
         var matrix = str.SplitByLine()
-                     .Select((line, y) => line
-                                     .SplitByChar()
-                                     .Select((val, x) => new MatrixNode(val: val, xPos: x, yPos: y, visited: false, weight: int.MaxValue))
-                                     .ToList())
-                     .ToList();
+                        .Select((line, y) => line
+                                             .SplitByChar()
+                                             .Select((val, x) => new MatrixNode(
+                                                             val: val, xPos: x, yPos: y, visited: false,
+                                                             weight: int.MaxValue))
+                                             .ToList())
+                        .ToList();
         return matrix;
+    }
+
+    public static string ToVisualizedString(this string[][] grid)
+    {
+        return string.Join("\n", grid.Select(x => string.Join("", x)).ToArray());
+    }
+
+    public static string ToSimpleString(this string[][] grid)
+    {
+        return string.Join("", grid.Select(x => string.Join("", x)).ToArray());
     }
 
     public static string[][] Transpose(this string[][] grid)
@@ -37,6 +49,6 @@ public static class MatrixExtensions
             }
         }
 
-        return transposed; 
+        return transposed;
     }
 }
