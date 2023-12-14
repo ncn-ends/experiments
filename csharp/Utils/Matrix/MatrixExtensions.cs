@@ -22,16 +22,21 @@ public static class MatrixExtensions
         return matrix;
     }
 
-    // public static List<List<T>> Map<T>(this List<List<T>> matrix, Func<int, int> action) where T : MatrixNode
-    // {
-    //     for (var y = 0; y < matrix.Count; y++)
-    //     {
-    //         for (var x = 0; x < matrix.Count; x++)
-    //         {
-    //
-    //         }
-    //     }
-    //
-    //     return newMatrix;
-    // }
+    public static string[][] Transpose(this string[][] grid)
+    {
+        int rows = grid.Length;
+        int cols = grid[0].Length;
+        string[][] transposed = new string[cols][];
+
+        for (int i = 0; i < cols; i++)
+        {
+            transposed[i] = new string[rows];
+            for (int j = 0; j < rows; j++)
+            {
+                transposed[i][j] = grid[j][i];
+            }
+        }
+
+        return transposed; 
+    }
 }
