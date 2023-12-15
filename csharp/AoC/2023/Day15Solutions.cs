@@ -1,6 +1,3 @@
-using System.Diagnostics;
-using System.Text;
-using Utils.Extensions;
 using Utils.Strings;
 
 
@@ -25,7 +22,6 @@ public static class Day15Solutions
     }
 
 
-
     [TestCase("HASH", 52)]
     [TestCase("pc", 3)]
     [TestCase("cm", 0)]
@@ -39,9 +35,8 @@ public static class Day15Solutions
     private static int HASHAlgo(string s)
     {
         var toReturn = 0;
-        for (var i = 0; i < s.Length; i++)
+        foreach (var c in s)
         {
-            var c = s[i];
             toReturn += (int) c;
             toReturn *= 17;
             toReturn %= 256;
@@ -53,56 +48,38 @@ public static class Day15Solutions
     private static int DoPart1(string input)
     {
         var codes = input.SplitBy([","]);
-        var total = 0;
-        foreach (var code in codes)
-        {
-            total += HASHAlgo(code);
-        }
-
-        return total;
+        return codes.Sum(HASHAlgo);
     }
 
     private static int DoPart2(string input)
     {
         var dict = new Dictionary<int, List<(string label, int lens)>>();
-        for (int i = 0; i < 256; i++)
-        {
-            dict.Add(i, new());
-        }
+        for (int i = 0; i < 256; i++) dict.Add(i, []);
 
         var codes = input.SplitBy([","]);
         foreach (var code in codes)
         {
-            var op = code.Contains("-")
+            var op = code.Contains('-')
                     ? "-"
                     : "=";
             var split = code.SplitBy(["=", "-"]);
             var label = split[0];
             var key = HASHAlgo(label);
+            var existingIndexOfLabelAtBox = dict[key].FindIndex(x => x.label == label);
             if (op == "=")
             {
                 var lensPower = code.ExtractNumbers()[0].val;
-                var existingIndexOfLabelAtBox = dict[key].FindIndex(x => x.label == label);
 
                 if (existingIndexOfLabelAtBox == -1)
-                {
                     dict[key].Add((label, lensPower));
-                }
                 else
-                {
                     dict[key][existingIndexOfLabelAtBox] = (label, lensPower);
-                }
-
             }
             else if (op == "-")
             {
-                var existingIndexOfLabelAtBox = dict[key].FindIndex(x => x.label == label);
-
                 if (existingIndexOfLabelAtBox == -1) continue;
-
                 dict[key].RemoveAt(existingIndexOfLabelAtBox);
             }
-
         }
 
         var total = 0;
@@ -111,12 +88,13 @@ public static class Day15Solutions
             for (var i = 0; i < lenses.Count; i++)
             {
                 var (_, lensPower) = lenses[i];
-                var asd = 1 + boxNumber;
-                asd   *= 1 + i;
-                asd   *= lensPower;
-                total += asd;
+                var calcPower = 1 + boxNumber;
+                calcPower *= 1 + i;
+                calcPower *= lensPower;
+                total     += calcPower;
             }
         }
+
         return total;
     }
 }
