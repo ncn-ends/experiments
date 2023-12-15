@@ -1,6 +1,7 @@
 **/input.txt
 **/.direnv/
 **/.idea/
+/csharp/experiments.sln.DotSettings.user
 
 csharp-experiments.sln.DotSettings.user
 **/BenchmarkDotNet.Artifacts/**
