@@ -156,8 +156,6 @@ public static class Day14Solutions
 
                 i       = t; // minus 1 or not? not sure
                 skipped = true;
-
-                // Debugger.Break();
             }
         }
 
