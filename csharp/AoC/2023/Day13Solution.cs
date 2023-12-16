@@ -35,6 +35,7 @@ public static class Day13Solution
         // TestContext.Out.WriteLine(DoPart1(input));
 
         // 32796 too low
+        // 22504 not right
         // Assert.That(DoPart2(example1), Is.EqualTo(400));
         TestContext.Out.WriteLine(DoPart2(input));
     }
@@ -124,7 +125,7 @@ public static class Day13Solution
                 diff++;
             }
 
-            if (isReflection) return (true, i, usedSmudge);
+            if (isReflection && usedSmudge) return (true, i, usedSmudge);
         }
 
         return default;
@@ -144,7 +145,7 @@ public static class Day13Solution
             var groupLines = group.SplitByLine();
             var (hasReflectionHorizontal, nA, usedSmudgeA) = IsGroupReflection2(groupLines);
 
-            if (hasReflectionHorizontal)
+            if (usedSmudgeA && hasReflectionHorizontal)
             {
                 totalLinesHorizontal += nA;
                 continue;
@@ -154,11 +155,16 @@ public static class Day13Solution
             var transposedGrid = grid.Transpose();
             var transposeGroupedLines = transposedGrid.Select(x => string.Join("", x)).ToList();
             var (hasReflectionVertical, nB, usedSmudgeB) = IsGroupReflection2(transposeGroupedLines);
-            if (hasReflectionVertical)
+            if (usedSmudgeB && hasReflectionVertical)
             {
                 totalLinesVertical += nB;
                 continue;
             }
+
+            if (hasReflectionHorizontal)
+                totalLinesHorizontal += nA;
+            else
+                totalLinesVertical += nB;
 
             Debugger.Break();
         }
