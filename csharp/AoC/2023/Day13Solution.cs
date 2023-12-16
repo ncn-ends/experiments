@@ -31,12 +31,10 @@ public static class Day13Solution
 
         var input = AocHandler.ImportHttp();
 
-        // Assert.That(DoPart1(example1), Is.EqualTo(405));
-        // TestContext.Out.WriteLine(DoPart1(input));
+        Assert.That(DoPart1(example1), Is.EqualTo(405));
+        TestContext.Out.WriteLine(DoPart1(input));
 
-        // 32796 too low
-        // 22504 not right
-        // Assert.That(DoPart2(example1), Is.EqualTo(400));
+        Assert.That(DoPart2(example1), Is.EqualTo(400));
         TestContext.Out.WriteLine(DoPart2(input));
     }
 
@@ -98,7 +96,7 @@ public static class Day13Solution
 
         return default;
     }
-    private static (bool isReflection, int topIndex, bool usedSmudge) IsGroupReflection2(List<string> groupLines)
+    private static (bool isReflection, int topIndex) IsGroupReflection2(List<string> groupLines)
     {
         for (var i = 1; i < groupLines.Count; i++)
         {
@@ -125,7 +123,7 @@ public static class Day13Solution
                 diff++;
             }
 
-            if (isReflection && usedSmudge) return (true, i, usedSmudge);
+            if (isReflection && usedSmudge) return (true, i);
         }
 
         return default;
@@ -137,15 +135,12 @@ public static class Day13Solution
 
         var totalLinesHorizontal = 0;
         var totalLinesVertical = 0;
-        // regular debugging start at i == 18
-        // usedsmudge debugging start after 30
-        for (var i = 0; i < groups.Count; i++)
+        foreach (var group in groups)
         {
-            var group = groups[i];
             var groupLines = group.SplitByLine();
-            var (hasReflectionHorizontal, nA, usedSmudgeA) = IsGroupReflection2(groupLines);
+            var (hasReflectionHorizontal, nA) = IsGroupReflection2(groupLines);
 
-            if (usedSmudgeA && hasReflectionHorizontal)
+            if (hasReflectionHorizontal)
             {
                 totalLinesHorizontal += nA;
                 continue;
@@ -154,19 +149,9 @@ public static class Day13Solution
             var grid = group.ToStringGrid();
             var transposedGrid = grid.Transpose();
             var transposeGroupedLines = transposedGrid.Select(x => string.Join("", x)).ToList();
-            var (hasReflectionVertical, nB, usedSmudgeB) = IsGroupReflection2(transposeGroupedLines);
-            if (usedSmudgeB && hasReflectionVertical)
-            {
-                totalLinesVertical += nB;
-                continue;
-            }
+            var (_, nB) = IsGroupReflection2(transposeGroupedLines);
 
-            if (hasReflectionHorizontal)
-                totalLinesHorizontal += nA;
-            else
-                totalLinesVertical += nB;
-
-            Debugger.Break();
+            totalLinesVertical += nB;
         }
 
         return totalLinesHorizontal * 100 + totalLinesVertical;
