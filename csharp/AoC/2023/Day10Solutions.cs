@@ -25,14 +25,26 @@ public static class Day10Solutions
                        LJ...
                        """;
 
+        var example3 = """
+                       ..........
+                       .S------7.
+                       .|F----7|.
+                       .||OOOO||.
+                       .||OOO0||.
+                       .|L-7F-J|.
+                       .|II||II|.
+                       .L--JL--J.
+                       ..........
+                       """;
+
         var input = AocHandler.ImportHttp();
 
         Assert.That(DoPart1(example1), Is.EqualTo(4));
         Assert.That(DoPart1(example2), Is.EqualTo(8));
         TestContext.Out.WriteLine(DoPart1(input));
 
-        // Assert.That(DoPart2(example2), Is.EqualTo(0));
-        // TestContext.Out.WriteLine(DoPart2(input));
+        Assert.That(DoPart2(example3), Is.EqualTo(4));
+        TestContext.Out.WriteLine(DoPart2(input));
     }
 
     private static List<(int x, int y)> GetMainPipe(string input)
@@ -87,32 +99,218 @@ public static class Day10Solutions
         return (int) Math.Ceiling((decimal) (pipe.Count / 2));
     }
 
-    public static (List<List<GridNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
-    {
-        var inputA = AocHandler.ImportHttp();
-        var inputB = """
-                    ..........
-                    .S------7.
-                    .|F----7|.
-                    .||OOOO||.
-                    .||OOO0||.
-                    .|L-7F-J|.
-                    .|II||II|.
-                    .L--JL--J.
-                    ..........
-                    """;
-        var input = inputA;
-        var matrix = input.ToWeightedGrid();
-        var pipe = GetMainPipe(input);
-
-        return (matrix, pipe);
-    }
+    // public static (List<List<GridNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
+    // {
+    //     var inputA = AocHandler.ImportHttp();
+    //     var inputB = """
+    //                  ..........
+    //                  .S------7.
+    //                  .|F----7|.
+    //                  .||OOOO||.
+    //                  .||OOO0||.
+    //                  .|L-7F-J|.
+    //                  .|II||II|.
+    //                  .L--JL--J.
+    //                  ..........
+    //                  """;
+    //     var input = inputA;
+    //     var matrix = input.ToWeightedGrid();
+    //     var pipe = GetMainPipe(input);
+    //
+    //     return (matrix, pipe);
+    // }
 
     private static int DoPart2(string input)
     {
-        var matrix = input.ToWeightedGrid();
+        var grid = input.ToWeightedGrid();
         var pipe = GetMainPipe(input);
 
+        var newGrid = new List<List<(char val, Status status, bool inBetween)>>();
+        for (var y = 0; y < grid.Count; y++)
+        {
+            newGrid.Add([]);
+            for (var x = 0; x < grid[y].Count; x++)
+            {
+                var status = Status.Unknown;
+                var adjacentPipes = pipe
+                                    .Where(pipeNode => pipeNode.x == x && pipeNode.y == y)
+                                    .Select(pipeNode => (
+                                                    x: pipeNode.x, y: pipeNode.y,
+                                                    val: grid[pipeNode.y][pipeNode.x].val))
+                                    .ToList();
+                if (adjacentPipes.Any()) status = Status.Pipe;
+
+                if (status == Status.Unknown)
+                {
+                    var hasPipeAdjacent = false; // tbd
+                    grid.ToStringGrid().IterateAdjacentNodesSafely(x, y, (newX, newY) =>
+                    {
+                        if (pipe.Any(pipeNode => pipeNode.x == newX && pipeNode.y == newY)) hasPipeAdjacent = true;
+                    });
+
+                    // if (hasPipeAdjacent) status = Status.PipeAdjacent;
+                    // else status                 = Status.Outside;
+                    // status = Status.Outside;
+                }
+
+                var val = char.Parse(grid[y][x].val);
+                newGrid[^1].Add((val, status, false));
+
+                if (x < grid[y].Count - 1)
+                {
+                    newGrid[^1].Add(('x', Status.Unknown, true));
+                }
+            }
+
+            if (y < grid.Count - 1)
+            {
+                var betweener = Enumerable.Repeat(('x', Status.Unknown, true), newGrid.Last().Count);
+                newGrid.Add(betweener.ToList());
+            }
+        }
+
+/* loop through pipe filling marking unknowns as pipes when applicable */
+        foreach (var pipeNodeCoords in pipe)
+        {
+            var (x, y) = pipeNodeCoords;
+            var pipeNodeVal = grid[y][x];
+            if (pipeNodeVal.val == "S") continue;
+            var mods = pipeNodeVal.val.GetNodeMods();
+
+            foreach (var mod in mods)
+            {
+                var newX = (x * 2) + mod.modX;
+                var newY = (y * 2) + mod.modY;
+                var newNode = newGrid[newY][newX];
+                newGrid[newY][newX] = (newNode.val, Status.Pipe, newNode.inBetween);
+            }
+        }
+
+/* starting from the top left, BFS through all nodes, stopping when reaching a pipe */
+        var visited = new HashSet<(int x, int y)>();
+        var q = new Queue<(int x, int y)>();
+        for (int y = 0; y < newGrid.Count; y++)
+        {
+            newGrid[y][0] = (newGrid[y][0].val, newGrid[y][0].status == Status.Unknown
+                                     ? Status.Outside
+                                     : newGrid[y][0].status, newGrid[y][0].inBetween);
+            newGrid[y][newGrid[0].Count - 1] = (newGrid[y][newGrid[0].Count - 1].val,
+                                                newGrid[y][newGrid[0].Count - 1].status == Status.Unknown
+                                                        ? Status.Outside
+                                                        : newGrid[y][newGrid[0].Count - 1].status,
+                                                newGrid[y][newGrid[0].Count - 1].inBetween);
+            q.Enqueue((0, y));
+            q.Enqueue((newGrid[0].Count - 1, y));
+        }
+
+        for (int x = 0; x < newGrid.Count; x++)
+        {
+            newGrid[0][x] = (newGrid[0][x].val, newGrid[0][x].status == Status.Unknown
+                                     ? Status.Outside
+                                     : newGrid[0][x].status, newGrid[0][x].inBetween);
+            newGrid[^1][x] = (newGrid[^1][x].val, newGrid[^1][x].status == Status.Unknown
+                                      ? Status.Outside
+                                      : newGrid[^1][x].status,
+                              newGrid[^1][x].inBetween);
+            q.Enqueue((x, 0));
+            q.Enqueue((x, newGrid.Count - 1));
+        }
+
+        while (q.Any())
+        {
+            var (x, y) = q.Dequeue();
+            var tile = newGrid[y][x];
+            if (tile.status == Status.Pipe) continue;
+            if (visited.Contains((x, y))) continue;
+
+            visited.Add((x, y));
+            newGrid[y][x] = (newGrid[y][x].val, Status.Outside, newGrid[y][x].inBetween);
+
+            newGrid.IterateAdjacentNodesSafely(x, y, (newX, newY) => { q.Enqueue((newX, newY)); });
+        }
+
+/* find all the ones that were originally not outside */
+        var total = 0;
+        for (var y = 0; y < newGrid.Count; y++)
+        {
+            for (var x = 0; x < newGrid[y].Count; x++)
+            {
+                var node = newGrid[y][x];
+                if (node.status == Status.Outside) continue;
+                if (node.status == Status.Pipe) continue;
+                if (node.inBetween) continue;
+                newGrid[y][x] = (node.val, Status.Inside, node.inBetween);
+                total++;
+            }
+        }
+
+
+        return total;
+    }
+
+    enum Status
+    {
+        Unknown,
+        Pipe,
+        Outside,
+        Inside,
+    }
+
+/*
+ * visualize:
+ *newGrid.Select(x => x.ToArray()).ToArray().ComplexVisualize((nodeCtx) =>
+   {
+       var x = nodeCtx.X;
+       var y = nodeCtx.Y;
+       var status = nodeCtx.OriginalData.status;
+       nodeCtx.SetValue(nodeCtx.OriginalData.val);
+
+       if (status == Status.Pipe) nodeCtx.SetBackgroundColor(ConsoleColor.Blue);
+       if (status == Status.Outside) nodeCtx.SetBackgroundColor(ConsoleColor.DarkMagenta);
+       if (status == Status.Unknown) nodeCtx.SetBackgroundColor(ConsoleColor.Gray);
+       if (status == Status.Inside) nodeCtx.SetBackgroundColor(ConsoleColor.Red);
+
+       if (nodeCtx.Val == '|') nodeCtx.SetValue("‖");
+       else if (nodeCtx.Val == '7') nodeCtx.SetValue("\u2557");
+       else if (nodeCtx.Val == 'J') nodeCtx.SetValue("\u255d");
+       else if (nodeCtx.Val == 'F') nodeCtx.SetValue("\u2554");
+       else if (nodeCtx.Val == 'L') nodeCtx.SetValue("\u255a");
+       else if (nodeCtx.Val == '-') nodeCtx.SetValue("\u2550");
+   });
+
+ *
+ */
+}
+
+public static class PipeMapper
+{
+    public static string[] SouthConnecting => ["|", "7", "F"];
+    public static string[] NorthConnecting => ["|", "J", "L"];
+    public static string[] EastConnecting => ["-", "L", "F"];
+    public static string[] WestConnecting => ["-", "7", "J"];
+
+    public static bool ConnectsToNorth(this string s) => NorthConnecting.Contains(s);
+    public static bool ConnectsToSouth(this string s) => SouthConnecting.Contains(s);
+    public static bool ConnectsToEast(this string s) => EastConnecting.Contains(s);
+    public static bool ConnectsToWest(this string s) => WestConnecting.Contains(s);
+    public static bool ConnectsToNorth(this char s) => NorthConnecting.Contains(s.ToString());
+    public static bool ConnectsToSouth(this char s) => SouthConnecting.Contains(s.ToString());
+    public static bool ConnectsToEast(this char s) => EastConnecting.Contains(s.ToString());
+    public static bool ConnectsToWest(this char s) => WestConnecting.Contains(s.ToString());
+
+    public static (int modX, int modY)[] GetNodeMods(this char c)
+    {
+        if (c == '-') return new[] {(-1, 0), (1, 0)};
+        else if (c == '|') return new[] {(0, -1), (0, 1)};
+        else if (c == '7') return new[] {(-1, 0), (0, 1)};
+        else if (c == 'J') return new[] {(-1, 0), (0, -1)};
+        else if (c == 'F') return new[] {(1, 0), (0, 1)};
+        else if (c == 'L') return new[] {(1, 0), (0, -1)};
         return default;
+    }
+
+    public static (int modX, int modY)[] GetNodeMods(this string c)
+    {
+        return GetNodeMods(char.Parse(c));
     }
 }

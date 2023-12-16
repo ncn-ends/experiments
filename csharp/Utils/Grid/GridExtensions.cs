@@ -3,14 +3,14 @@ using Utils.Strings;
 
 namespace Utils.Matrix;
 
-public class GridVisualizerNodeContext
+public class GridVisualizerNodeContext<T>
 {
     public required int X { get; init; }
     public required int Y { get; init; }
-    public required char Val { get; init; }
+    public char Val { get; private set; }
+    public required T OriginalData { get; init; }
     public ConsoleColor? BgColor { get; private set; }
     public ConsoleColor? FgColor { get; private set; }
-    public char? Alias { get; private set; }
 
 
     public void SetBackgroundColor(ConsoleColor color)
@@ -23,14 +23,14 @@ public class GridVisualizerNodeContext
         FgColor = color;
     }
 
-    public void SetAlias(char c)
+    public void SetValue(char c)
     {
-        Alias = c;
+        Val = c;
     }
 
-    public void SetAlias(string c)
+    public void SetValue(string c)
     {
-        Alias = char.Parse(c);
+        Val = char.Parse(c);
     }
 }
 
@@ -97,24 +97,24 @@ public static class GridExtensions
            else if (nodeCtx.Val == '-') nodeCtx.SetAlias("\u2550");
        });
      */
-    public static void ComplexVisualize(this string[][] grid,
-                                        Action<GridVisualizerNodeContext> applyVisualizerContext)
+    public static void ComplexVisualize<T>(this T[][] grid,
+                                           Action<GridVisualizerNodeContext<T>> applyVisualizerContext)
     {
-        var yAxisDisplayWidth = grid.Length.ToString().Length + 1;
+        var yAxisDisplayWidth = grid.Count().ToString().Length + 1;
         PrintXAxisNumbers(yAxisDisplayWidth);
 
         /* print contents visualized and print y axis numbers */
-        for (var y = 0; y < grid.Length; y++)
+        for (var y = 0; y < grid.Count(); y++)
         {
             Console.Write("{0," + yAxisDisplayWidth + "} ", y);
             for (var x = 0; x < grid[y].Length; x++)
             {
                 var node = grid[y][x];
-                var visualizerNodeContext = new GridVisualizerNodeContext()
+                var visualizerNodeContext = new GridVisualizerNodeContext<T>()
                 {
-                        X   = x,
-                        Y   = y,
-                        Val = char.Parse(node)
+                        X            = x,
+                        Y            = y,
+                        OriginalData = node
                 };
                 applyVisualizerContext(visualizerNodeContext);
 
@@ -123,7 +123,7 @@ public static class GridExtensions
                 if (visualizerNodeContext.FgColor is not null)
                     Console.ForegroundColor = visualizerNodeContext.FgColor.Value;
 
-                var charToVisualize = visualizerNodeContext.Alias ?? visualizerNodeContext.Val;
+                var charToVisualize = visualizerNodeContext.Val;
                 Console.Write(charToVisualize.ToString());
                 Console.ResetColor();
             }
@@ -181,11 +181,11 @@ public static class GridExtensions
         return transposed;
     }
 
-    private static void IterateNeighborsSafely((int modX, int modY)[] movements,
-                                               string[][] grid,
-                                               int x,
-                                               int y,
-                                               Action<int, int> action)
+    private static void IterateNeighborsSafely<T>((int modX, int modY)[] movements,
+                                                  T[][] grid,
+                                                  int x,
+                                                  int y,
+                                                  Action<int, int> action)
     {
         foreach (var dir in movements)
         {
@@ -193,14 +193,38 @@ public static class GridExtensions
             var newY = y + dir.modY;
             if (newX < 0 || newY < 0) continue;
             if (newY > grid.Length - 1 || newX > grid[0].Length - 1) continue;
-            action(x, y);
+            action(newX, newY);
         }
     }
 
-    public static void IterateAdjacentNodesSafely(this string[][] grid,
+    public static void IterateAdjacentNodesSafely<T>(this T[][] grid,
+                                                     int x,
+                                                     int y,
+                                                     Action<int, int> action)
+    {
+        IterateNeighborsSafely(MovementHelpers.GetAdjacentMovements(), grid, x, y, action);
+    }
+
+    private static void IterateNeighborsSafely<T>((int modX, int modY)[] movements,
+                                                  List<List<T>> grid,
                                                   int x,
                                                   int y,
                                                   Action<int, int> action)
+    {
+        foreach (var dir in movements)
+        {
+            var newX = x + dir.modX;
+            var newY = y + dir.modY;
+            if (newX < 0 || newY < 0) continue;
+            if (newY > grid.Count - 1 || newX > grid[0].Count - 1) continue;
+            action(newX, newY);
+        }
+    }
+
+    public static void IterateAdjacentNodesSafely<T>(this List<List<T>> grid,
+                                                     int x,
+                                                     int y,
+                                                     Action<int, int> action)
     {
         IterateNeighborsSafely(MovementHelpers.GetAdjacentMovements(), grid, x, y, action);
     }
