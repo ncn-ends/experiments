@@ -27,6 +27,7 @@ public class GridVisualizerNodeContext
     {
         Alias = c;
     }
+
     public void SetAlias(string c)
     {
         Alias = char.Parse(c);
@@ -34,10 +35,10 @@ public class GridVisualizerNodeContext
 }
 
 public record GridNode(string val,
-                         int xPos,
-                         int yPos,
-                         bool visited,
-                         int weight);
+                       int xPos,
+                       int yPos,
+                       bool visited,
+                       int weight);
 
 public static class GridExtensions
 {
@@ -57,6 +58,11 @@ public static class GridExtensions
     public static string[][] ToStringGrid(this List<List<GridNode>> grid)
     {
         return grid.Select(x => x.Select(y => y.val).ToArray()).ToArray();
+    }
+
+    public static string[][] ToStringGrid<T>(this List<List<T>> grid, Func<T, string> getVal)
+    {
+        return grid.Select(x => x.Select(getVal).ToArray()).ToArray();
     }
 
     public static string ToVisualizedString(this string[][] grid)
@@ -106,14 +112,16 @@ public static class GridExtensions
                 var node = grid[y][x];
                 var visualizerNodeContext = new GridVisualizerNodeContext()
                 {
-                        X = x,
-                        Y = y,
+                        X   = x,
+                        Y   = y,
                         Val = char.Parse(node)
                 };
                 applyVisualizerContext(visualizerNodeContext);
 
-                if (visualizerNodeContext.BgColor is not null) Console.BackgroundColor = visualizerNodeContext.BgColor.Value;
-                if (visualizerNodeContext.FgColor is not null) Console.ForegroundColor = visualizerNodeContext.FgColor.Value;
+                if (visualizerNodeContext.BgColor is not null)
+                    Console.BackgroundColor = visualizerNodeContext.BgColor.Value;
+                if (visualizerNodeContext.FgColor is not null)
+                    Console.ForegroundColor = visualizerNodeContext.FgColor.Value;
 
                 var charToVisualize = visualizerNodeContext.Alias ?? visualizerNodeContext.Val;
                 Console.Write(charToVisualize.ToString());
@@ -171,5 +179,29 @@ public static class GridExtensions
         }
 
         return transposed;
+    }
+
+    private static void IterateNeighborsSafely((int modX, int modY)[] movements,
+                                               string[][] grid,
+                                               int x,
+                                               int y,
+                                               Action<int, int> action)
+    {
+        foreach (var dir in movements)
+        {
+            var newX = x + dir.modX;
+            var newY = y + dir.modY;
+            if (newX < 0 || newY < 0) continue;
+            if (newY > grid.Length - 1 || newX > grid[0].Length - 1) continue;
+            action(x, y);
+        }
+    }
+
+    public static void IterateAdjacentNodesSafely(this string[][] grid,
+                                                  int x,
+                                                  int y,
+                                                  Action<int, int> action)
+    {
+        IterateNeighborsSafely(MovementHelpers.GetAdjacentMovements(), grid, x, y, action);
     }
 }

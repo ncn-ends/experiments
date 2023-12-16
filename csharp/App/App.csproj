@@ -20,4 +20,9 @@
       <ProjectReference Include="..\AoC\AoC.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Day10Program.cs" />
+      <None Include="Day10Program.cs" />
+    </ItemGroup>
+
 </Project>
