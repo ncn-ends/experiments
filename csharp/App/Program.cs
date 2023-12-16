@@ -221,20 +221,19 @@ while (paths.Any())
     // }o
 
 
+    // if (!matrix[topPoint.y][topPoint.x].val.ConnectsToWest())
+    // {
+    //     var pointToConsider = (x1: topPoint.x - 1, y1: topPoint.y, x2: topPoint.x, y2: topPoint.y);
+    //     if (CanBeConsideredForPath(pointToConsider)) paths.Enqueue(pointToConsider);
+    // }
 
-        // if (!matrix[topPoint.y][topPoint.x].val.ConnectsToWest())
-        // {
-        //     var pointToConsider = (x1: topPoint.x - 1, y1: topPoint.y, x2: topPoint.x, y2: topPoint.y);
-        //     if (CanBeConsideredForPath(pointToConsider)) paths.Enqueue(pointToConsider);
-        // }
-
-        //
-        //
-        // if (!matrix[leftPoint.y][leftPoint.x].val.ConnectsToNorth())
-        // {
-        //     var pointToConsider = (x1: leftPoint.x, y1: leftPoint.y - 1, x2: leftPoint.x, y2: leftPoint.y);
-        //     if (CanBeConsideredForPath(pointToConsider)) paths.Enqueue(pointToConsider);
-        // }
+    //
+    //
+    // if (!matrix[leftPoint.y][leftPoint.x].val.ConnectsToNorth())
+    // {
+    //     var pointToConsider = (x1: leftPoint.x, y1: leftPoint.y - 1, x2: leftPoint.x, y2: leftPoint.y);
+    //     if (CanBeConsideredForPath(pointToConsider)) paths.Enqueue(pointToConsider);
+    // }
 
     if (IsClosedOff(dir, (next.x1, next.y1), (next.x2, next.y2)))
     {
@@ -264,8 +263,11 @@ while (paths.Any())
             var pointToConsider = (x1: rightPoint.x, y1: rightPoint.y, x2: rightPoint.x, y2: rightPoint.y + 1);
             if (CanBeConsideredForPath(pointToConsider)) paths.Enqueue(pointToConsider);
         }
+
         continue;
-    };
+    }
+
+    ;
 
     paths.Enqueue(next);
 }
@@ -296,85 +298,29 @@ foreach (var v in visited)
 
 
 /* visualization */
-int maxNumber = matrix[0].Count;
-int maxDigits = maxNumber.ToString().Length;
-
-for (int digitIndex = 0; digitIndex < maxDigits; digitIndex++)
+matrix.ToStringGrid().ComplexVisualize((nodeCtx) =>
 {
-    Console.Write("     ");
-
-    for (int number = 0; number < maxNumber; number++)
+    var x = nodeCtx.X;
+    var y = nodeCtx.Y;
+    if (nodeStatusMatrix.TryGetValue((x, y), out var status))
     {
-        string numStr = number.ToString().PadLeft(maxDigits, ' ');
-
-        if (digitIndex < numStr.Length)
-        {
-            Console.Write(numStr[digitIndex]);
-        }
-        else
-        {
-            Console.Write(" ");
-        }
+        if (status == Status.Pipe) nodeCtx.SetBackgroundColor(ConsoleColor.DarkCyan);
+        if (status == Status.PipeTouchingOutside) nodeCtx.SetBackgroundColor(ConsoleColor.DarkBlue);
+        if (status == Status.Outside) nodeCtx.SetBackgroundColor(ConsoleColor.Magenta);
+        if (status == Status.OutsideTouchingPipe) nodeCtx.SetBackgroundColor(ConsoleColor.DarkMagenta);
+        if (status == Status.Unknown) nodeCtx.SetBackgroundColor(ConsoleColor.Red);
+        if (status == Status.In) nodeCtx.SetBackgroundColor(ConsoleColor.Green);
+        if (status == Status.PathFromOutside) nodeCtx.SetBackgroundColor(ConsoleColor.Yellow);
+        if (status == Status.PreviouslyUnknownNowConsideredOutSide) nodeCtx.SetBackgroundColor(ConsoleColor.Gray);
     }
 
-    Console.WriteLine();
-}
-
-for (var y = 0; y < matrix.Count; y++)
-{
-    Console.Write($"{y,4} ");
-    for (var x = 0; x < matrix[y].Count; x++)
-    {
-        if (nodeStatusMatrix.TryGetValue((x, y), out var status))
-        {
-            if (status == Status.Pipe) Console.BackgroundColor = ConsoleColor.DarkCyan;
-            if (status == Status.PipeTouchingOutside) Console.BackgroundColor = ConsoleColor.DarkBlue;
-            if (status == Status.Outside) Console.BackgroundColor = ConsoleColor.Magenta;
-            if (status == Status.OutsideTouchingPipe) Console.BackgroundColor = ConsoleColor.DarkMagenta;
-            if (status == Status.Unknown) Console.BackgroundColor = ConsoleColor.Red;
-            if (status == Status.In) Console.BackgroundColor = ConsoleColor.Green;
-            if (status == Status.PathFromOutside) Console.BackgroundColor = ConsoleColor.Yellow;
-            if (status == Status.PreviouslyUnknownNowConsideredOutSide) Console.BackgroundColor = ConsoleColor.Gray;
-        }
-
-        var node = matrix[y][x];
-
-        if (node.val == "|") Console.Write("‖");
-        else if (node.val == "7") Console.Write("\u2557");
-        else if (node.val == "J") Console.Write("\u255d");
-        else if (node.val == "F") Console.Write("\u2554");
-        else if (node.val == "L") Console.Write("\u255a");
-        else if (node.val == "-") Console.Write("\u2550");
-        else Console.Write(node.val);
-        // Console.Write(node.val);
-        Console.ResetColor();
-    }
-    Console.Write($"{y,4} ");
-
-    Console.WriteLine();
-}
-for (int digitIndex = 0; digitIndex < maxDigits; digitIndex++)
-{
-    Console.Write("     ");
-
-    for (int number = 0; number < maxNumber; number++)
-    {
-        string numStr = number.ToString().PadLeft(maxDigits, ' ');
-
-        if (digitIndex < numStr.Length)
-        {
-            Console.Write(numStr[digitIndex]);
-        }
-        else
-        {
-            Console.Write(" ");
-        }
-    }
-
-    Console.WriteLine();
-}
-
-
+    if (nodeCtx.Val == '|') nodeCtx.SetAlias("‖");
+    else if (nodeCtx.Val == '7') nodeCtx.SetAlias("\u2557");
+    else if (nodeCtx.Val == 'J') nodeCtx.SetAlias("\u255d");
+    else if (nodeCtx.Val == 'F') nodeCtx.SetAlias("\u2554");
+    else if (nodeCtx.Val == 'L') nodeCtx.SetAlias("\u255a");
+    else if (nodeCtx.Val == '-') nodeCtx.SetAlias("\u2550");
+});
 
 // less than 646
 Console.WriteLine(nodeStatusMatrix.Values.Count(x => x == Status.Unknown));

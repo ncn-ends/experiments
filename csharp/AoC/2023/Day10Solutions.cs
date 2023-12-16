@@ -37,7 +37,7 @@ public static class Day10Solutions
 
     private static List<(int x, int y)> GetMainPipe(string input)
     {
-        var matrix = input.ToWeightedMatrix();
+        var matrix = input.ToWeightedGrid();
 
         /* find S */
         var s = (x: 0, y: 0);
@@ -87,7 +87,7 @@ public static class Day10Solutions
         return (int) Math.Ceiling((decimal) (pipe.Count / 2));
     }
 
-    public static (List<List<MatrixNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
+    public static (List<List<GridNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
     {
         var inputA = AocHandler.ImportHttp();
         var inputB = """
@@ -102,7 +102,7 @@ public static class Day10Solutions
                     ..........
                     """;
         var input = inputA;
-        var matrix = input.ToWeightedMatrix();
+        var matrix = input.ToWeightedGrid();
         var pipe = GetMainPipe(input);
 
         return (matrix, pipe);
@@ -110,7 +110,7 @@ public static class Day10Solutions
 
     private static int DoPart2(string input)
     {
-        var matrix = input.ToWeightedMatrix();
+        var matrix = input.ToWeightedGrid();
         var pipe = GetMainPipe(input);
 
         return default;
