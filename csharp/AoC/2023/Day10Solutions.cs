@@ -171,19 +171,23 @@ public static class Day10Solutions
         for (int y = 0; y < newGrid.Count; y++)
         {
             var nodeFirst = newGrid[y][0];
-            newGrid[y][0] = nodeFirst with
+            if (newGrid[y][0] is {status: Status.Unknown} node)
             {
-                    status = nodeFirst.status == Status.Unknown
-                            ? Status.Outside
-                            : nodeFirst.status
-            };
+                newGrid[y][0] = nodeFirst with
+                {
+                        status = Status.Outside
+                };
+            }
+
             var nodeLast = newGrid[y][newGrid[0].Count - 1];
-            newGrid[y][newGrid[0].Count - 1] = nodeLast with
+            if (nodeLast.status == Status.Unknown)
             {
-                    status = nodeLast.status == Status.Unknown
-                            ? Status.Outside
-                            : nodeLast.status
-            };
+                newGrid[y][newGrid[0].Count - 1] = nodeLast with
+                {
+                        status = Status.Outside
+                };
+            }
+
             q.Enqueue((0, y));
             q.Enqueue((newGrid[0].Count - 1, y));
         }
@@ -191,19 +195,23 @@ public static class Day10Solutions
         for (int x = 0; x < newGrid.Count; x++)
         {
             var nodeFirst = newGrid[0][x];
-            newGrid[0][x] = nodeFirst with
+            if (nodeFirst.status == Status.Unknown)
             {
-                    status = nodeFirst.status == Status.Unknown
-                            ? Status.Outside
-                            : nodeFirst.status
-            };
+                newGrid[0][x] = nodeFirst with
+                {
+                        status = Status.Outside
+                };
+            }
+
             var nodeLast = newGrid[^1][x];
-            newGrid[^1][x] = nodeLast with
+            if (nodeLast.status == Status.Unknown)
             {
-                    status = nodeLast.status == Status.Unknown
-                            ? Status.Outside
-                            : nodeLast.status
-            };
+                newGrid[^1][x] = nodeLast with
+                {
+                        status = Status.Outside
+                };
+            }
+
             q.Enqueue((x, 0));
             q.Enqueue((x, newGrid.Count - 1));
         }
@@ -231,6 +239,7 @@ public static class Day10Solutions
                 if (node.status == Status.Outside) continue;
                 if (node.status == Status.Pipe) continue;
                 if (node.inBetween) continue;
+
                 newGrid[y][x] = newGrid[y][x] with {status = Status.Inside};
                 total++;
             }
