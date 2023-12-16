@@ -99,33 +99,16 @@ public static class Day10Solutions
         return (int) Math.Ceiling((decimal) (pipe.Count / 2));
     }
 
-    // public static (List<List<GridNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
-    // {
-    //     var inputA = AocHandler.ImportHttp();
-    //     var inputB = """
-    //                  ..........
-    //                  .S------7.
-    //                  .|F----7|.
-    //                  .||OOOO||.
-    //                  .||OOO0||.
-    //                  .|L-7F-J|.
-    //                  .|II||II|.
-    //                  .L--JL--J.
-    //                  ..........
-    //                  """;
-    //     var input = inputA;
-    //     var matrix = input.ToWeightedGrid();
-    //     var pipe = GetMainPipe(input);
-    //
-    //     return (matrix, pipe);
-    // }
+    private record struct NewGridNode(char val,
+                                      Status status,
+                                      bool inBetween);
 
     private static int DoPart2(string input)
     {
         var grid = input.ToWeightedGrid();
         var pipe = GetMainPipe(input);
 
-        var newGrid = new List<List<(char val, Status status, bool inBetween)>>();
+        var newGrid = new List<List<NewGridNode>>();
         for (var y = 0; y < grid.Count; y++)
         {
             newGrid.Add([]);
@@ -142,34 +125,30 @@ public static class Day10Solutions
 
                 if (status == Status.Unknown)
                 {
-                    var hasPipeAdjacent = false; // tbd
+                    var hasPipeAdjacent = false;
                     grid.ToStringGrid().IterateAdjacentNodesSafely(x, y, (newX, newY) =>
                     {
                         if (pipe.Any(pipeNode => pipeNode.x == newX && pipeNode.y == newY)) hasPipeAdjacent = true;
                     });
-
-                    // if (hasPipeAdjacent) status = Status.PipeAdjacent;
-                    // else status                 = Status.Outside;
-                    // status = Status.Outside;
                 }
 
                 var val = char.Parse(grid[y][x].val);
-                newGrid[^1].Add((val, status, false));
+                newGrid[^1].Add(new NewGridNode(val, status, false));
 
                 if (x < grid[y].Count - 1)
                 {
-                    newGrid[^1].Add(('x', Status.Unknown, true));
+                    newGrid[^1].Add(new NewGridNode('x', Status.Unknown, true));
                 }
             }
 
             if (y < grid.Count - 1)
             {
-                var betweener = Enumerable.Repeat(('x', Status.Unknown, true), newGrid.Last().Count);
+                var betweener = Enumerable.Repeat(new NewGridNode('x', Status.Unknown, true), newGrid.Last().Count);
                 newGrid.Add(betweener.ToList());
             }
         }
 
-/* loop through pipe filling marking unknowns as pipes when applicable */
+        /* loop through pipe filling marking unknowns as pipes when applicable */
         foreach (var pipeNodeCoords in pipe)
         {
             var (x, y) = pipeNodeCoords;
@@ -182,36 +161,49 @@ public static class Day10Solutions
                 var newX = (x * 2) + mod.modX;
                 var newY = (y * 2) + mod.modY;
                 var newNode = newGrid[newY][newX];
-                newGrid[newY][newX] = (newNode.val, Status.Pipe, newNode.inBetween);
+                newGrid[newY][newX] = newNode with {status = Status.Pipe};
             }
         }
 
-/* starting from the top left, BFS through all nodes, stopping when reaching a pipe */
+        /* starting from the top left, BFS through all nodes, stopping when reaching a pipe */
         var visited = new HashSet<(int x, int y)>();
         var q = new Queue<(int x, int y)>();
         for (int y = 0; y < newGrid.Count; y++)
         {
-            newGrid[y][0] = (newGrid[y][0].val, newGrid[y][0].status == Status.Unknown
-                                     ? Status.Outside
-                                     : newGrid[y][0].status, newGrid[y][0].inBetween);
-            newGrid[y][newGrid[0].Count - 1] = (newGrid[y][newGrid[0].Count - 1].val,
-                                                newGrid[y][newGrid[0].Count - 1].status == Status.Unknown
-                                                        ? Status.Outside
-                                                        : newGrid[y][newGrid[0].Count - 1].status,
-                                                newGrid[y][newGrid[0].Count - 1].inBetween);
+            var nodeFirst = newGrid[y][0];
+            newGrid[y][0] = nodeFirst with
+            {
+                    status = nodeFirst.status == Status.Unknown
+                            ? Status.Outside
+                            : nodeFirst.status
+            };
+            var nodeLast = newGrid[y][newGrid[0].Count - 1];
+            newGrid[y][newGrid[0].Count - 1] = nodeLast with
+            {
+                    status = nodeLast.status == Status.Unknown
+                            ? Status.Outside
+                            : nodeLast.status
+            };
             q.Enqueue((0, y));
             q.Enqueue((newGrid[0].Count - 1, y));
         }
 
         for (int x = 0; x < newGrid.Count; x++)
         {
-            newGrid[0][x] = (newGrid[0][x].val, newGrid[0][x].status == Status.Unknown
-                                     ? Status.Outside
-                                     : newGrid[0][x].status, newGrid[0][x].inBetween);
-            newGrid[^1][x] = (newGrid[^1][x].val, newGrid[^1][x].status == Status.Unknown
-                                      ? Status.Outside
-                                      : newGrid[^1][x].status,
-                              newGrid[^1][x].inBetween);
+            var nodeFirst = newGrid[0][x];
+            newGrid[0][x] = nodeFirst with
+            {
+                    status = nodeFirst.status == Status.Unknown
+                            ? Status.Outside
+                            : nodeFirst.status
+            };
+            var nodeLast = newGrid[^1][x];
+            newGrid[^1][x] = nodeLast with
+            {
+                    status = nodeLast.status == Status.Unknown
+                            ? Status.Outside
+                            : nodeLast.status
+            };
             q.Enqueue((x, 0));
             q.Enqueue((x, newGrid.Count - 1));
         }
@@ -224,12 +216,12 @@ public static class Day10Solutions
             if (visited.Contains((x, y))) continue;
 
             visited.Add((x, y));
-            newGrid[y][x] = (newGrid[y][x].val, Status.Outside, newGrid[y][x].inBetween);
+            newGrid[y][x] = newGrid[y][x] with {status = Status.Outside};
 
             newGrid.IterateAdjacentNodesSafely(x, y, (newX, newY) => { q.Enqueue((newX, newY)); });
         }
 
-/* find all the ones that were originally not outside */
+        /* find all the ones that were originally not outside */
         var total = 0;
         for (var y = 0; y < newGrid.Count; y++)
         {
@@ -239,7 +231,7 @@ public static class Day10Solutions
                 if (node.status == Status.Outside) continue;
                 if (node.status == Status.Pipe) continue;
                 if (node.inBetween) continue;
-                newGrid[y][x] = (node.val, Status.Inside, node.inBetween);
+                newGrid[y][x] = newGrid[y][x] with {status = Status.Inside};
                 total++;
             }
         }
@@ -255,31 +247,6 @@ public static class Day10Solutions
         Outside,
         Inside,
     }
-
-/*
- * visualize:
- *newGrid.Select(x => x.ToArray()).ToArray().ComplexVisualize((nodeCtx) =>
-   {
-       var x = nodeCtx.X;
-       var y = nodeCtx.Y;
-       var status = nodeCtx.OriginalData.status;
-       nodeCtx.SetValue(nodeCtx.OriginalData.val);
-
-       if (status == Status.Pipe) nodeCtx.SetBackgroundColor(ConsoleColor.Blue);
-       if (status == Status.Outside) nodeCtx.SetBackgroundColor(ConsoleColor.DarkMagenta);
-       if (status == Status.Unknown) nodeCtx.SetBackgroundColor(ConsoleColor.Gray);
-       if (status == Status.Inside) nodeCtx.SetBackgroundColor(ConsoleColor.Red);
-
-       if (nodeCtx.Val == '|') nodeCtx.SetValue("‖");
-       else if (nodeCtx.Val == '7') nodeCtx.SetValue("\u2557");
-       else if (nodeCtx.Val == 'J') nodeCtx.SetValue("\u255d");
-       else if (nodeCtx.Val == 'F') nodeCtx.SetValue("\u2554");
-       else if (nodeCtx.Val == 'L') nodeCtx.SetValue("\u255a");
-       else if (nodeCtx.Val == '-') nodeCtx.SetValue("\u2550");
-   });
-
- *
- */
 }
 
 public static class PipeMapper
@@ -314,3 +281,51 @@ public static class PipeMapper
         return GetNodeMods(char.Parse(c));
     }
 }
+
+/*
+ * visualize:
+ *newGrid.Select(x => x.ToArray()).ToArray().ComplexVisualize((nodeCtx) =>
+   {
+       var x = nodeCtx.X;
+       var y = nodeCtx.Y;
+       var status = nodeCtx.OriginalData.status;
+       nodeCtx.SetValue(nodeCtx.OriginalData.val);
+
+       if (status == Status.Pipe) nodeCtx.SetBackgroundColor(ConsoleColor.Blue);
+       if (status == Status.Outside) nodeCtx.SetBackgroundColor(ConsoleColor.DarkMagenta);
+       if (status == Status.Unknown) nodeCtx.SetBackgroundColor(ConsoleColor.Gray);
+       if (status == Status.Inside) nodeCtx.SetBackgroundColor(ConsoleColor.Red);
+
+       if (nodeCtx.Val == '|') nodeCtx.SetValue("‖");
+       else if (nodeCtx.Val == '7') nodeCtx.SetValue("\u2557");
+       else if (nodeCtx.Val == 'J') nodeCtx.SetValue("\u255d");
+       else if (nodeCtx.Val == 'F') nodeCtx.SetValue("\u2554");
+       else if (nodeCtx.Val == 'L') nodeCtx.SetValue("\u255a");
+       else if (nodeCtx.Val == '-') nodeCtx.SetValue("\u2550");
+   });
+
+ *
+ */
+
+
+/* for when working in Program.cs */
+// public static (List<List<GridNode>> matrix, List<(int x, int y)> pipe) GetVisualizationMaterial()
+// {
+//     var inputA = AocHandler.ImportHttp();
+//     var inputB = """
+//                  ..........
+//                  .S------7.
+//                  .|F----7|.
+//                  .||OOOO||.
+//                  .||OOO0||.
+//                  .|L-7F-J|.
+//                  .|II||II|.
+//                  .L--JL--J.
+//                  ..........
+//                  """;
+//     var input = inputA;
+//     var matrix = input.ToWeightedGrid();
+//     var pipe = GetMainPipe(input);
+//
+//     return (matrix, pipe);
+// }
