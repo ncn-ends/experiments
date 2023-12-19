@@ -58,4 +58,17 @@ public static class MovementHelpers
 
         return directions.ToArray();
     }
+
+    public static (int modX, int modY) GetMovementModFromChar(this char c)
+    {
+        if (c == 'R') return Movement.Right;
+        if (c == 'L') return Movement.Left;
+        if (c == 'U') return Movement.Up;
+        if (c == 'D') return Movement.Down;
+        throw new Exception("Unknown movement character.");
+    }
+    public static (int modX, int modY) GetMovementModFromChar(this string c)
+    {
+        return GetMovementModFromChar(char.Parse(c));
+    }
 }
