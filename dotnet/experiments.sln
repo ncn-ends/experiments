@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NUnitTests", "NUnitTests\NU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC", "AoC\AoC.csproj", "{9F893E7C-E892-4009-B2D7-05CEFD31DA4E}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProjectEuler", "ProjectEuler\ProjectEuler.fsproj", "{14AD6456-F5A8-4095-A216-CE152415601A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,5 +57,9 @@ Global
 		{9F893E7C-E892-4009-B2D7-05CEFD31DA4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F893E7C-E892-4009-B2D7-05CEFD31DA4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F893E7C-E892-4009-B2D7-05CEFD31DA4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14AD6456-F5A8-4095-A216-CE152415601A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14AD6456-F5A8-4095-A216-CE152415601A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14AD6456-F5A8-4095-A216-CE152415601A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14AD6456-F5A8-4095-A216-CE152415601A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
