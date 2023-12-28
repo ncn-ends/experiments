@@ -21,15 +21,17 @@ public class AdjacencyMap<T> where T : IEquatable<T>
 {
     #region setup/data
 
-    public AdjacencyMap(bool isWeighted = false)
+    public AdjacencyMap(bool isWeighted = false, bool isBidirectional = false)
     {
         if (typeof(T) != typeof(int) && typeof(T) != typeof(string))
             throw new Exception("Invalid type, only strings or ints allowed");
 
-        IsWeighted = isWeighted;
+        IsWeighted      = isWeighted;
+        IsBidirectional = isBidirectional;
     }
 
     public bool IsWeighted { get; init; }
+    public bool IsBidirectional { get; init; }
     public HashSet<AdjacencyNode<T>> Nodes { get; set; } = [];
 
     #endregion
@@ -64,6 +66,37 @@ public class AdjacencyMap<T> where T : IEquatable<T>
     {
         var node = Nodes.FirstOrDefault(x => x.Value.Equals(nodeValue));
         return node;
+    }
+
+    public List<List<AdjacencyNode<T>>> GetIslands()
+    {
+        var visisted = new HashSet<AdjacencyNode<T>>();
+        var islands = new List<List<AdjacencyNode<T>>>();
+        foreach (var node in Nodes)
+        {
+            if (visisted.Contains(node)) continue;
+            var q = new Queue<AdjacencyNode<T>>();
+            q.Enqueue(node);
+            islands.Add([]);
+            while (q.Any())
+            {
+                var c = q.Dequeue();
+                if (visisted.Contains(c)) continue;
+                islands.Last().Add(c);
+                visisted.Add(c);
+                foreach (var edge in c.Connections)
+                    q.Enqueue(edge.ToNode);
+
+                if (!IsBidirectional) continue;
+
+                foreach (var adjacencyNode in Nodes)
+                {
+                    if (adjacencyNode.Connections.Any(n => n.ToNode == c)) q.Enqueue(adjacencyNode);
+                }
+            }
+        }
+
+        return islands;
     }
 
 
