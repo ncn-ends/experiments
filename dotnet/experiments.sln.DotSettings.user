@@ -1,0 +1,58 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2015_002Ff_003ADay8Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2016_002Ff_003ADay13Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2016_002Ff_003ADay6Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2017_002Ff_003ADay12Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2017_002Ff_003ADay4Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2018_002Ff_003ADay11Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2019_002Ff_003ADay6Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2020_002Ff_003ADay2Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2021_002Ff_003ADay4Solutions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A1_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A10_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A11_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A12_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A2_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A3_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A4_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A5_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A6_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A7_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A8_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A9_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay1Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay2Solutions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Ff_003AAocHandler_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4c206e13_002Df375_002D4593_002Db50a_002D446ea6030c41/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Solution /&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=940c0657_002D24a9_002D4e4c_002Db1cf_002Df5d2efee4abb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Day16Solutions" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day16Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day10Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day13Solution&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day17Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day18Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e1a180f2_002D61c1_002D414e_002D9ded_002D06bc28988f70/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;Or&gt;
+    &lt;And&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day16Solutions&lt;/TestId&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day10Solutions&lt;/TestId&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day13Solution&lt;/TestId&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day17Solutions&lt;/TestId&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day18Solutions&lt;/TestId&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+      &lt;TestAncestor&gt;
+        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
+      &lt;/TestAncestor&gt;
+    &lt;/And&gt;
+    &lt;TestAncestor&gt;
+      &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day25Solutions&lt;/TestId&gt;
+    &lt;/TestAncestor&gt;
+  &lt;/Or&gt;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
