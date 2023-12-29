@@ -17,7 +17,7 @@ let rec fib = fun x ->
 [<TestCase(9, 55)>]
 let TestFib input expected = Assert.AreEqual(expected, fib input)
 
-let letsgo max =
+let solve max =
     let rec fib a b list =
         if b >= max then
             list
@@ -30,5 +30,5 @@ let letsgo max =
 
 [<Test>]
 let TestProblemSolution () =
-    Assert.AreEqual(44, letsgo 100)
-    Assert.AreEqual(4613732, letsgo 4_000_000)
+    Assert.AreEqual(44, solve 100)
+    Assert.AreEqual(4613732, solve 4_000_000)
