@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\ProjectEuler\ProjectEuler.fsproj" />
       <ProjectReference Include="..\Subjects\Subjects.csproj" />
     </ItemGroup>
 

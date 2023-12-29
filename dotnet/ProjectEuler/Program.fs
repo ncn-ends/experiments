@@ -1,3 +1,4 @@
-﻿module Program
-let a = Problems.Problem1.f 1000
-printf "%d" a
+module ProjectEuler.Program
+
+    [<EntryPoint>]
+    let main _ = 0
