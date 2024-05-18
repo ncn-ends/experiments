@@ -43,32 +43,3 @@ This repo contains random experiments and solutions for Advent of Code and LeetC
 ## Progress: LeetCode
 
 https://leetcode.com/ncn-ends/
-
-# Variable names
-`p` pointer (single)  
-`p1-5` pointers (multiple)
-`s` stack   
-`q` queue  
-`l` list  
-`c` catch-all "current"  
-`r` placeholder to be returned
-
-### File Templates for C#
-
-`ild`  
-```
-[InlineData($END$)]
-```  
-  
-`theory`
-```
-    [Theory]
-    public async Task $methodName$(){
-        $END$
-    }
-```
-
-`arr`
-```
-new[] {$END$}
-```
