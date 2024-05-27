@@ -41,5 +41,8 @@
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem2&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem3&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day22Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::E8C5D32F-C99B-49C8-BF35-DC34D4409762::net8.0::LeetCode.Tests.Test1&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::E8C5D32F-C99B-49C8-BF35-DC34D4409762::net8.0::LeetCode.Tests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

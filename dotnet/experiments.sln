@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AoC", "AoC\AoC.csproj", "{9
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ProjectEuler", "ProjectEuler\ProjectEuler.fsproj", "{0E3239F6-EAC0-422A-BBAB-33F320C5CF79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeetCode", "LeetCode\LeetCode.csproj", "{E8C5D32F-C99B-49C8-BF35-DC34D4409762}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,5 +63,9 @@ Global
 		{0E3239F6-EAC0-422A-BBAB-33F320C5CF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E3239F6-EAC0-422A-BBAB-33F320C5CF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E3239F6-EAC0-422A-BBAB-33F320C5CF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8C5D32F-C99B-49C8-BF35-DC34D4409762}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8C5D32F-C99B-49C8-BF35-DC34D4409762}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8C5D32F-C99B-49C8-BF35-DC34D4409762}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8C5D32F-C99B-49C8-BF35-DC34D4409762}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
