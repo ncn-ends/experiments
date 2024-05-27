@@ -24,10 +24,10 @@ This repo contains random experiments and solutions for Advent of Code and LeetC
 
 ## Progress: Advent of Code
 
-**★**  = Part completed within 24 hours of release  
-*✓* = Part completed some time after  
-~~Strikethrough~~: Solution code missing in this repo  
-<ins>Underline</ins>: Original solution code missing in this repo  
+**★**  = Part completed within 24 hours of release
+*✓* = Part completed some time after
+~~Strikethrough~~: Solution code missing in this repo
+<ins>Underline</ins>: Original solution code missing in this repo
 
 | Year | Day 1 | Day 2 | Day 3 | Day 4 | Day 5 | Day 6 | Day 7  | Day 8   | Day 9   | Day 10 | Day 11 | Day 12 | Day 13  | Day 14  | Day 15 | Day 16 | Day 17 | Day 18 | Day 19 | Day 20 | Day 21 | Day 22 | Day 23 | Day 24 | Day 25 |
 |------|-------|-------|-------|------|-------|------|--------|---------|---------|-------|-----|------|---------|---------|--------|--------|--------|-------|-------|--------|--------|--------|--------|--------|--------|
@@ -44,3 +44,13 @@ This repo contains random experiments and solutions for Advent of Code and LeetC
 ## Progress: LeetCode
 
 https://leetcode.com/ncn-ends/
+
+# Reproduce
+
+## dotnet 
+
+1. Clone project 
+2. A direnv is provided using my nix flake. Alternatively install the relevant .NET versions and VS/Rider
+3. Login to adventofcode.com and then find your session token.  
+4. Set the property `AOC_SESSION_TOKEN` in .NET User Secrets in project AoC with your session token. Include the `session=` portion
+5. If you intend to run from project App, repeat step #4 for that project
