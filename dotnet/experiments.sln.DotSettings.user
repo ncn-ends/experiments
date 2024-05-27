@@ -36,32 +36,10 @@
     &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e1a180f2_002D61c1_002D414e_002D9ded_002D06bc28988f70/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Session" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Or&gt;
-    &lt;And&gt;
-      &lt;TestAncestor&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day16Solutions&lt;/TestId&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day10Solutions&lt;/TestId&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day13Solution&lt;/TestId&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day17Solutions&lt;/TestId&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day18Solutions&lt;/TestId&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
-      &lt;/TestAncestor&gt;
-      &lt;TestAncestor&gt;
-        &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
-      &lt;/TestAncestor&gt;
-    &lt;/And&gt;
-    &lt;TestAncestor&gt;
-      &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day25Solutions&lt;/TestId&gt;
-      &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEulerTest&lt;/TestId&gt;
-      &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEulerTest.Problem1&lt;/TestId&gt;
-      &lt;TestId&gt;NUnit3x::F0AA59B9-4AFC-40A5-9C67-4FFF4CEBC1B1::net8.0::NUnitTests.FakeTest.Test&lt;/TestId&gt;
-      &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem2&lt;/TestId&gt;
-    &lt;/TestAncestor&gt;
-  &lt;/Or&gt;
-&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e1a180f2_002D61c1_002D414e_002D9ded_002D06bc28988f70/@EntryIndexedValue">JetBrains.ReSharper.UnitTestFramework.Session.Serialization.SessionState</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f47277f8_002D4518_002D4f67_002D83fc_002D3e4e7f298cf5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Problem2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem2&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem3&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

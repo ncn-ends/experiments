@@ -6,12 +6,13 @@
         <IsPackable>false</IsPackable>
         <GenerateProgramFile>false</GenerateProgramFile>
         <IsTestProject>true</IsTestProject>
-        <RootNamespace>ProjectEulerTest</RootNamespace>
+        <RootNamespace>ProjectEuler</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
         <Compile Include="Problems\Problem1.fs" />
         <Compile Include="Problems\Problem2.fs" />
+        <Compile Include="Problems\Problem3.fs" />
         <Compile Include="Program.fs" />
     </ItemGroup>
 

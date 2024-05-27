@@ -1,4 +1,4 @@
-module ProjectEuler.Problem1
+module ProjectEuler.Problems.Problem1
 
 open NUnit.Framework
 
