@@ -87,6 +87,7 @@ public static class Day2Solutions
 
             var rowSafe = CheckRowSafety(levels, false);
             if (!rowSafe) rowSafe = CheckRowSafety(levels[1..], true);
+            if (!rowSafe) rowSafe = CheckRowSafety([levels[0], ..levels[2..]], true);
 
             if (rowSafe) safes.Add(string.Join(" ", levels));
             else bads.Add(string.Join(" ", levels));
