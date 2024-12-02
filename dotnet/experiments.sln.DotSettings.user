@@ -20,9 +20,16 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A7_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A8_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2022_002Fd_003A9_002Ff_003ASolution_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
-	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay1Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
+	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay1Solutions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay2Solutions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Ff_003AAocHandler_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=060674be_002D807d_002D4104_002Db05a_002D1bf8cfcbe4c0/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="FSharpAoC" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::85AB32EC-F92F-4306-89B8-E5F295ABF882::net8.0::FSharpAoC&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day1Solutions.Run&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2024.Day1Solutions&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
 	
 	
 	

@@ -37,7 +37,7 @@ public static class Day1Solutions
 
         var res2 = DoPart2(input);
         TestContext.Out.WriteLine(res2);
-        AocHandler.SubmitSolution(res2, AocSolutionPart.Part2);
+        // AocHandler.SubmitSolution(res2, AocSolutionPart.Part2);
     }
 
     private static int DoPart1(string input)
