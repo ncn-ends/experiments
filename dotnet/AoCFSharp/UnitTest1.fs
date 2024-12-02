@@ -7,5 +7,5 @@ let Setup () =
     ()
 
 [<Test>]
-let Test1 () =
+let Day1Solution () =
     Assert.Pass()

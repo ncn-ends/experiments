@@ -28,6 +28,8 @@
     &lt;TestId&gt;NUnit3x::85AB32EC-F92F-4306-89B8-E5F295ABF882::net8.0::FSharpAoC&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day1Solutions.Run&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2024.Day1Solutions&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2024.Day2Solutions.Run&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2024.Day2Solutions&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
 	
