@@ -1,4 +1,7 @@
-namespace AoC.Y2023;
+using AoC;
+
+
+namespace AoC.Y2018;
 
 public static class Day22Solutions
 {

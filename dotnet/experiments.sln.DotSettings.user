@@ -23,26 +23,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay1Solutions_002Ecs/@EntryIndexedValue">ExplicitlyExcluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Fd_003A2023_002Ff_003ADay2Solutions_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/FilesAndFoldersToSkip2/=9F893E7C_002DE892_002D4009_002DB2D7_002D05CEFD31DA4E_002Ff_003AAocHandler_002Ecs/@EntryIndexedValue">ForceIncluded</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4c206e13_002Df375_002D4593_002Db50a_002D446ea6030c41/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;Solution /&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=940c0657_002D24a9_002D4e4c_002Db1cf_002Df5d2efee4abb/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="Day16Solutions" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day16Solutions&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day10Solutions&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day13Solution&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day17Solutions&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day18Solutions&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day19Solutions&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e1a180f2_002D61c1_002D414e_002D9ded_002D06bc28988f70/@EntryIndexedValue">JetBrains.ReSharper.UnitTestFramework.Session.Serialization.SessionState</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f47277f8_002D4518_002D4f67_002D83fc_002D3e4e7f298cf5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Problem2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem2&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::0E3239F6-EAC0-422A-BBAB-33F320C5CF79::net8.0::ProjectEuler.Problems.Problem3&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9F893E7C-E892-4009-B2D7-05CEFD31DA4E::net8.0::AoC.Y2023.Day22Solutions&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::E8C5D32F-C99B-49C8-BF35-DC34D4409762::net8.0::LeetCode.Tests.Test1&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::E8C5D32F-C99B-49C8-BF35-DC34D4409762::net8.0::LeetCode.Tests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	
+	
+	</wpf:ResourceDictionary>

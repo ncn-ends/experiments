@@ -5,7 +5,7 @@ using Utils.Numbers;
 using Utils.Strings;
 
 
-namespace AoC2.Y2018;
+namespace Y2018;
 
 public class Day11Solutions_Old
 {

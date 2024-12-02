@@ -8,7 +8,7 @@
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
         <UserSecretsId>e1036118-a84a-4e07-b327-90e056205be9</UserSecretsId>
-        <RootNamespace>AoC2</RootNamespace>
+        <RootNamespace>AoC</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
