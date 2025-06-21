@@ -39,3 +39,5 @@ SELECT su.user_id, (COALESCE(c.count, 0)::numeric(10, 2) / COALESCE(c2.count, 1)
 FROM Signups su
 LEFT JOIN (SELECT user_id, COUNT(*) FROM Confirmations WHERE Confirmations.action = 'confirmed' GROUP BY user_id) c on c.user_id = su.user_id
 LEFT JOIN (SELECT user_id, COUNT(*) FROM Confirmations GROUP BY user_id) c2 on c2.user_id = su.user_id
+
+/* TODO: interesting one. come back to and check out other solutions */
