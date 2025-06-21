@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  founddb:
+    container_name: practicedb
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: practicepw1234
+      POSTGRES_USER: practicedb
+      POSTGRES_DB: practicedb
+    ports:
+      - "5431:5432"
+    volumes:
+      - practicedb_volume:/var/lib/postgresql/data
+
+
+volumes:
+  practicedb_volume:
