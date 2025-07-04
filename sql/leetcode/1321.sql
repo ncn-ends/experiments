@@ -40,13 +40,3 @@ CROSS JOIN LATERAL (
 ) ok
 GROUP BY d.visited_on
 -- ORDER BY d.visited_on
-
--- Out of all the SQL 50 questions, I think this one is the only one that I've encountered with a bad description.
---
--- > You are the restaurant owner and you want to analyze a possible expansion (there will be at least one customer every day).
---
--- Why is this part in paranthesis?
---
--- > Compute the moving average of how much the customer paid in a seven days window
---
--- how much "the customer" paid? That doesn't match the expected outputs. We aren't looking at a single customer, we're looking at
